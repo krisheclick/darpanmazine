@@ -1,0 +1,19 @@
+.advertiesment {
+    text-align: center;
+    padding-block: 24px;
+}
+.banner{
+    margin-bottom: 96px;
+}
+aside.mainContentAd{
+    row-gap: 32px;
+}
+
+@media only screen and (max-width: 1600px){
+    .banner{
+        margin-bottom: 72px;
+    }
+    aside.mainContentAd{
+        row-gap: 24px;
+    }
+}

@@ -1,0 +1,37 @@
+.boxContent, .sliderBox, .poster{
+    position: relative;
+    z-index: 1;
+}
+.sliderBox{
+    display: block;
+    color: var(--black-color);
+}
+.poster{
+    padding-top: 62%;
+}
+.sliderBox::before, .boxContent::before{
+    content: '';
+    width: calc(100% + 20px);
+    height: 12px;
+    display: block;
+    background: url('./video-strip.png') repeat-x top left / contain ;
+}
+.boxContent::before{
+    margin-bottom: 16px;
+}
+.subtitle{
+    font: normal 20px / 1.2 var(--font-secondary);
+    color: inherit;
+}
+.videoTimer{
+    position: absolute;
+    z-index: 1;
+    left: 10px;
+    bottom: 10px;
+    background: var(--another-color);
+    color: var(--white-color);
+    font-size: 11px;
+    line-height: 1;
+    padding: 4px 6px;
+    border-radius: 1px;
+}

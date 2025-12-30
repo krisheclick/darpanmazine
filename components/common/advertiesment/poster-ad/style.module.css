@@ -1,0 +1,61 @@
+.quizAdBox{
+    background: #F5F5F5;
+    padding: 16px;
+}
+.poster{
+    position: relative;
+    z-index: 1;
+}
+.poster img{
+    width: 100%;
+    height: auto;
+}
+.postBoxLink{
+    display: grid;
+    align-items: end;
+    height: 310px;
+    position: relative;
+    z-index: 1;
+    color: var(--white-color) !important;
+    padding: 16px;
+}
+.videoBoxLink.postBoxLink{
+    height: 224px;
+}
+.postBoxLink::after{
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 59.93%, rgba(0, 0, 0, 0.82) 75.25%);
+}
+.slogan{
+    display: inline-block;
+    vertical-align: middle;
+    background: var(--primary-color);
+    color: var(--white-color);
+    margin-bottom: 8px;
+    padding: 4px 8px;
+    font-size: 12px;
+}
+.subtitle{
+    font: normal 20px / 1.1 var(--font-secondary);
+    letter-spacing: .5px;
+}
+.videoButton{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 2;
+    transform: translate(-50%, -50%);
+    --size: 32px;
+    width: var(--size);
+    height: var(--size);
+    border-radius: 100%;
+    background: rgba(0, 0, 0, 0.50);
+    color: var(--white-color);
+    font-size: 12px;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+}

@@ -1,0 +1,30 @@
+.bar_title{
+    padding: 14px 20px;
+    font: normal 22px / 1.2 var(--font-bold);
+    letter-spacing: 0.5px;
+    background: var(--black-color);
+    color: var(--white-color);
+    margin-bottom: 24px;
+}
+.list li {
+    margin-bottom: 20px;
+}
+.box{
+    display: grid;
+    grid-template-columns: repeat(1, 4fr 5fr);
+    gap: 12px;
+    font: normal 13px / 1.2 var(--font-bold);
+}
+.poster{
+    position: relative;
+    z-index: 1;
+    padding-top: 75%;
+}
+.title{
+    font-size: 1.15em;
+    margin-bottom: 4px;
+    color: var(--black-color);
+}
+.postDate{
+    color: rgba(81, 81, 81, 1);
+}

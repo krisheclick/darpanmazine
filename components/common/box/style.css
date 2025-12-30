@@ -1,0 +1,82 @@
+.eventsBox {
+    display: grid;
+    --leftY: 16px;
+    row-gap: var(--leftY);
+    font-size: 15px;
+    min-height: 100%;
+}
+.boxPoster{
+    position: relative;
+    z-index: 1;
+    display: block;
+    padding-top: 88%;
+    margin-bottom: var(--leftY);
+}
+.boxPoster img{
+    object-fit: cover;
+}
+.boxTag {
+    padding: 4px 8px;
+    font-size: 12px;
+    background: var(--primary-color);
+    color: var(--white-color);
+    margin-bottom: 8px;
+}
+.eventsBox-end {
+	border-top: 1px solid var(--border);
+	--gap: 8px;
+	align-items: start;
+	column-gap: var(--gap);
+	margin-top: auto;
+	padding-top: 8px;
+	display: flex;
+	font-size: .9em;
+	line-height: 1.3;
+}
+.eventsBox-end .authorName {
+    color: var(--black-color);
+}
+.eventsBox-end .authorName:not(:only-child) {
+    border-right: 1px solid currentColor;
+    padding-right: var(--gap);
+}
+
+/* ==========Trending========== */
+.swiper-slide:has(.eventsBox) {
+	height: auto;
+}
+.trending_slider .boxPoster,
+.photoBox .boxPoster {
+	padding-top: 110%;
+}
+/* ==========Magazine View========== */
+.magazineBoxFirst .boxPoster{
+    padding-top: 132.5%;
+}
+.magazineBox .boxPoster{
+    padding-top: 60%;
+}
+
+/* ==========Photos========== */
+.photoBox{
+    display: block; 
+}
+.photoTag {
+	background: var(--tertiary-color);
+	color: var(--black-color);
+	font: 600 12px / 1.25 var(--font-primary);
+	padding: 6px 12px;
+	position: absolute;
+	top: 0;
+	right: 0;
+}
+.photoBoxText{
+    background: var(--white-color);
+    padding: 20px 0px;
+}
+
+@media only screen and (max-width: 1600px){
+    .eventsBox{
+        font-size: 13px;
+    }
+}

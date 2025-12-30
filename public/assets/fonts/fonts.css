@@ -1,0 +1,24 @@
+@font-face {
+    font-family: 'Times New Roman';
+    src: url('./times-webfont.eot');
+    src: url('./times-webfont.eot?#iefix') format('embedded-opentype'),
+        url('./times-webfont.woff2') format('woff2'),
+        url('./times-webfont.woff') format('woff'),
+        url('./times-webfont.ttf') format('truetype'),
+        url('./times-webfont.svg#times_new_romanregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'Times New Roman Bold';
+    src: url('./timesbd-webfont.eot');
+    src: url('./timesbd-webfont.eot?#iefix') format('embedded-opentype'),
+        url('./timesbd-webfont.woff2') format('woff2'),
+        url('./timesbd-webfont.woff') format('woff'),
+        url('./timesbd-webfont.ttf') format('truetype'),
+        url('./timesbd-webfont.svg#times_new_romanbold') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}

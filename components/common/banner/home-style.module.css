@@ -1,0 +1,75 @@
+.banner{
+    position: relative;
+    z-index: 1;
+    --height: 585px;
+    --thumbHeight: 72px;
+    --freeBottom: 42px;
+    --freeX: 48px;
+}
+.poster, .thumbItem{
+    position: relative;
+    z-index: 1;
+    height: var(--height);
+}
+figure.poster::after{
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: linear-gradient(#0000 27.4%, #0000008b 43.27%, #000000cf 75.48%);
+}
+.poster img{
+    object-position: 0 10%;
+}
+.bannerText{
+    position: absolute;
+    bottom: calc(var(--thumbHeight) + var(--freeBottom));
+    inset-inline: var(--freeX);
+    z-index: 1;
+    color: var(--white-color);
+    max-width: 580px;
+    margin-bottom: 20px;
+}
+.title{
+    font: normal 36px / 1.1 var(--font-bold);
+    margin-bottom: 12px;
+}
+.datetime{
+    font-size: 14px;
+    letter-spacing: 0.5px;
+}
+
+.thumb_slider{
+    position: absolute;
+    bottom: var(--freeBottom);
+    inset-inline: var(--freeX);
+    z-index: 1;
+}
+.thumbItem{
+    width: var(--thumbHeight) !important;
+    height: var(--thumbHeight);
+    cursor: pointer;
+}
+.thumbItem::after{
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, .4);
+}
+.thumbItem.skeleton::after{
+    background: #ffffff54;
+}
+
+@media only screen and (max-width: 1600px){
+    .banner{
+        --height: 543px;
+        --freeBottom: 30px;
+        --freeX: 36px;
+    }
+    .title{
+        font-size: 30px;
+    }
+    .datetime{
+        font-size: 12px;
+    }
+}

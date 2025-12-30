@@ -1,0 +1,28 @@
+.newsletterArea{
+    padding: 20px;
+    background: rgba(245, 245, 245, 1);
+    margin-bottom: 32px;
+}
+.contentArea{
+    display: flex;
+    align-items: start;
+    gap: 16px;
+    font: 400 19px / 1.25 var(--font-secondary);
+}
+.formRow{
+    margin-top: 16px;
+}
+.inputColumn{
+    flex: inherit;
+}
+.inputColumnGroup input, .inputColumnGroup button{
+    --height: 36px;
+}
+.inputColumnGroup input{
+    border-width: 0px 0px 1px;
+    border-radius: 0;
+    padding: 0;
+    --input-color: var(--black-color);
+    background: transparent !important;
+    box-shadow: none !important;
+}

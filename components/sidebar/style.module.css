@@ -1,0 +1,6 @@
+.sidebar > *{
+    margin-bottom: 24px;
+}
+.sidebar > *:last-child{
+    margin-bottom: 0;
+}

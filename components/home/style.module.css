@@ -1,0 +1,4 @@
+.magzineViewList{
+    display: grid;
+    row-gap: 24px;
+}

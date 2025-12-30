@@ -1,0 +1,23 @@
+.bannerAdBox{
+    padding: 12px;
+    background: var(--primary-color);
+    font-size: 15px;
+    color: #E0DEDE;
+    text-align: center;
+}
+.bannerAdPoster{
+    position: relative;
+    z-index: 1;
+    padding-top: 125%;
+    margin-bottom: 12px;
+}
+.bannerAdTitle{
+    font: normal 20px/ 1.25 var(--font-bold);
+    margin-bottom: 6px;
+}
+.bannerAdBtn a{
+    --height: 42px;
+}
+.bannerAdBtn a.doorstepBtn{
+    --shadow-color: var(--white-color)
+}

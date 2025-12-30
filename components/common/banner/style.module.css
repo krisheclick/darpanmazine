@@ -1,0 +1,35 @@
+.poster{
+    position: relative;
+    z-index: 1;
+    padding-top: 45.25%;
+}
+.poster::after{
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 40.38%, rgba(0, 0, 0, 0.54) 51.92%, #000000 100%);
+    z-index: 1;
+}
+.bannerText{
+    position: absolute;
+    z-index: 2;
+    --leaveX: 48px;
+    bottom: var(--leaveX);
+    left: var(--leaveX);
+    color: var(--white-color);
+    max-width: 500px;
+}
+.title{
+    font: normal 36px / 1.1 var(--font-bold);
+    margin-bottom: 16px;
+}
+.datetime{
+    font-size: 14px;
+    letter-spacing: 0.5px;
+}
+
+@media only screen and (max-width: 1399px){
+    .poster{
+        padding-top: 55.45%;
+    }
+}

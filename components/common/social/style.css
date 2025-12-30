@@ -1,0 +1,92 @@
+.social {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.social a{
+    --size: 40px;
+    --color: #1b1b1b;
+    display: grid;
+    place-items: center;
+    font-size: calc(var(--size) / 2.1);
+    line-height: 1;
+    width: var(--size);
+    height: var(--size);
+    text-align: center;
+    background: var(--color);
+    color: var(--white-color);
+    box-shadow: 0px 0px 0px 1px var(--color);
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+}
+.social a:hover{
+    box-shadow: 0px 0px 0px 1px var(--color);
+    background: var(--white-color);
+    color: var(--color);
+}
+.social a > *{
+    -moz-transition: all 300ms ease-in-out;
+    -webkit-transition: all 300ms ease-in-out;
+    transition: all 300ms ease-in-out;
+}
+.social a:hover > *{
+    transform: rotate(360deg);
+}
+.social.sm a{
+    --size: 32px;
+}
+.social.round a{
+    border-radius: 100%;
+}
+.social a.rj_facebook {
+    --color: #3b5999;
+}
+.social .rj_twitter { 
+    --color: #14171A;
+}
+.social .rj_linkedin { 
+    --color: #006fa6;
+}
+.social .rj_google-plus  { 
+    --color: #DE5347;
+}
+.social .rj_youtube {  
+    --color: #E52117;
+}
+.social .rj_pinterest { 
+    --color: #bd081c;
+}
+.social .rj_rss { 
+    --color: #F36F24;
+}
+.social .rj_whatsapp { 
+    --color: #11ba17;
+}
+.social .rj_instagram{
+    --color: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+}
+.social .rj_instagram:hover,
+.social.white .rj_instagram:not(:hover){
+    color: #dc2743;
+    box-shadow: 0px 0px 0px 1px #dc2743;
+}
+/* .social a::before{
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--color);
+    z-index: -1;
+    opacity: 0;
+} */
+/* .social a.rj_instagram::before{
+    opacity: 1;
+} */
+.social.white a{
+    background: var(--white-color);
+    color: var(--color);
+}
+.social.white a:hover{
+    background: var(--color);
+    color: var(--white-color);
+}
