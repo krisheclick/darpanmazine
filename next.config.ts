@@ -6,7 +6,7 @@ const nextConfig = {
 
   assetPrefix:
     process.env.NODE_ENV === "production"
-      ? process.env.NEXT_PUBLIC_ENV_URL
+      ? process.env.NEXT_PUBLIC_ASSET_PREFIX
       : undefined,
 
   images: {
@@ -26,7 +26,7 @@ const nextConfig = {
   },
 
   env: {
-    NEXT_PUBLIC_ASSET_PREFIX: process.env.NEXT_PUBLIC_ASSET_PREFIX,
+    NEXT_PUBLIC_ENV_URL: process.env.NEXT_PUBLIC_ENV_URL,
     NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL,
     NEXT_PUBLIC_MEDIA_URL: process.env.NEXT_PUBLIC_MEDIA_URL,
     NEXT_PUBLIC_IMAGE_URL: process.env.NEXT_PUBLIC_IMAGE_URL,

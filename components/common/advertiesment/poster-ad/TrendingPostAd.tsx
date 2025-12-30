@@ -2,7 +2,7 @@ import Link from 'next/link';
 import Styles from './style.module.css';
 
 const TrendingPostAd = () => {
-    const poster = `${process.env.NEXT_PUBLIC_ASSET_PREFIX}deleted/hartal.png`;
+    const poster = `${process.env.NEXT_PUBLIC_ASSET_PREFIX}assets/images/deleted/hartal.png`;
     return (
         <Link 
             href="#" 

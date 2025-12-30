@@ -50,7 +50,7 @@ const Header = ({ data, menu}: Props) => {
                         </div>
                         <Link href={webLink ?? ''} className="logo">
                             <Image
-                                src={logo ? `${process.env.NEXT_PUBLIC_MEDIA_URL}${logo}` : `${process.env.NEXT_PUBLIC_ASSET_PREFIX}logo.webp`}
+                                src={logo ? `${process.env.NEXT_PUBLIC_MEDIA_URL}${logo}` : `${process.env.NEXT_PUBLIC_ASSET_PREFIX}assets/images/logo.webp`}
                                 alt={`${title} Logo` || "Darpan Magazine Logo"}
                                 width={360} height={100}
                                 priority

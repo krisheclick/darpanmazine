@@ -13,13 +13,13 @@ const PhotoBox = ({tag, title, slug, thumbnail} : Props) => {
         <Link href={`${process.env.NEXT_PUBLIC_ENV_URL}${slug}`} className="photoBox">
             <figure className="boxPoster">
                 <Image
-                    src={thumbnail || `${process.env.NEXT_PUBLIC_ENV_URL}deleted/tamanna_punjabi_kapoora’s.png`}
+                    src={thumbnail || `${process.env.NEXT_PUBLIC_ENV_URL}assets/images/deleted/tamanna_punjabi_kapoora’s.png`}
                     alt={title || "Poster Title"}
                     fill
                     priority
                     onError={(e) => {
                         (e.target as HTMLImageElement).src =
-                            `${process.env.NEXT_PUBLIC_ASSET_PREFIX}no-image.jpg`;
+                            `${process.env.NEXT_PUBLIC_ASSET_PREFIX}assets/images/no-image.jpg`;
                     }}
                     sizes="(max-width: 768px) 100vw, 25vw"
                 />

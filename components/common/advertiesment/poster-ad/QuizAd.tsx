@@ -6,7 +6,7 @@ const QuizAd = () => {
         <div className={Styles.quizAdBox}>
             <figure className={Styles.poster}>
                 <Image
-                    src={`${process.env.NEXT_PUBLIC_ASSET_PREFIX}deleted/quiz-ad.png`}
+                    src={`${process.env.NEXT_PUBLIC_ASSET_PREFIX}assets/images/deleted/quiz-ad.png`}
                     alt="Advertiesment Poster"
                     width={280} height={280}
                     priority

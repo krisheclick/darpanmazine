@@ -88,7 +88,7 @@ const PostList = () => {
                             title={value.title}
                             slug={value.slug}
                             publish_date={value.publishDate}
-                            thumbnail={`${process.env.NEXT_PUBLIC_ASSET_PREFIX}${value.thumbnail_url}`}
+                            thumbnail={`${process.env.NEXT_PUBLIC_ASSET_PREFIX}assets/images/${value.thumbnail_url}`}
                             timestring={true}
                         />
                     </Col>

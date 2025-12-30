@@ -12,7 +12,7 @@ const PopularPost = () => {
                         <Link href="#" className={Styles.box}>
                             <figure className={Styles.poster}>
                                 <Image
-                                    src={`${process.env.NEXT_PUBLIC_ASSET_PREFIX}deleted/popular/ott.png`}
+                                    src={`${process.env.NEXT_PUBLIC_ASSET_PREFIX}assets/images/deleted/popular/ott.png`}
                                     alt="Thumbnail poster"
                                     fill
                                     priority
@@ -28,7 +28,7 @@ const PopularPost = () => {
                         <Link href="#" className={Styles.box}>
                             <figure className={Styles.poster}>
                                 <Image
-                                    src={`${process.env.NEXT_PUBLIC_ASSET_PREFIX}deleted/popular/glammer.png`}
+                                    src={`${process.env.NEXT_PUBLIC_ASSET_PREFIX}assets/images/deleted/popular/glammer.png`}
                                     alt="Thumbnail poster"
                                     fill
                                     priority
@@ -44,7 +44,7 @@ const PopularPost = () => {
                         <Link href="#" className={Styles.box}>
                             <figure className={Styles.poster}>
                                 <Image
-                                    src={`${process.env.NEXT_PUBLIC_ASSET_PREFIX}deleted/popular/dig-deep.png`}
+                                    src={`${process.env.NEXT_PUBLIC_ASSET_PREFIX}assets/images/deleted/popular/dig-deep.png`}
                                     alt="Thumbnail poster"
                                     fill
                                     priority
@@ -60,7 +60,7 @@ const PopularPost = () => {
                         <Link href="#" className={Styles.box}>
                             <figure className={Styles.poster}>
                                 <Image
-                                    src={`${process.env.NEXT_PUBLIC_ASSET_PREFIX}deleted/popular/design.png`}
+                                    src={`${process.env.NEXT_PUBLIC_ASSET_PREFIX}assets/images/deleted/popular/design.png`}
                                     alt="Thumbnail poster"
                                     fill
                                     priority

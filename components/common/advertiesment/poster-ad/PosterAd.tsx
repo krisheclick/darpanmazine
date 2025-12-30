@@ -6,7 +6,7 @@ const PosterAd = () => {
         <div className={Styles.posterAd}>
             <figure className={Styles.poster}>
                 <Image
-                    src={`${process.env.NEXT_PUBLIC_ASSET_PREFIX}deleted/vitamin.png`}
+                    src={`${process.env.NEXT_PUBLIC_ASSET_PREFIX}assets/images/deleted/vitamin.png`}
                     alt="Skyscraper Advertiesment Poster"
                     width={310}
                     height={250}

@@ -3,7 +3,7 @@ import Styles from './style.module.css';
 import { faPlay } from '@fortawesome/free-solid-svg-icons';
 
 const VideoAd = () => {
-    const poster = `${process.env.NEXT_PUBLIC_ASSET_PREFIX}deleted/Jacqueline-Fernandez.png`;
+    const poster = `${process.env.NEXT_PUBLIC_ASSET_PREFIX}assets/images/deleted/Jacqueline-Fernandez.png`;
     return (
         <div 
             className={`${Styles.postBoxLink} ${Styles.videoBoxLink}`}

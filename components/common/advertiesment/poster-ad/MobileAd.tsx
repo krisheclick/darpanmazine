@@ -6,7 +6,7 @@ const MobileAd = () => {
         <div className={Styles.mobileAd}>
             <figure className={Styles.poster}>
                 <Image
-                    src={`${process.env.NEXT_PUBLIC_ASSET_PREFIX}deleted/mobile-app-ad.png`}
+                    src={`${process.env.NEXT_PUBLIC_ASSET_PREFIX}assets/images/deleted/mobile-app-ad.png`}
                     alt="Skyscraper Advertiesment Poster"
                     width={310}
                     height={550}

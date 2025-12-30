@@ -32,7 +32,7 @@ const Sliderbanner = () => {
                             fill
                             priority
                             onError={(e) => {
-                                (e.target as HTMLImageElement).src= `${process.env.NEXT_PUBLIC_ASSET_PREFIX}no-image.jpg`;
+                                (e.target as HTMLImageElement).src= `${process.env.NEXT_PUBLIC_ASSET_PREFIX}assets/images/no-image.jpg`;
                             }}
 
                             sizes="(max-width: 1280px) 100vw, 65vw"

@@ -11,7 +11,7 @@ const Newsletter = () => {
                     <div className={Styles.contentArea}>
                         <figure className={`flex-shrink-0 ${Styles.logo ?? ''}`}>
                             <Image
-                                src={`${process.env.NEXT_PUBLIC_ASSET_PREFIX}week-unwrapped.webp`}
+                                src={`${process.env.NEXT_PUBLIC_ASSET_PREFIX}assets/images/week-unwrapped.webp`}
                                 alt="Logo"
                                 width={230}
                                 height={84}

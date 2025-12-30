@@ -6,7 +6,7 @@ const MusicAd = () => {
         <div className={Styles.musicAd}>
             <figure className={Styles.poster}>
                 <Image
-                    src={`${process.env.NEXT_PUBLIC_ASSET_PREFIX}deleted/music-ad.png`}
+                    src={`${process.env.NEXT_PUBLIC_ASSET_PREFIX}assets/images/deleted/music-ad.png`}
                     alt="Skyscraper Advertiesment Poster"
                     width={310}
                     height={550}

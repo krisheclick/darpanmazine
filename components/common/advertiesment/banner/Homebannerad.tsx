@@ -6,7 +6,7 @@ const Homebannerad = () => {
         <div className={Styles.bannerAdBox}>
             <figure className={Styles.bannerAdPoster}>
                 <Image
-                    src={`${process.env.NEXT_PUBLIC_ASSET_PREFIX}/sonakshi.jpg`}
+                    src={`${process.env.NEXT_PUBLIC_ASSET_PREFIX}assets/images/sonakshi.jpg`}
                     alt="Sonakshi"
                     fill
                     priority

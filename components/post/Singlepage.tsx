@@ -10,7 +10,7 @@ const Singlepage = () => {
         <div className={Styles.single_page}>
             <figure className={Styles.poster}>
                 <Image
-                    src={`${process.env.NEXT_PUBLIC_ASSET_PREFIX}deleted/post-banner.png`}
+                    src={`${process.env.NEXT_PUBLIC_ASSET_PREFIX}assets/images/deleted/post-banner.png`}
                     alt="Single Poster"
                     width={1247} height={742}
                     priority
@@ -41,13 +41,13 @@ const Singlepage = () => {
 
                     <p>
                         <Image
-                            src={`${process.env.NEXT_PUBLIC_ASSET_PREFIX}deleted/post-1.png`}
+                            src={`${process.env.NEXT_PUBLIC_ASSET_PREFIX}assets/images/deleted/post-1.png`}
                             alt="Single Poster"
                             width={1247} height={742}
                             priority
                         />
                         <Image
-                            src={`${process.env.NEXT_PUBLIC_ASSET_PREFIX}deleted/post-2.png`}
+                            src={`${process.env.NEXT_PUBLIC_ASSET_PREFIX}assets/images/deleted/post-2.png`}
                             alt="Single Poster"
                             width={1247} height={742}
                             priority
@@ -61,7 +61,7 @@ const Singlepage = () => {
 
                 <figure className={Styles.posterAd}>
                     <Image
-                        src={`${process.env.NEXT_PUBLIC_ASSET_PREFIX}poster-ad.jpg`}
+                        src={`${process.env.NEXT_PUBLIC_ASSET_PREFIX}assets/images/poster-ad.jpg`}
                         alt="Poster"
                         width={770}
                         height={164}

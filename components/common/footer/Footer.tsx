@@ -54,7 +54,7 @@ const Footer = ({data, menu} : Props) => {
                         <div className="logoRow d-flex align-items-end justify-content-between gap-3">
                             <Link href={webLink ?? ''} className="d-block f_logo">
                                 <Image
-                                    src={logo ? `${mediaLink}${logo}` : `${staticLink}/logo.webp`}
+                                    src={logo ? `${mediaLink}${logo}` : `${staticLink}assets/images/logo.webp`}
                                     alt={`${title} Logo` || 'Darpan Logo'}
                                     width={280} height={80}
                                     priority
@@ -70,7 +70,7 @@ const Footer = ({data, menu} : Props) => {
                     <div className="right_column">
                         <div className="other-logo">
                             <Image
-                                src={`${staticLink}/week-unwrapped.png`}
+                                src={`${staticLink}assets/images/week-unwrapped.png`}
                                 alt="another logo"
                                 width={206}
                                 height={69}
