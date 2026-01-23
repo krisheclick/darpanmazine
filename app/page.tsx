@@ -126,7 +126,7 @@ export default function Home() {
                             <div className={`section-area sm ${Styles.videoPost ?? ''}`}>
                                 <div className="rj_content border-block mb-lg-4">
                                     <h5 className="title mb-0">Videos</h5>
-                                    <div className="videoCategory">
+                                    <div className={Styles.videoCategory}>
                                         <ul className="inlineList">
                                             <li>
                                                 <Link href="#">BOLLYWOOD</Link>

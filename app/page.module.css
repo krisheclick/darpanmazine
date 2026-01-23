@@ -8,6 +8,10 @@
 aside.mainContentAd{
     row-gap: 32px;
 }
+.videoCategory{
+    font-family: var(--font-bold);
+    font-size: 15px;
+}
 @media only screen and (max-width: 1600px){
     .banner{
         margin-bottom: 72px;

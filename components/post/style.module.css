@@ -1,6 +1,9 @@
 .area_section{
     margin-block: 32px;
 }
+.categoryList{
+    font-family: var(--font-secondary)
+}
 .poster{
     margin-bottom: 24px;
 }

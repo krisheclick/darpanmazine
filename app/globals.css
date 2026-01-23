@@ -133,7 +133,7 @@ nav.noList li{
 .inlineList li::after{
     content: '|';
     display: inline-block;
-    vertical-align: middle;
+    vertical-align: text-top;
     margin: 0px 8px;
 }
 .inlineList li:last-child::after{
