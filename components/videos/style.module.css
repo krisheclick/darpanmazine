@@ -12,9 +12,9 @@
 .sliderBox::before, .boxContent::before{
     content: '';
     width: calc(100% + 20px);
-    height: 12px;
+    height: 20px;
     display: block;
-    background: url('./video-strip.png') repeat-x top left / contain ;
+    background: url('./video-strip.webp') repeat-x top left / contain ;
 }
 .boxContent::before{
     margin-bottom: 16px;
