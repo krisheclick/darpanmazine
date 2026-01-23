@@ -1,18 +1,15 @@
 import Link from "next/link";
 import Styles from "./style.module.css";
-import Image from "next/image";
+import ImageFunction from "@/utlis/ImageFunction";
 const Homebannerad = () => {
     return (
         <div className={Styles.bannerAdBox}>
-            <figure className={Styles.bannerAdPoster}>
-                <Image
-                    src={`${process.env.NEXT_PUBLIC_ASSET_PREFIX}assets/images/sonakshi.jpg`}
-                    alt="Sonakshi"
-                    fill
-                    priority
-                />
-            </figure>
-            <div  className={Styles.bannerAdContent}>
+            <ImageFunction
+                className={Styles.bannerAdPoster}
+                src={`${process.env.NEXT_PUBLIC_ASSET_PREFIX}assets/images/sonakshi.jpg`}
+                alt="Sonakshi"
+            />
+            <div className={Styles.bannerAdContent}>
                 <div className={Styles.bannerAdTitle}>September / October 2025</div>
                 <p>Lorem Ipsum is simply dummy text the printing and typesetting industry.</p>
                 <div className={`d-flex flex-column gap-2 ${Styles.bannerAdBtn}`}>

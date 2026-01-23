@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import { Container, FormControl } from "react-bootstrap";
 import Social from "../social/Social";
@@ -6,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import Navigation from "./Navigation";
 import "./style.css";
+import ImageFunctionLink from "@/utlis/ImageFunctionLink";
 
 type Site = {
     favicon?: string;
@@ -34,9 +34,7 @@ type Props = {
     data?: Webdata;
     menu?: Menu;
 };
-
 const Header = ({ data, menu}: Props) => {
-    const webLink = process.env.NEXT_PUBLIC_ENV_URL;
     const title = data?.site?.title ?? "Darpan Magazine";
     const logo = data?.site?.logo;
     return (
@@ -48,15 +46,15 @@ const Header = ({ data, menu}: Props) => {
                             <Social data={data?.socials} classProps="round sm white" />
                             <Link href="#" className="rj-btn-newsletter white-btn specialHover newsletterBtn">NEWSLETTER</Link>
                         </div>
-                        <Link href={webLink ?? ''} className="logo">
-                            <Image
-                                src={logo ? `${process.env.NEXT_PUBLIC_MEDIA_URL}${logo}` : `${process.env.NEXT_PUBLIC_ASSET_PREFIX}assets/images/logo.webp`}
-                                alt={`${title} Logo` || "Darpan Magazine Logo"}
-                                width={360} height={100}
-                                priority
-                                style={{objectFit: "contain"}}
-                            />
-                        </Link>
+                        <ImageFunctionLink
+                            href={process.env.NEXT_PUBLIC_ENV_URL}
+                            className="logo"
+                            src={`${process.env.NEXT_PUBLIC_MEDIA_URL}${logo}`}
+                            fallBack="assets/images/logo.webp"
+                            alt={`${title} Logo` || "Darpan Magazine Logo"}
+                            width={360} height={100}
+                            style={{objectFit: "contain"}}
+                        />
                         <div className="rightArea text-end">
                             <form className="headerSearch">
                                 <div className="searchInput">

@@ -1,19 +1,17 @@
-import Image from 'next/image'
-import Styles from './style.module.css'
+import Styles from './style.module.css';
+import ImageFunction from '@/utlis/ImageFunction';
 
 const BlogAd = () => {
     return (
         <div className={Styles.blogAd}>
-            <figure className={Styles.poster}>
-                <Image
-                    src={`${process.env.NEXT_PUBLIC_ASSET_PREFIX}assets/images/deleted/magazine-blog.png`}
-                    alt="Skyscraper Advertiesment Poster"
-                    width={310}
-                    height={258}
-                    priority
-                    style={{ objectFit: "contain" }}
-                />
-            </figure>
+            <ImageFunction
+                className={Styles.poster}
+                src={`${process.env.NEXT_PUBLIC_ASSET_PREFIX}assets/images/deleted/magazine-blog.png`}
+                alt="Skyscraper Advertiesment Poster"
+                width={310}
+                height={258}
+                style={{ objectFit: "contain" }}
+            />
         </div>
     )
 }

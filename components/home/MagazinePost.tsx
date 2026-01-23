@@ -48,6 +48,7 @@ const MagazinePost = () => {
                                         author_name={value.author}
                                         publish_date={value.publish_date}
                                         thumbnail={`${process.env.NEXT_PUBLIC_IMAGE_URL}/library/uploads${value.image_dir} ${value.thumb_image}.jpg`}
+                                        errorImg="assets/images/deleted/Jacqueline-Fernandez.png"
                                     />
                                 </div>
                             )
@@ -65,7 +66,7 @@ const MagazinePost = () => {
                                     author_name={value.author}
                                     publish_date={value.publish_date}
                                     thumbnail={`${process.env.NEXT_PUBLIC_IMAGE_URL}/library/uploads${value.image_dir} ${value.thumb_image}.jpg`}
-                                    errorImg={ `${process.env.NEXT_PUBLIC_ASSET_PREFIX || ''}assets/images/deleted/poster-woman.png` }
+                                    errorImg="assets/images/deleted/poster-woman.png"
                                 />
                             </div>
                         )

@@ -8,7 +8,6 @@
 aside.mainContentAd{
     row-gap: 32px;
 }
-
 @media only screen and (max-width: 1600px){
     .banner{
         margin-bottom: 72px;

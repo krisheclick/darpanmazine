@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import ImageFunctionLink from "@/utlis/ImageFunctionLink";
 type Props = {
     tag?: string;
     title?: string;
@@ -26,23 +27,12 @@ const EventsBox = ({tag, title, slug, author_name, publish_date, thumbnail, erro
     return(
         <div className="eventsBox">
             <div className="eventsBox-top">
-                <Link href={`${process.env.NEXT_PUBLIC_ENV_URL}${slug}`} className="boxPoster">
-                    <Image
-                        src={thumbnail || `${process.env.NEXT_PUBLIC_ENV_URL}assets/images/deleted/tamanna_punjabi_kapoora’s.png`}
-                        alt={title || "Poster Title"}
-                        fill
-                        priority
-                        // onError={(e) => {
-                        //     (e.target as HTMLImageElement).src =
-                        //         `${process.env.NEXT_PUBLIC_ASSET_PREFIX}no-image.jpg`;
-                        // }}
-                        onError={(e) => {
-                            (e.target as HTMLImageElement).src =
-                                errorImg ? errorImg : `${process.env.NEXT_PUBLIC_ASSET_PREFIX}assets/images/no-image.jpg`;
-                        }}
-                        sizes="(max-width: 768px) 100vw, 25vw"
-                    />
-                </Link>
+                <ImageFunctionLink
+                    href={`${process.env.NEXT_PUBLIC_ENV_URL}${slug}`} className="boxPoster"
+                    src={thumbnail}
+                    alt={title}
+                    fallBack={errorImg}
+                />
                 <div className="eventsBox-text">
                     {tag ? <span className="boxTag">{tag}</span> : ''}
                     <Link 

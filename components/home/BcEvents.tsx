@@ -10,7 +10,7 @@ const BcEventsList = () => {
                 "tag": "Events",
                 "title": "Tamanna Punjabi Kapoor’s Serenade is a timeless ode",
                 "slug": "/#",
-                "thumbnail_dir": "deleted/",
+                "thumbnail_dir": "assets/images/deleted/",
                 "thumbnail": "tamanna_punjabi_kapoora’s.png",
                 "author_name": "Darpan Desk",
                 "publish_date": "2025-05-26T14:28:01.000Z"
@@ -19,7 +19,7 @@ const BcEventsList = () => {
                 "tag": "Events",
                 "title": "In retaliation for Op Sindoor, Pakistan halted newspapers",
                 "slug": "/#",
-                "thumbnail_dir": "deleted/",
+                "thumbnail_dir": "assets/images/deleted/",
                 "thumbnail": "op_sindoor_pakistan.jpg",
                 "author_name": "Joanna Wellick",
                 "publish_date": "2025-01-18T09:15:00.000Z"
@@ -28,7 +28,7 @@ const BcEventsList = () => {
                 "tag": "Events",
                 "title": "BC Hydro's Site C dam is located on the Peace River, near St.",
                 "slug": "/#",
-                "thumbnail_dir": "deleted/",
+                "thumbnail_dir": "assets/images/deleted/",
                 "thumbnail": "peace_river.png",
                 "author_name": "Joanna Wellick",
                 "publish_date": "2025-01-18T09:15:00.000Z"

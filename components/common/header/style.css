@@ -11,7 +11,7 @@
     column-gap: 36px;
 }
 .logo{
-    display: block;
+    height: 100px;
 }
 .searchInput {
 	max-width: 85%;
@@ -28,7 +28,7 @@
     width: var(--size);
     height: calc(var(--size) - 10px);
     color: var(--white-color);
-    background: var(--another-color);
+    background: var(--primary-color);
     border: none;
     outline: none;
     position: absolute;

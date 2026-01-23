@@ -1,5 +1,4 @@
 import { Container } from "react-bootstrap";
-import Image from "next/image";
 import Styles from "./page.module.css";
 import HomeBannerSlider from "@/components/common/banner/Homebanner";
 import Homebannerad from "@/components/common/advertiesment/banner/Homebannerad";
@@ -20,6 +19,7 @@ import TrendingPostAd from "@/components/common/advertiesment/poster-ad/Trending
 import VideoSlider from "@/components/home/VideoSlider";
 import VideoAd from "@/components/common/advertiesment/poster-ad/VideoAd";
 import Link from "next/link";
+import ImageFunction from "@/utlis/ImageFunction";
 
 export default function Home() {
 
@@ -28,15 +28,13 @@ export default function Home() {
         <div className={Styles.page}>
             <div className={Styles.advertiesment}>
                 <Container>
-                    <figure className={Styles.poster}>
-                        <Image
-                            src={`${assetPrefix}poster-ad.jpg`}
-                            alt="Poster"
-                            width={770}
-                            height={164}
-                            priority
-                        />
-                    </figure>
+                    <ImageFunction
+                        className={`max-width mx-auto ${Styles.poster}`}
+                        src={`${assetPrefix}assets/images/poster-ad.jpg`}
+                        alt="Poster"
+                        width={770}
+                        height={164}
+                    />
                 </Container>
             </div>
 
@@ -96,15 +94,13 @@ export default function Home() {
                         <article className={Styles.mainContent}>
                             <div className={Styles.newsletterArea}>
                                 <Newsletter />
-                                <figure className={Styles.overlook_poster}>
-                                    <Image
-                                        src={`${assetPrefix}deleted/overlook-ad.png`}
-                                        alt="Poster"
-                                        width={770}
-                                        height={164}
-                                        priority
-                                    />
-                                </figure>
+                                <ImageFunction
+                                    className={`max-width ${Styles.overlook_poster}`}
+                                    src={`${assetPrefix}assets/images/deleted/overlook-ad.png`}
+                                    alt="Poster"
+                                    width={770}
+                                    height={164}
+                                />
                             </div>
                             {/* Branded Content */}
                             <div className={`section-area sm ${Styles.brandPost ?? ''}`}>
@@ -160,15 +156,13 @@ export default function Home() {
                             </div>
 
                             {/* Advertiesment */}
-                            <figure className={Styles.ipad_poster}>
-                                <Image
-                                    src={`${assetPrefix}deleted/ipad.png`}
-                                    alt="Poster"
-                                    width={770}
-                                    height={164}
-                                    priority
-                                />
-                            </figure>
+                            <ImageFunction
+                                className={`max-width ${Styles.ipad_poster}`}
+                                src={`${assetPrefix}assets/images/deleted/ipad.png`}
+                                alt="Poster"
+                                width={770}
+                                height={164}
+                            />
                         </article>
                         <aside className={Styles.mainContentAd}>
                             <MusicAd />

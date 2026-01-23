@@ -10,6 +10,7 @@ import "swiper/css/free-mode";
 import Styles from "./home-style.module.css"
 import Image from "next/image";
 import Link from "next/link";
+import ImageFunction from "@/utlis/ImageFunction";
 
 type DataItem = {
     heading?: string;
@@ -71,16 +72,12 @@ const HomeBannerSlider = () => {
                         return (
                             <SwiperSlide key={index} className={Styles.sliderItem}>
                                 <Link href={`${process.env.NEXT_PUBLIC_ENV_URL}${url}`} className="d-block color-inherit">
-                                    <figure className={Styles.poster}>
-                                        <Image
-
-                                            src={`${process.env.NEXT_PUBLIC_IMAGE_URL}/library/uploads${image_dir}/${poster[0]}.jpg`}
-                                            alt={heading || "Poster"}
-                                            fill
-                                            priority
-                                            style={{ objectFit: "cover" }}
-                                        />
-                                    </figure>
+                                    <ImageFunction
+                                        className={Styles.poster}
+                                        src={`${process.env.NEXT_PUBLIC_IMAGE_URL}/library/uploads${image_dir}/${poster[0]}.jpg`}
+                                        alt={heading || "Poster"}
+                                        style={{ objectFit: "cover" }}
+                                    />
                                     <div className={Styles.bannerText}>
                                         <div className={Styles.title}
                                             dangerouslySetInnerHTML={{ __html: heading ?? '' }}

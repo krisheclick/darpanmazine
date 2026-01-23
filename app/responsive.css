@@ -1,0 +1,22 @@
+@media only screen and (max-width: 1600px){
+    .columnRow {
+        --add: 260px;
+        --space: 24px;
+    }
+    .title{
+        font-size: 24px;
+    }
+    .subtitle {
+        font-size: 20px;
+    }
+    .trending_slider .eventsBox{
+        padding-right: 0;
+    }
+    .section-area{
+        margin: 60px 0px;
+    }
+    .rj_content{
+        margin-bottom: 32px;
+        padding: 10px 12px;
+    }
+}

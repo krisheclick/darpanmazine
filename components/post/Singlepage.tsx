@@ -4,18 +4,17 @@ import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebook, faLinkedin, faWhatsapp, faXTwitter } from '@fortawesome/free-brands-svg-icons';
 import { faLink } from '@fortawesome/free-solid-svg-icons';
+import ImageFunction from '@/utlis/ImageFunction';
 
 const Singlepage = () => {
     return (
         <div className={Styles.single_page}>
-            <figure className={Styles.poster}>
-                <Image
-                    src={`${process.env.NEXT_PUBLIC_ASSET_PREFIX}assets/images/deleted/post-banner.png`}
-                    alt="Single Poster"
-                    width={1247} height={742}
-                    priority
-                />
-            </figure>
+            <ImageFunction
+                className={Styles.poster}
+                src={`${process.env.NEXT_PUBLIC_ASSET_PREFIX}assets/images/deleted/post-banner.png`}
+                alt="Single Poster"
+                width={1247} height={742}
+            />
             <div className={Styles.single_content}>
                 <div className={`d-flex align-items-start gap-4 ${Styles.post_share}`}>
                     <span className='mt-1'>Share in Post: </span>

@@ -3,6 +3,8 @@ import { Container, FormControl } from "react-bootstrap";
 import Social from "../social/Social";
 import Image from "next/image";
 import "./style.css"
+import ImageFunction from "@/utlis/ImageFunction";
+import ImageFunctionLink from "@/utlis/ImageFunctionLink";
 type SocialItem = {
     site_social_link_name: string;
     site_social_link_url: string;
@@ -52,15 +54,15 @@ const Footer = ({data, menu} : Props) => {
                             </div>
                         )}
                         <div className="logoRow d-flex align-items-end justify-content-between gap-3">
-                            <Link href={webLink ?? ''} className="d-block f_logo">
-                                <Image
-                                    src={logo ? `${mediaLink}${logo}` : `${staticLink}assets/images/logo.webp`}
-                                    alt={`${title} Logo` || 'Darpan Logo'}
-                                    width={280} height={80}
-                                    priority
-                                    style={{objectFit: "contain"}}
-                                />
-                            </Link>
+                            <ImageFunctionLink
+                                href={webLink}
+                                className="f_logo"
+                                src={`${mediaLink}${logo}`}
+                                alt={`${title} Logo` || 'Darpan Logo'}
+                                width={280} height={80}
+                                style={{objectFit: "contain"}}
+                                fallBack="assets/images/logo.webp"
+                            />
                             <Social data={data?.socials} classProps="sm white" />
                         </div>
                         <div className="copyright">
@@ -68,16 +70,14 @@ const Footer = ({data, menu} : Props) => {
                         </div>
                     </div>
                     <div className="right_column">
-                        <div className="other-logo">
-                            <Image
-                                src={`${staticLink}assets/images/week-unwrapped.png`}
-                                alt="another logo"
-                                width={206}
-                                height={69}
-                                priority
-                                style={{objectFit:"contain"}}
-                            />
-                        </div>
+                        <ImageFunction
+                            className="max-width other-logo"
+                            src={`${staticLink}assets/images/week-unwrapped.png`}
+                            alt="another logo"
+                            width={206}
+                            height={69}
+                            style={{objectFit:"contain"}}
+                        />
                         <div className="subscribe-part">
                             <p>{`Subscribe to 'The Week Unwrapped' your weekly passport to what matters - news, culture, community`}</p>
                             <form action="#" className="subscribeForm">
@@ -88,7 +88,7 @@ const Footer = ({data, menu} : Props) => {
                                         placeholder="Enter  Your Email"
                                         className="rounded-0 bg-white"
                                     />
-                                    <button type="submit" className="rj-btn-subscribe transparent-btn">Subscribe Now</button>
+                                    <button type="submit" className="rj-btn-subscribe transparent-btn text-white">Subscribe Now</button>
                                 </div>
                             </form>
                         </div>
@@ -96,7 +96,7 @@ const Footer = ({data, menu} : Props) => {
                             <div className="issue-title">{`DARPAN's Latest Issue`}</div>
                             <div className="btn_wrap">
                                 <Link href="#" className="rj-btn-edition btn-edition">Digital Edition Here</Link>
-                                <Link href="#" className="rj-btn-doorstep transparent-btn doorstep-btn">Get DARPAN at Your Doorstep</Link>
+                                <Link href="#" className="rj-btn-doorstep transparent-btn doorstep-btn text-white">Get DARPAN at Your Doorstep</Link>
                             </div>
                         </div>
                     </div>

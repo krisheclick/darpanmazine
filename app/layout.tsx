@@ -1,14 +1,16 @@
 import type { Metadata } from "next";
-import { Inter, Tinos} from "next/font/google";
+import { Inter, Tinos } from "next/font/google";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-bootstrap";
-import {config} from "@fortawesome/fontawesome-svg-core";
+import { config } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 config.autoAddCss = false;
-import "./globals.css";
 import Header from "@/components/common/header/Header";
 import Footer from "@/components/common/footer/Footer";
+import "./globals.css";
+import "./responsive.css";
 import "@/components/common/box/style.css";
+import ProgressLink from "@/utlis/ProgressLink";
 
 const inter = Inter({
   variable: "--font-primary",
@@ -42,7 +44,8 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.variable} ${tinos.variable}`}>
-        <Header data={response_data} menu={navigation} /> 
+        <ProgressLink />
+        <Header data={response_data} menu={navigation} />
         <main className="mainContainer">{children}</main>
         <Footer data={response_data} menu={navigation} />
       </body>
