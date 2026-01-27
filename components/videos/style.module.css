@@ -22,6 +22,7 @@
 .subtitle{
     font: normal 20px / 1.2 var(--font-secondary);
     color: inherit;
+    min-height: 22px;
 }
 .videoTimer{
     position: absolute;
@@ -34,4 +35,15 @@
     line-height: 1;
     padding: 4px 6px;
     border-radius: 1px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+.videoTimer *{
+    width: 8px;
+    height: 8px;
+    border-radius: 0;
+}
+.videoTimer b{
+    width: 1px;
 }

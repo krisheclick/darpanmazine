@@ -43,7 +43,7 @@ const Header = ({ data, menu}: Props) => {
                 <Container>
                     <div className="topHeaderWrapper">
                         <div className="leftArea d-flex align-items-center">
-                            <Social data={data?.socials} classProps="round sm white" />
+                            <Social data={data?.socials} classProps="round sm white header_social" />
                             <Link href="#" className="rj-btn-newsletter white-btn specialHover newsletterBtn">NEWSLETTER</Link>
                         </div>
                         <ImageFunctionLink

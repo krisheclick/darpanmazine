@@ -18,9 +18,11 @@
 .boxTag {
     padding: 4px 8px;
     font-size: 12px;
-    background: var(--primary-color);
     color: var(--white-color);
     margin-bottom: 8px;
+}
+.boxTag:not(.skeleton){
+    background: var(--primary-color);
 }
 .eventsBox-end {
 	border-top: 1px solid var(--border);
@@ -74,7 +76,20 @@
     background: var(--white-color);
     padding: 20px 0px;
 }
-
+/* ==========Skeleton========== */
+.skeltetonBox *{
+    min-height: 18px;
+}
+.boxTag.skeleton {
+	width: 120px;
+	height: 26px;
+}
+.skeltetonBox .subtitle{
+    height: 20px;
+}
+.skeltetonBox .authorName{
+    border: none !important;
+}
 @media only screen and (max-width: 1600px){
     .eventsBox{
         font-size: 13px;

@@ -10,6 +10,9 @@
 .leftArea{
     column-gap: 36px;
 }
+.newsletterBtn{
+    --shadow-color: var(--white-color) !important;
+}
 .logo{
     height: 100px;
 }

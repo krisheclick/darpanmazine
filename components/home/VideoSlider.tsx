@@ -7,6 +7,7 @@ import "swiper/css/free-mode";
 import "swiper/css/autoplay";
 import "swiper/css/navigation";
 import VideosliderBox from "../videos/VideosliderBox";
+import VideoSkeleton from "../videos/videoSkeleton";
 
 type VideoItem = {
     heading?: string;
@@ -52,22 +53,29 @@ const VideoSlider = () => {
             modules={[Autoplay, Navigation, FreeMode]}
             className="video_slider"
         >
-            {data?.map((value, index) => {
-                const thumb_image = value?.thumb_image;
-                const videoArray = typeof thumb_image === "string" ? thumb_image.split('|') : "";
-                return (
+            {!hasLoading && data ? (
+                data?.map((value, index) => {
+                    const thumb_image = value?.thumb_image;
+                    const videoArray = typeof thumb_image === "string" ? thumb_image.split('|') : "";
+                    return (
+                        <SwiperSlide className="videoBox" key={index}>
+                            <VideosliderBox
+                                title={value?.heading}
+                                url={value?.url}
+                                image_dir={value?.image_dir}
+                                poster={videoArray[0]}
+                                videoTimer={videoArray[1]}
+                                publish_date={value?.publish_date}
+                            />
+                        </SwiperSlide>
+                    )
+                })) : (
+                [...Array(4)].map((_, index) => (
                     <SwiperSlide className="videoBox" key={index}>
-                        <VideosliderBox
-                            title={value?.heading}
-                            url={value?.url}
-                            image_dir={value?.image_dir}
-                            poster={videoArray[0]}
-                            videoTimer={videoArray[1]}
-                            publish_date={value?.publish_date}
-                        />
+                        <VideoSkeleton />
                     </SwiperSlide>
-                )
-            })}
+                ))
+            )}
         </Swiper>
     )
 }

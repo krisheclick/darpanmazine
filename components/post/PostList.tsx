@@ -3,6 +3,7 @@ import Styles from "./style.module.css";
 import { Col, Row } from "react-bootstrap";
 import { useEffect, useState } from "react";
 import EventsBox from "../common/box/Box";
+import BoxSkeleton from "../common/box/BoxSkeleton";
 
 type PostItem = {
     title?: string;
@@ -81,7 +82,8 @@ const PostList = () => {
     return (
         <div className={Styles.postList}>
             <Row className="rowGap">
-                {data.map((value, index) => (
+                {!hasLoading && data ? (
+                    data.map((value, index) => (
                     <Col xl={4} sm={6} key={index}>
                         <EventsBox
                             tag={value.tag}
@@ -92,7 +94,13 @@ const PostList = () => {
                             timestring={true}
                         />
                     </Col>
-                ))}
+                ))) : (
+                    [...Array(6)].map((_, index) => (
+                        <Col xl={4} sm={6} key={index}>
+                            <BoxSkeleton />
+                        </Col>
+                    ))
+                )}
             </Row>
         </div>
     )

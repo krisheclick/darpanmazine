@@ -63,7 +63,7 @@ const Footer = ({data, menu} : Props) => {
                                 style={{objectFit: "contain"}}
                                 fallBack="assets/images/logo.webp"
                             />
-                            <Social data={data?.socials} classProps="sm white" />
+                            <Social data={data?.socials} classProps="footer_social" />
                         </div>
                         <div className="copyright">
                             <p>&#169; {new Date().getFullYear()} {data?.site?.copyright}</p>

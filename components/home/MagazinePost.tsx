@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import EventsBox from "../common/box/Box";
 import { Col, Row } from "react-bootstrap";
 import Styles from "./style.module.css";
+import BoxSkeleton from "../common/box/BoxSkeleton";
 
 type DataItem = {
     heading?: string;
@@ -38,9 +39,35 @@ const MagazinePost = () => {
             <Row>
                 <Col lg={4}>
                     <div className={Styles.magzineViewList}>
-                        {data?.slice(1, 4)?.map((value, index) => {
+                        {!hasLoading && data ?
+                            data?.slice(1, 4)?.map((value, index) => {
+                                return (
+                                    <div className="magazineBox" key={index}>
+                                        <EventsBox
+                                            tag="Events"
+                                            title={value.heading}
+                                            slug={value.url}
+                                            author_name={value.author}
+                                            publish_date={value.publish_date}
+                                            thumbnail={`${process.env.NEXT_PUBLIC_IMAGE_URL}/library/uploads${value.image_dir} ${value.thumb_image}.jpg`}
+                                            errorImg="assets/images/deleted/Jacqueline-Fernandez.png"
+                                        />
+                                    </div>
+                                )
+                            }) : (
+                                [...Array(3)].map((_, index) => (
+                                    <div className="magazineBox" key={index}>
+                                        <BoxSkeleton />
+                                    </div>
+                                ))
+                            )}
+                    </div>
+                </Col>
+                <Col lg={8}>
+                    {!hasLoading && data ?
+                        data?.slice(0, 1)?.map((value, index) => {
                             return (
-                                <div className="magazineBox" key={index}>
+                                <div className="magazineBoxFirst" key={index}>
                                     <EventsBox
                                         tag="Events"
                                         title={value.heading}
@@ -48,29 +75,15 @@ const MagazinePost = () => {
                                         author_name={value.author}
                                         publish_date={value.publish_date}
                                         thumbnail={`${process.env.NEXT_PUBLIC_IMAGE_URL}/library/uploads${value.image_dir} ${value.thumb_image}.jpg`}
-                                        errorImg="assets/images/deleted/Jacqueline-Fernandez.png"
+                                        errorImg="assets/images/deleted/poster-woman.png"
                                     />
                                 </div>
                             )
-                        })}
-                    </div>
-                </Col>
-                <Col lg={8}>
-                    {data?.slice(0, 1)?.map((value, index) => {
-                        return (
-                            <div className="magazineBoxFirst" key={index}>
-                                <EventsBox
-                                    tag="Events"
-                                    title={value.heading}
-                                    slug={value.url}
-                                    author_name={value.author}
-                                    publish_date={value.publish_date}
-                                    thumbnail={`${process.env.NEXT_PUBLIC_IMAGE_URL}/library/uploads${value.image_dir} ${value.thumb_image}.jpg`}
-                                    errorImg="assets/images/deleted/poster-woman.png"
-                                />
+                        }) : (
+                            <div className="magazineBoxFirst">
+                                <BoxSkeleton />
                             </div>
-                        )
-                    })}
+                        )}
                 </Col>
             </Row>
         </div>

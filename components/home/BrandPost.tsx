@@ -7,6 +7,7 @@ import "swiper/css/free-mode";
 import "swiper/css/autoplay";
 import "swiper/css/navigation";
 import EventsBox from "../common/box/Box";
+import BoxSkeleton from "../common/box/BoxSkeleton";
 
 type DataItem = {
     heading?: string;
@@ -50,21 +51,28 @@ const BrandPost = () => {
             modules={[Autoplay, Navigation, FreeMode]}
             className="brands_slider"
         >
-            {data?.map((value, index) => {
-                const poster = typeof value.thumb_image === "string" ? value.thumb_image.split(',') : "";
-                return (
-                    <SwiperSlide key={index}>
-                        <EventsBox
-                            tag="Events"
-                            title={value.heading}
-                            slug={value.url}
-                            author_name={value.author}
-                            publish_date={value.publish_date}
-                            thumbnail={`${process.env.NEXT_PUBLIC_IMAGE_URL}/library/uploads${value.image_dir}${poster[0]}.jpg`}
-                        />
-                    </SwiperSlide>
-                )
-            })}
+            {!hasLoading && data ?
+                data?.map((value, index) => {
+                    const poster = typeof value.thumb_image === "string" ? value.thumb_image.split(',') : "";
+                    return (
+                        <SwiperSlide key={index}>
+                            <EventsBox
+                                tag="Events"
+                                title={value.heading}
+                                slug={value.url}
+                                author_name={value.author}
+                                publish_date={value.publish_date}
+                                thumbnail={`${process.env.NEXT_PUBLIC_IMAGE_URL}/library/uploads${value.image_dir}${poster[0]}.jpg`}
+                            />
+                        </SwiperSlide>
+                    )
+                }) : (
+                    [...Array(4)].map((_, index) => (
+                        <SwiperSlide key={index}>
+                            <BoxSkeleton />
+                        </SwiperSlide>
+                    ))
+                )}
         </Swiper>
     )
 }

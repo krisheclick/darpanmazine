@@ -1,79 +1,82 @@
 "use client";
-// import { useState } from "react";
-import {Col, Row} from "react-bootstrap";
 import EventsBox from "../common/box/Box";
-const BcEventsList = () => {
-    const events = {
-        "status": "success",
-        "response_data": [
-            {
-                "tag": "Events",
-                "title": "Tamanna Punjabi Kapoor’s Serenade is a timeless ode",
-                "slug": "/#",
-                "thumbnail_dir": "assets/images/deleted/",
-                "thumbnail": "tamanna_punjabi_kapoora’s.png",
-                "author_name": "Darpan Desk",
-                "publish_date": "2025-05-26T14:28:01.000Z"
-            },
-            {
-                "tag": "Events",
-                "title": "In retaliation for Op Sindoor, Pakistan halted newspapers",
-                "slug": "/#",
-                "thumbnail_dir": "assets/images/deleted/",
-                "thumbnail": "op_sindoor_pakistan.jpg",
-                "author_name": "Joanna Wellick",
-                "publish_date": "2025-01-18T09:15:00.000Z"
-            },
-            {
-                "tag": "Events",
-                "title": "BC Hydro's Site C dam is located on the Peace River, near St.",
-                "slug": "/#",
-                "thumbnail_dir": "assets/images/deleted/",
-                "thumbnail": "peace_river.png",
-                "author_name": "Joanna Wellick",
-                "publish_date": "2025-01-18T09:15:00.000Z"
-            }
-        ]
+import { useCallback, useEffect, useState } from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/autoplay";
+import "swiper/css/free-mode";
+import Styles from "./style.module.css";
+import { Autoplay, FreeMode } from "swiper/modules";
+import BoxSkeleton from "../common/box/BoxSkeleton";
+
+type DataItem = {
+    type?: string;
+    category?: {
+        name?: string;
     }
+    heading?: string;
+    url?: string;
+    short_description?: string;
+    image_dir?: string;
+    thumb_image?: string;
+    author?: string;
+    publish_date?: string;
+}
+const BcEventsList = () => {
 
-    // type DataItem = {
-    //     tag?: string;
-    //     title?: string;
-    //     thumbnail?: string;
-    //     author_name?: string;
-    //     publish_date?: string;
-    // }
+    const [hasLoading, setLoading] = useState(true);
+    const [data, setData] = useState<DataItem[] | null>(null);
 
-    // const [hasLoading, setLoading] = useState(true);
-    // const [data, setData] = useState<DataItem[] | null>(null);
+    const fetchData = useCallback(async () => {
+        try {
+            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/hot/editors-pick`);
+            const { response_data } = await response.json();
+            setData(response_data?.data);
+        } catch (err: unknown) {
+            console.log('Events Data is something wrong: ', (err as Error).message);
+        } finally {
+            setLoading(false)
+        }
+    }, []);
 
-    // const fetchData = async() => {
-    //     try{
-    //         const response = await fetch(events);
-    //         const {response_data} = (await response).json();
-    //         setData(response_data);
-    //     }catch(err: unknown){
-    //         console.log('Events Data is something wrong: ', (err as Error).message);
-    //     }finally{
-    //         setLoading(false)
-    //     }
-    // }
+    useEffect(() => {
+        fetchData();
+    }, [fetchData]);
 
     return (
-        <Row className="gx-3">
-            {events.response_data.map((value, index) => (
-                <Col lg={4} key={index}>
-                    <EventsBox
-                        tag={value.tag}
-                        title={value.title}
-                        slug={value.slug}
-                        author_name={value.author_name}
-                        publish_date={value.publish_date}
-                        thumbnail={`${process.env.NEXT_PUBLIC_ASSET_PREFIX}${value.thumbnail_dir}${value.thumbnail}`}
-                    />
-                </Col>
-            ))}
-        </Row>
+        <Swiper
+            spaceBetween={16}
+            slidesPerView={data && data.length > 0 ? Math.min(data.length, 3) : 3}
+            loop={(data?.length || 0) > 3}
+            modules={[Autoplay, FreeMode]}
+            autoplay={{
+                delay: 30000,
+                disableOnInteraction: false
+            }}
+            className={`bcEventsSlider ${Styles.bcEventsSlider}`}
+        >
+            {!hasLoading && data ? (
+                data?.map((value, index) => (
+                    <SwiperSlide key={index}>
+                        <EventsBox
+                            tag={value.category?.name}
+                            title={value.heading}
+                            slug={value.url}
+                            author_name={value.author}
+                            publish_date={value.publish_date}
+                            thumbnail={`${process.env.NEXT_PUBLIC_ASSET_PREFIX}${value.image_dir}${value.thumb_image}`}
+                            errorImg="assets/images/deleted/tamanna_punjabi_kapoora’s.png"
+                        />
+                    </SwiperSlide>
+                ))
+            ) : (
+                [...Array(4)].map((_, index) => (
+                    <SwiperSlide key={index}>
+                        <BoxSkeleton />
+                    </SwiperSlide>
+                ))
+            )}
+        </Swiper>
     )
 }
 

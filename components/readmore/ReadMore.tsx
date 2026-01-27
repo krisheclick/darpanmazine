@@ -10,6 +10,7 @@ import "swiper/css/free-mode";
 import { Container } from 'react-bootstrap';
 import Styles from './style.module.css';
 import { useLayoutContext } from "@/context/inner_context";
+import BoxSkeleton from "../common/box/BoxSkeleton";
 
 
 const api = {
@@ -72,7 +73,7 @@ type PostItem = {
 const ReadMoreSlider = () => {
     const [data, setData] = useState<PostItem[]>([]);
     const [hasLoading, setLasLoading] = useState(true);
-    const {otherSlider} = useLayoutContext();
+    const { otherSlider } = useLayoutContext();
     const fetchdata = async () => {
         try {
             // const resposne = await fetch(`${process.env.NEXT_PUBLIC_API_URL}`);
@@ -108,18 +109,25 @@ const ReadMoreSlider = () => {
                             modules={[Autoplay, Navigation, FreeMode]}
                             className={`other_slider ${Styles.other_slider ?? ''}`}
                         >
-                            {data.map((value, index) => (
-                                <SwiperSlide key={index}>
-                                    <EventsBox
-                                        tag={value.tag}
-                                        title={value.title}
-                                        slug={value.slug}
-                                        publish_date={value.publishDate}
-                                        thumbnail={`${process.env.NEXT_PUBLIC_ASSET_PREFIX}assets/images/${value.thumbnail_url}`}
-                                        timestring={true}
-                                    />
-                                </SwiperSlide>
-                            ))}
+                            {!hasLoading && data ? (
+                                data.map((value, index) => (
+                                    <SwiperSlide key={index}>
+                                        <EventsBox
+                                            tag={value.tag}
+                                            title={value.title}
+                                            slug={value.slug}
+                                            publish_date={value.publishDate}
+                                            thumbnail={`${process.env.NEXT_PUBLIC_ASSET_PREFIX}assets/images/${value.thumbnail_url}`}
+                                            timestring={true}
+                                        />
+                                    </SwiperSlide>
+                                ))) : (
+                                [...Array(4)].map((_, index) => (
+                                    <SwiperSlide key={index}>
+                                        <BoxSkeleton />
+                                    </SwiperSlide>
+                                ))
+                            )}
                         </Swiper>
                     </div>
 
