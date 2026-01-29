@@ -15,8 +15,10 @@ import ImageFunction from "@/utlis/ImageFunction";
 type DataItem = {
     heading?: string;
     url?: string;
-    thumb_image?: string;
-    image_dir?: string | string[] | null;
+    type?: string;
+    thumbnail?: {
+        file_url?: string;
+    }
     publish_date?: string;
     author?: string;
     category?: {
@@ -42,6 +44,7 @@ const HomeBannerSlider = () => {
         fetchData();
     }, []);
 
+
     return (
         <div className={Styles.banner}>
             <Swiper
@@ -56,8 +59,8 @@ const HomeBannerSlider = () => {
             >
                 {!hasLoading ? (
                     banner?.map((data, index) => {
-                        const { heading, url, thumb_image, image_dir, publish_date } = data;
-                        const poster = typeof thumb_image === "string" ? thumb_image.split('#,#') : [];
+                        const { heading, url, thumbnail, publish_date } = data;
+                        // const poster = typeof thumb_image === "string" ? thumb_image.split('#,#') : [];
                         const dateObj = new Date(publish_date ?? '');
                         const formattedDate = dateObj.toLocaleDateString("en-GB", {
                             day: "2-digit",
@@ -74,7 +77,7 @@ const HomeBannerSlider = () => {
                                 <Link href={`${process.env.NEXT_PUBLIC_ENV_URL}${url}`} className="d-block color-inherit">
                                     <ImageFunction
                                         className={Styles.poster}
-                                        src={`${process.env.NEXT_PUBLIC_IMAGE_URL}/library/uploads${image_dir}/${poster[0]}.jpg`}
+                                        src={`${process.env.NEXT_PUBLIC_MEDIA_URL}${thumbnail?.file_url}`}
                                         alt={heading || "Poster"}
                                         style={{ objectFit: "cover" }}
                                     />
@@ -123,12 +126,11 @@ const HomeBannerSlider = () => {
                 >
                     {!hasLoading ? (
                         banner?.map((data, index) => {
-                            const { heading, thumb_image, image_dir } = data;
-                            const thumbs = typeof thumb_image === 'string' ? thumb_image.split('#,#') : [];
+                            const { heading, thumbnail} = data;
                             return (
                                 <SwiperSlide key={index} className={Styles.thumbItem}>
                                     <Image
-                                        src={`${process.env.NEXT_PUBLIC_IMAGE_URL}/library/uploads${image_dir}/${thumbs[0]}.jpg`}
+                                        src={`${process.env.NEXT_PUBLIC_MEDIA_URL}${thumbnail?.file_url}`}
                                         alt={heading || "Thumbnail"}
                                         fill
                                         priority

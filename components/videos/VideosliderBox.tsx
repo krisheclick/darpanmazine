@@ -19,8 +19,12 @@ const VideosliderBox = ({title, url, image_dir, poster, videoTimer}: Props) => {
                     alt={title || "Video Poster"}
                     fill
                     priority
+                    onError={(e) => {
+                        const target = e.target as HTMLImageElement;
+                        target.src=`${process.env.NEXT_PUBLIC_ASSET_PREFIX}assets/images/deleted/Jacqueline-Fernandez.png`
+                    }}
                 />
-                <span className={Styles.videoTimer}>{videoTimer}</span>
+                <span className={Styles.videoTimer}>{videoTimer || '0:00'}</span>
             </figure>
             <div className={Styles.boxContent}>
                 <div className={Styles.subtitle}>{title}</div>

@@ -10,8 +10,9 @@ type DataItem = {
     url?: string;
     author?: string;
     short_description?: string;
-    image_dir?: string;
-    thumb_image?: string | string[] | null;
+    thumbnail?: {
+        file_url?: string;
+    }
     publish_date?: string;
 }
 const MagazinePost = () => {
@@ -49,7 +50,7 @@ const MagazinePost = () => {
                                             slug={value.url}
                                             author_name={value.author}
                                             publish_date={value.publish_date}
-                                            thumbnail={`${process.env.NEXT_PUBLIC_IMAGE_URL}/library/uploads${value.image_dir} ${value.thumb_image}.jpg`}
+                                            thumbnail={`${process.env.NEXT_PUBLIC_MEDIA_URL}${value.thumbnail?.file_url}`}
                                             errorImg="assets/images/deleted/Jacqueline-Fernandez.png"
                                         />
                                     </div>
@@ -74,7 +75,7 @@ const MagazinePost = () => {
                                         slug={value.url}
                                         author_name={value.author}
                                         publish_date={value.publish_date}
-                                        thumbnail={`${process.env.NEXT_PUBLIC_IMAGE_URL}/library/uploads${value.image_dir} ${value.thumb_image}.jpg`}
+                                        thumbnail={`${process.env.NEXT_PUBLIC_MEDIA_URL}${value.thumbnail?.file_url}`}
                                         errorImg="assets/images/deleted/poster-woman.png"
                                     />
                                 </div>

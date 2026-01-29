@@ -14,8 +14,9 @@ type DataItem = {
     url?: string;
     author?: string;
     short_description?: string;
-    image_dir?: string;
-    thumb_image?: string | string[] | null;
+    thumbnail?: {
+        file_url?: string;
+    }
     publish_date?: string;
 }
 const TrendingList = () => {
@@ -49,7 +50,6 @@ const TrendingList = () => {
         >
             {!hasLoading && data ?
                 data?.map((value, index) => {
-                    const poster = typeof value.thumb_image === "string" ? value.thumb_image.split(',') : "";
                     return (
                         <SwiperSlide key={index}>
                             <EventsBox
@@ -58,7 +58,8 @@ const TrendingList = () => {
                                 slug={value.url}
                                 author_name={value.author}
                                 publish_date={value.publish_date}
-                                thumbnail={`${process.env.NEXT_PUBLIC_IMAGE_URL}/library/uploads${value.image_dir}${poster[0]}.jpg`}
+                                thumbnail={`${process.env.NEXT_PUBLIC_MEDIA_URL}${value.thumbnail?.file_url}`}
+                                errorImg="assets/images/deleted/tamanna_punjabi_kapoora’s.png"
                             />
                         </SwiperSlide>
                     )

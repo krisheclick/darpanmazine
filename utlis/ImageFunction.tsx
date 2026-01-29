@@ -47,7 +47,7 @@ const ImageFunction = ({
                 className={`${hasLoading ? 'loading': 'loaded'}`}
                 onError={(e) => {
                     const target = e.target as HTMLImageElement;
-                    target.src= `${asset_prefix}${imageFallback}`
+                    target.src= imageFallback
                 }}
                 style={style}
             />

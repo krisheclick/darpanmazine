@@ -19,7 +19,7 @@ const PhotoBox = ({tag, title, slug, thumbnail} : Props) => {
                     priority
                     onError={(e) => {
                         (e.target as HTMLImageElement).src =
-                            `${process.env.NEXT_PUBLIC_ASSET_PREFIX}assets/images/noimage.webp`;
+                            `${process.env.NEXT_PUBLIC_ASSET_PREFIX}assets/images/deleted/poster-woman.png`;
                     }}
                     sizes="(max-width: 768px) 100vw, 25vw"
                 />

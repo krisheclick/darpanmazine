@@ -17,8 +17,9 @@ type DataItem = {
     heading?: string;
     url?: string;
     short_description?: string;
-    image_dir?: string;
-    thumb_image?: string;
+    thumbnail?: {
+        file_url?: string;
+    }
     author?: string;
     publish_date?: string;
 }
@@ -64,7 +65,7 @@ const BcEventsList = () => {
                             slug={value.url}
                             author_name={value.author}
                             publish_date={value.publish_date}
-                            thumbnail={`${process.env.NEXT_PUBLIC_ASSET_PREFIX}${value.image_dir}${value.thumb_image}`}
+                            thumbnail={`${process.env.NEXT_PUBLIC_MEDIA_URL}${value.thumbnail?.file_url}`}
                             errorImg="assets/images/deleted/tamanna_punjabi_kapoora’s.png"
                         />
                     </SwiperSlide>
