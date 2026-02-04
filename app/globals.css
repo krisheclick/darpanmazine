@@ -130,13 +130,13 @@ nav.noList li{
     display: flex;
     flex-wrap: wrap;
 }
-.inlineList li::after{
+.inlineList li::before{
     content: '|';
     display: inline-block;
     vertical-align: text-top;
     margin: 0px 8px;
 }
-.inlineList li:last-child::after{
+.inlineList li:first-child::before{
     display: none;
 }
 .inlineList a {

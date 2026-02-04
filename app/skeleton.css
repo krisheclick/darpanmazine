@@ -35,6 +35,10 @@
 	height: 36px;
 	border-radius: 4px;
 }
+.skeleton.title{
+  width: 220px;
+  height: 30px;
+}
 .skeletonDot {
 	background: linear-gradient(45deg, rgba(31, 88, 203, .26), var(--primary-background));
 	border-radius: 6px;
