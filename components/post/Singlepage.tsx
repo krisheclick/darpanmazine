@@ -1,3 +1,4 @@
+"use client";
 import Image from 'next/image';
 import Styles from './style.module.css';
 import Link from 'next/link';
@@ -5,8 +6,16 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebook, faLinkedin, faWhatsapp, faXTwitter } from '@fortawesome/free-brands-svg-icons';
 import { faLink } from '@fortawesome/free-solid-svg-icons';
 import ImageFunction from '@/utlis/ImageFunction';
+import { useLayoutContext } from '@/context/inner_context';
+import { useEffect } from 'react';
 
 const Singlepage = () => {
+    const { setOtherSlider } = useLayoutContext();
+    useEffect(() => {
+        setOtherSlider(true);
+        
+        return () => setOtherSlider(false);
+    }, [setOtherSlider]);
     return (
         <div className={Styles.single_page}>
             <ImageFunction

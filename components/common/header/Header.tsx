@@ -36,38 +36,38 @@ type Props = {
     data?: Webdata;
     menu?: Menu;
 };
-interface AddData {
-    title?: string;
-    link?: string;
-    image?: string;
-}
-interface AdType {
-    ads?: AddData[];
-}
+// interface AddData {
+//     title?: string;
+//     link?: string;
+//     image?: string;
+// }
+// interface AdType {
+//     ads?: AddData[];
+// }
 const Header = ({ data, menu}: Props) => {
     const title = data?.site?.title ?? "Darpan Magazine";
     const logo = data?.site?.logo;
 
-    const [hasLoading, setLoading] = useState(true);
-    const [ads, setAds] = useState<AdType[] | null>(null);
-    const fetchData = useCallback(async() => {
-        try{
-            setLoading(true)
-            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/all-ads/`);
-            const {response_data} = await response.json();
-            setAds(response_data);
-        }catch(err: unknown){
-            console.log('Advertiesment fetch api data is somrthing wrong: ', (err as Error).message)
-        }finally{
-            setLoading(false)
-        }
-    }, []);
+    // const [hasLoading, setLoading] = useState(true);
+    // const [ads, setAds] = useState<AdType[] | null>(null);
+    // const fetchData = useCallback(async() => {
+    //     try{
+    //         setLoading(true)
+    //         const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/all-ads/`);
+    //         const {response_data} = await response.json();
+    //         setAds(response_data);
+    //     }catch(err: unknown){
+    //         console.log('Advertiesment fetch api data is somrthing wrong: ', (err as Error).message)
+    //     }finally{
+    //         setLoading(false)
+    //     }
+    // }, []);
 
-    useEffect(() => {
-        fetchData();
-    }, [fetchData]);
+    // useEffect(() => {
+    //     fetchData();
+    // }, [fetchData]);
 
-    console.log('ads', ads)
+    // console.log('ads', ads)
 
     return (
         <header className="mainHeader">
