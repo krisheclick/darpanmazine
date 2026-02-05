@@ -107,3 +107,9 @@
 	--size: auto;
 	font-size: 28px;
 }
+
+@media only screen and (max-width: 1600px){
+    .social.footer_social a{
+        font-size: 24px;
+    }
+}

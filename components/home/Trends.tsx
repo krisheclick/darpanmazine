@@ -42,11 +42,29 @@ const TrendingList = () => {
     return (
         <Swiper
             spaceBetween={16}
-            slidesPerView={data && data.length > 0 ? Math.min(data.length, 4) : 4}
+            // slidesPerView={data && data.length > 0 ? Math.min(data.length, 4) : 4}
             loop={(data?.length || 0) > 4}
             navigation
             modules={[Autoplay, Navigation, FreeMode]}
             className="trending_slider"
+            breakpoints={{
+                0: {
+                    slidesPerView: 1.2,
+                    spaceBetween: 12,
+                },
+                576: {
+                    slidesPerView: 2,
+                },
+                768: {
+                    slidesPerView: 3,
+                },
+                992: {
+                    slidesPerView: 3,
+                },
+                1600: {
+                    slidesPerView: 4,
+                },
+            }}
         >
             {!hasLoading && data ?
                 data?.map((value, index) => {

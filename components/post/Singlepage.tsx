@@ -6,7 +6,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebook, faLinkedin, faWhatsapp, faXTwitter } from '@fortawesome/free-brands-svg-icons';
 import { faLink } from '@fortawesome/free-solid-svg-icons';
 import ImageFunction from '@/utlis/ImageFunction';
-import { useLayoutContext } from '@/context/inner_context';
 import { useEffect, useState } from 'react';
 import { usePostContext } from '@/context/post_context';
 import NotFoundPage from '@/app/notFound';
@@ -33,8 +32,7 @@ const Singlepage = ({url = []}:PageProps) => {
 
     const [notFound, setNotFoundPage] = useState(false);
     const [data, setData] = useState<PageData | null>(null);
-    const {setLoading, hasLoading, setReadMostArticle} = usePostContext();
-    const { setOtherSlider, setArticle, setPostCategory} = useLayoutContext();
+    const {setLoading, hasLoading, setReadMostArticle, setOtherSlider, setArticle, setPostCategory} = usePostContext();
     useEffect(() => {
         setOtherSlider(true);
         

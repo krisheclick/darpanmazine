@@ -34,12 +34,25 @@ interface MostReadArticle {
         categoryName?: string;
         slug?: string;
         imageDir?: string;
-        images?: {
-            file_url?: string;
-        }[] | undefined;
-    }
+    };
+    images?: {
+        file_url?: string;
+    }[];
 }
-
+interface MostArticle {
+    heading?: string;
+    permalink?: string;
+    shortDescription?: string;
+    publishDate?: string;
+    images?: {
+        file_url?: string;
+    }[];
+}
+interface Categoryview  {
+    categoryName?: string;
+    slug?: string;
+    imageDir?: string;
+}
 interface PostContextData {
     hasLoading: boolean;
     setLoading: (hasLoading: boolean) => void;
@@ -52,6 +65,14 @@ interface PostContextData {
     setReadMostArticle: (mostReadArticle: MostReadArticle[]) => void;
     latestArticle: MostReadArticle[] | null;
     setLatestArticle: (latestArticle: MostReadArticle[]) => void;
+    article: MostArticle[] | null;
+    setArticle: (article: MostArticle[]) => void;
+    postCategory: Categoryview | null;
+    setPostCategory: (postCategory: Categoryview) => void;
+
+    // Other Slider
+    otherSlider: boolean | null;
+    setOtherSlider: (otherSlider: boolean) => void;
 }
 
 const PostContext = createContext<PostContextData | undefined>(undefined);
@@ -62,6 +83,9 @@ export const PostProvider = ({children}: {children: ReactNode}) => {
     const [allPosts, setAllPosts] = useState<Postdata[] | null>(null);
     const [mostReadArticle, setReadMostArticle] = useState<MostReadArticle[] | null>(null);
     const [latestArticle, setLatestArticle] = useState<MostReadArticle[] | null>(null);
+    const [article, setArticle] = useState<MostArticle[] | null>(null);
+    const [postCategory, setPostCategory] = useState<Categoryview | null>(null);
+    const [otherSlider, setOtherSlider] = useState(false);
     return(
         <PostContext.Provider
             value={{
@@ -69,7 +93,10 @@ export const PostProvider = ({children}: {children: ReactNode}) => {
                 mainCategory, setMainCategory,
                 allPosts, setAllPosts,
                 mostReadArticle, setReadMostArticle,
-                latestArticle, setLatestArticle
+                latestArticle, setLatestArticle,
+                otherSlider, setOtherSlider,
+                article, setArticle,
+                postCategory, setPostCategory
             }}
         >
             {children}

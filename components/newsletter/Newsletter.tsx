@@ -7,7 +7,7 @@ const Newsletter = () => {
     return (
         <div className={Styles.newsletterArea}>
             <Row className='align-items-start'>
-                <Col xl={6}>
+                <Col xl={6} className={Styles.fullWidth}>
                     <div className={Styles.contentArea}>
                         <figure className={`flex-shrink-0 ${Styles.logo ?? ''}`}>
                             <Image
@@ -22,7 +22,7 @@ const Newsletter = () => {
                         <div>{`Sign Up to Receive 'The Week Unwrapped' A quick digest of top news, pop culture, South Asian pride, and events — delivered weekly.`}</div>
                     </div>
                 </Col>
-                <Col xl={6}>
+                <Col xl={6} className={Styles.fullWidth}>
                     <div className={Styles.formArea}>
                         <NewsletterForm />
                     </div>

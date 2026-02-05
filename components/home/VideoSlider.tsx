@@ -17,8 +17,13 @@ type VideoItem = {
     thumb_image?: string | string[] | null;
     image_dir?: string;
     publish_date?: string;
+    video_duration?: string;
     category: {
         name?: string;
+    };
+    thumbnail?: {
+        file_name?: string;
+        file_url?: string;
     }
 }
 const VideoSlider = () => {
@@ -52,19 +57,34 @@ const VideoSlider = () => {
             }}
             modules={[Autoplay, Navigation, FreeMode]}
             className="video_slider"
+            breakpoints={{
+                0: {
+                    slidesPerView: 1.2,
+                    spaceBetween: 12,
+                },
+                576: {
+                    slidesPerView: 2,
+                },
+                768: {
+                    slidesPerView: 3,
+                },
+                992: {
+                    slidesPerView: 3,
+                },
+                1600: {
+                    slidesPerView: 4,
+                },
+            }}
         >
             {!hasLoading && data ? (
                 data?.map((value, index) => {
-                    const thumb_image = value?.thumb_image;
-                    const videoArray = typeof thumb_image === "string" ? thumb_image.split('|') : "";
                     return (
                         <SwiperSlide className="videoBox" key={index}>
                             <VideosliderBox
                                 title={value?.heading}
                                 url={value?.url}
-                                image_dir={value?.image_dir}
-                                poster={videoArray[0]}
-                                videoTimer={videoArray[1]}
+                                poster={value?.thumbnail?.file_url}
+                                videoTimer={value.video_duration}
                                 publish_date={value?.publish_date}
                             />
                         </SwiperSlide>

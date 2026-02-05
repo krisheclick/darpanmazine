@@ -4,7 +4,7 @@ import Styles from './style.module.css';
 const NewsletterForm = () => {
     return (
         <form>
-            <div className={`d-flex align-items-start gap-2 ${Styles.formRow ?? ''}`}>
+            <div className={Styles.formRow}>
                 <Col className={Styles.inputColumn}>
                     <div className={Styles.inputColumnGroup}>
                         <FormControl
@@ -21,7 +21,7 @@ const NewsletterForm = () => {
                         />
                     </div>
                 </Col>
-                <Col className={Styles.inputColumn}>
+                <Col className={Styles.inputColumn} style={{flex: "inherit"}}>
                     <div className={Styles.inputColumnGroup}>
                         <button type='submit' className='rj-btn-subscribe'>Subscribe Now</button>
                     </div>

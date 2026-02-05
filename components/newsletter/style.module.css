@@ -10,10 +10,10 @@
     font: 400 19px / 1.25 var(--font-secondary);
 }
 .formRow{
+    display: flex;
+    align-items: start;
+    gap: 8px;
     margin-top: 16px;
-}
-.inputColumn{
-    flex: inherit;
 }
 .inputColumnGroup input, .inputColumnGroup button{
     --height: 36px;
@@ -25,4 +25,13 @@
     --input-color: var(--black-color);
     background: transparent !important;
     box-shadow: none !important;
+}
+
+@media only screen and (max-width: 1600px){
+    .fullWidth{
+        width: 100%;
+    }
+    .formRow{
+        gap: 16px;
+    }
 }

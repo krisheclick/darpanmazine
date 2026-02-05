@@ -81,7 +81,7 @@ const Footer = ({data, menu} : Props) => {
                         <div className="subscribe-part">
                             <p>{`Subscribe to 'The Week Unwrapped' your weekly passport to what matters - news, culture, community`}</p>
                             <form action="#" className="subscribeForm">
-                                <div className="subscribeInput d-flex align-items-start gap-3">
+                                <div className="subscribeInput d-flex align-items-start">
                                     <FormControl
                                         type="text"
                                         name="subscribe_input"

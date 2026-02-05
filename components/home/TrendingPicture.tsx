@@ -16,6 +16,10 @@ type DataItem = {
     image_dir?: string;
     thumb_image?: string | string[] | null;
     publish_date?: string;
+    thumbnail?: {
+        file_name?: string;
+        file_url?: string;
+    }
 }
 const TrendingPicture = () => {
     const [hasLoading, setLoading] = useState(true);
@@ -49,16 +53,34 @@ const TrendingPicture = () => {
             }}
             modules={[Autoplay, Navigation, FreeMode]}
             className="picture_slider"
+            breakpoints={{
+                0: {
+                    slidesPerView: 1.2,
+                    spaceBetween: 12,
+                },
+                576: {
+                    slidesPerView: 2,
+                },
+                768: {
+                    slidesPerView: 3,
+                },
+                992: {
+                    slidesPerView: 3,
+                },
+                1600: {
+                    slidesPerView: 3,
+                },
+            }}
         >
             {data?.map((value, index) => {
-                const poster = typeof value.thumb_image === "string" ? value.thumb_image.split(",#")[0].split("|")[0] : "";
+                // const poster = typeof value.thumb_image === "string" ? value.thumb_image.split(",#")[0].split("|")[0] : "";
                 return (
                     <SwiperSlide key={index}>
                         <PhotoBox
                             tag=""
                             title={value.heading}
                             slug={value.url}
-                            thumbnail={`${process.env.NEXT_PUBLIC_IMAGE_URL}/library/uploads${value.image_dir}/${poster}.jpg`}
+                            thumbnail={`${process.env.NEXT_PUBLIC_MEDIA_URL}${value?.thumbnail?.file_url}`}
                         />
                     </SwiperSlide>
                 )

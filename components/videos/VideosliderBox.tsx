@@ -5,17 +5,16 @@ import Styles from './style.module.css';
 type Props = {
     title?: string;
     url?: string;
-    image_dir?: string;
     poster?: string;
     publish_date?: string;
     videoTimer?: string;
 }
-const VideosliderBox = ({title, url, image_dir, poster, videoTimer}: Props) => {
+const VideosliderBox = ({title, url, poster, videoTimer}: Props) => {
     return (
-        <Link href={`${process.env.NEXT_PUBLIC_ENV_URL}${url}`} className={`videoBox ${Styles.sliderBox}`}>
+        <Link href={url || ""} className={`videoBox ${Styles.sliderBox}`} target='_blank'>
             <figure className={Styles.poster}>
                 <Image
-                    src={`${process.env.NEXT_PUBLIC_IMAGE_URL}/library/uploads${image_dir}${poster}.jpg`}
+                    src={`${process.env.NEXT_PUBLIC_MEDIA_URL}${poster}`}
                     alt={title || "Video Poster"}
                     fill
                     priority

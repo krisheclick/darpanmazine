@@ -8,11 +8,10 @@ import "swiper/css/navigation";
 import "swiper/css/free-mode";
 import { Container } from 'react-bootstrap';
 import Styles from './style.module.css';
-import { useLayoutContext } from "@/context/inner_context";
 import BoxSkeleton from "../common/box/BoxSkeleton";
+import { usePostContext } from "@/context/post_context";
 const ReadMoreSlider = () => {
-    const { otherSlider, article, postCategory} = useLayoutContext();
-
+    const { otherSlider, article, postCategory} = usePostContext();
     return (
         otherSlider && (
             <div className={`section-area ${Styles.readMore_section ?? ''}`}>

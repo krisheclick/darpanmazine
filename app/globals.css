@@ -465,6 +465,12 @@ form{
 .rowGap{
     row-gap: var(--bs-gutter-x);
 }
+.mainLayout{
+    margin-block: 30px;
+}
+.poster-ad-inner{
+    margin: 48px 0px 32px;
+}
 /* =========== Row Column Sperarate Ends ================= */
 
 /* Wrapper */
@@ -523,4 +529,5 @@ form{
 .rj_editor_text :is(.editor_iframe_social, .editor_iframe_video, .test) iframe{
     aspect-ratio: 16/9;
     margin-bottom: 16px;
+    width: 100%;
 }
