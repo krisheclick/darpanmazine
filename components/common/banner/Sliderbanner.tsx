@@ -32,7 +32,7 @@ const Sliderbanner = () => {
                     />
                     <div className={Styles.bannerText}>
                         <div className={Styles.title}>Interior health says parents should ensure kids caught <br /> up vaccination</div>
-                        <div className={Styles.datetime}><span> 05 Dec, 2025</span> <span>10:34 AM</span></div>
+                        <div className={Styles.datetime}>Darpan Desk | <span> 05 Dec, 2025</span> <span>10:34 AM</span></div>
                     </div>
                 </SwiperSlide>
             </Swiper>
