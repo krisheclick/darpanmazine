@@ -27,6 +27,19 @@ interface Postdata {
     }
 }
 
+interface MostReadArticle {
+    heading?: string;
+    permalink?: string;
+    categoryview?: {
+        categoryName?: string;
+        slug?: string;
+        imageDir?: string;
+        images?: {
+            file_url?: string;
+        }[];
+    }
+}
+
 interface PostContextData {
     hasLoading: boolean;
     setLoading: (hasLoading: boolean) => void;
@@ -34,6 +47,11 @@ interface PostContextData {
     setMainCategory: (mainCategory: MainCategory) => void;
     allPosts: Postdata[] | null;
     setAllPosts: (allPosts: Postdata[]) => void;
+
+    mostReadArticle: MostReadArticle[] | null;
+    setReadMostArticle: (mostReadArticle: MostReadArticle[]) => void;
+    latestArticle: MostReadArticle[] | null;
+    setLatestArticle: (latestArticle: MostReadArticle[]) => void;
 }
 
 const PostContext = createContext<PostContextData | undefined>(undefined);
@@ -42,12 +60,16 @@ export const PostProvider = ({children}: {children: ReactNode}) => {
     const [hasLoading, setLoading,] = useState(true);
     const [mainCategory, setMainCategory] = useState<MainCategory | null>(null);
     const [allPosts, setAllPosts] = useState<Postdata[] | null>(null);
+    const [mostReadArticle, setReadMostArticle] = useState<MostReadArticle[] | null>(null);
+    const [latestArticle, setLatestArticle] = useState<MostReadArticle[] | null>(null);
     return(
         <PostContext.Provider
             value={{
                 hasLoading, setLoading,
                 mainCategory, setMainCategory,
-                allPosts, setAllPosts
+                allPosts, setAllPosts,
+                mostReadArticle, setReadMostArticle,
+                latestArticle, setLatestArticle
             }}
         >
             {children}

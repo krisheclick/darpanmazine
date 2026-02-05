@@ -5,13 +5,15 @@ import PostView from "./PostView";
 import PostList from "./PostList";
 import Singlepage from "./Singlepage";
 import { usePostContext } from "@/context/post_context";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import NotFoundPage from "@/app/notFound";
 
 type PageProps = {
     checkCategory?: boolean
     slug: string[];
 }
 const PostPageComponent = ({checkCategory= false, slug}: PageProps) => {
+    const [notFound, setNotFoundPage] = useState(false);
     const {setLoading, setMainCategory, setAllPosts} = usePostContext();
     // const current_url = slug[slug.length - 1];
     // const [current_url, ...urlArray] = [...slug].reverse();
@@ -26,8 +28,6 @@ const PostPageComponent = ({checkCategory= false, slug}: PageProps) => {
 
     const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
-    console.log('parentCategory', reversed.reverse().join("/"))
-
     const fetchCategory = async() => {
         try{
             const response = await fetch(`${API_URL}/category/${parentCategory}/`, {cache: "no-store"});
@@ -35,8 +35,11 @@ const PostPageComponent = ({checkCategory= false, slug}: PageProps) => {
             setMainCategory(category_data);
 
             //Posts
-            const postResponse = await fetch(`${API_URL}/category/${postUrl}/posts?page=1&limit=12`);
-            const {response_data} = await postResponse.json();
+            const postResponse = await fetch(`${API_URL}/category/${postUrl}/posts?page=1&limit=30`);
+            const {response_data, response_code} = await postResponse.json();
+            if(!response_code){
+                setNotFoundPage(true);
+            }
             setAllPosts(response_data);
         }catch(err: unknown){
             console.log('Category API is something wrong: ', (err as Error).message);
@@ -49,23 +52,27 @@ const PostPageComponent = ({checkCategory= false, slug}: PageProps) => {
         fetchCategory();
     }, []);
 
+    if (!checkCategory) {
+        return <Singlepage url={[...slug]} />;
+    }
+
+    if (notFound) {
+        return <NotFoundPage />
+    }
+    
     return(
-        checkCategory ? (
-            <>
-                <Sliderbanner />
-                <PostView />
-                <ImageFunction
-                    className="poster-ad-inner"
-                    src={`${process.env.NEXT_PUBLIC_ASSET_PREFIX}assets/images/poster-ad.jpg`}
-                    alt="Poster"
-                    width={770}
-                    height={164}
-                />
-                <PostList />
-            </>
-        ) : (
-            <Singlepage />
-        )
+        <>
+            <Sliderbanner />
+            <PostView />
+            {/* <ImageFunction
+                className="poster-ad-inner"
+                src={`${process.env.NEXT_PUBLIC_ASSET_PREFIX}assets/images/poster-ad.jpg`}
+                alt="Poster"
+                width={770}
+                height={164}
+            /> */}
+            <PostList />
+        </>
     )
 }
 

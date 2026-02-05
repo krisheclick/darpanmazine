@@ -24,7 +24,9 @@
     --foreground: #ededed;
   }
 } */
-
+.text-primary {
+	color: var(--primary-color) !important;
+}
 body {
     font: 400 16px / 1.5 var(--font-primary);
 }

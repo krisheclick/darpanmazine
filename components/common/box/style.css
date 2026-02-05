@@ -14,6 +14,7 @@
 }
 .boxPoster img{
     object-fit: cover;
+    object-position: top;
 }
 .boxTag {
     padding: 4px 8px;

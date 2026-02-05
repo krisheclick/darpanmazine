@@ -36,7 +36,6 @@ const PostView = () => {
                     </ul>
                 </div>
             </div>
-            <PostList />
         </div>
     )
 }
