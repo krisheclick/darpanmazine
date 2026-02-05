@@ -41,7 +41,7 @@ const ReadMoreSlider = () => {
                                             title={value.heading}
                                             slug={value.permalink}
                                             publish_date={value.publishDate}
-                                            thumbnail={`${process.env.NEXT_PUBLIC_MEDIA_URL}${value.images[0]?.file_url}`}
+                                            thumbnail={`${process.env.NEXT_PUBLIC_MEDIA_URL}${value.images?.[0]?.file_url}`}
                                             timestring={true}
                                         />
                                     </SwiperSlide>
