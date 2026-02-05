@@ -287,6 +287,10 @@ form{
 /* =======Button Ends======= */
 
 /* =======Swiper Start======= */
+:is(.swiper-button-prev, .swiper-button-next).swiper-button-disabled{
+    pointer-events: inherit !important;
+    cursor: not-allowed !important;
+}
 [class*="swiper-button-"]:not(:empty){
     --size: 32px;
     --free: 1px;
