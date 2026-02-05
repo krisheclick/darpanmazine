@@ -54,6 +54,8 @@ const PostPageComponent = ({checkCategory= false, slug}: PageProps) => {
 
     if (!checkCategory) {
         return <Singlepage url={[...slug]} />;
+    }else {
+        
     }
 
     if (notFound) {

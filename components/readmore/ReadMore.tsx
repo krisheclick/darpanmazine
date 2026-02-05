@@ -11,7 +11,7 @@ import Styles from './style.module.css';
 import { useLayoutContext } from "@/context/inner_context";
 import BoxSkeleton from "../common/box/BoxSkeleton";
 const ReadMoreSlider = () => {
-    const { otherSlider, article} = useLayoutContext();
+    const { otherSlider, article, postCategory} = useLayoutContext();
 
     return (
         otherSlider && (
@@ -39,7 +39,7 @@ const ReadMoreSlider = () => {
                                     <SwiperSlide key={index}>
                                         <EventsBox
                                             title={value.heading}
-                                            slug={value.permalink}
+                                            slug={`${postCategory?.slug}${value.permalink}`}
                                             publish_date={value.publishDate}
                                             thumbnail={`${process.env.NEXT_PUBLIC_MEDIA_URL}${value.images?.[0]?.file_url}`}
                                             timestring={true}

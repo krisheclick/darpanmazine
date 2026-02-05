@@ -516,3 +516,7 @@ form{
 #nprogress .spinner-icon {
 	border-color: var(--white-color) #0000 #0000 var(--white-color) !important;
 }
+.rj_editor_text :is(.editor_iframe_social, .editor_iframe_video, .test) iframe{
+    aspect-ratio: 16/9;
+    margin-bottom: 16px;
+}

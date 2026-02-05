@@ -7,7 +7,7 @@ import { faFacebook, faLinkedin, faWhatsapp, faXTwitter } from '@fortawesome/fre
 import { faLink } from '@fortawesome/free-solid-svg-icons';
 import ImageFunction from '@/utlis/ImageFunction';
 import { useLayoutContext } from '@/context/inner_context';
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { usePostContext } from '@/context/post_context';
 import NotFoundPage from '@/app/notFound';
 
@@ -30,17 +30,16 @@ type PageData = {
     }[];
 }
 const Singlepage = ({url = []}:PageProps) => {
-    const { setOtherSlider } = useLayoutContext();
+
+    const [notFound, setNotFoundPage] = useState(false);
+    const [data, setData] = useState<PageData | null>(null);
+    const {setLoading, hasLoading, setReadMostArticle} = usePostContext();
+    const { setOtherSlider, setArticle, setPostCategory} = useLayoutContext();
     useEffect(() => {
         setOtherSlider(true);
         
         return () => setOtherSlider(false);
     }, [setOtherSlider]);
-
-    const [notFound, setNotFoundPage] = useState(false);
-    const [data, setData] = useState<PageData | null>(null);
-    const {setLoading, hasLoading, setReadMostArticle} = usePostContext();
-    const {setArticle} = useLayoutContext();
 
     const fetchData = async() => {
         try{
@@ -52,6 +51,7 @@ const Singlepage = ({url = []}:PageProps) => {
             setData(response_data);
             setReadMostArticle(response_data?.most_read_articles);
             setArticle(response_data?.mostarticles);
+            setPostCategory(response_data?.categoryview);
         }catch(err: unknown){
             console.log('Category API is something wrong: ', (err as Error).message);
         }finally{
@@ -68,6 +68,19 @@ const Singlepage = ({url = []}:PageProps) => {
     }
 
     const poster = data?.images?.[0]?.file_url;
+    const publishDate = data?.publishDate;
+    const dateObj = new Date(publishDate ?? '');
+    const formattedDate = dateObj.toLocaleDateString("en-GB", {
+        day: "2-digit",
+        month: "long",
+    }) + ', '+ dateObj.getFullYear();
+
+    const formattedTime = dateObj.toLocaleTimeString("en-US", {
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: true
+    });
+
     return (
         !hasLoading && (
             <div className={Styles.single_page}>
@@ -91,8 +104,8 @@ const Singlepage = ({url = []}:PageProps) => {
                         </div>
                     </div>
                     <div className={Styles.tagWrap}>
-                        <span>Lifestyle, </span>
-                        <time dateTime="12:30px">17 December 2025</time>
+                        <span>{data?.categoryview?.categoryName}, </span>
+                        <time dateTime={formattedTime}>{formattedDate}</time>
                     </div>
                     <h1 className={Styles.pageTitle }>{data?.heading}</h1>
                     <div className={`rj_editor_text ${Styles.rj_editor_text}`}
