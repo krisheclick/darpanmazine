@@ -35,12 +35,14 @@ const PostPageComponent = ({checkCategory= false, slug}: PageProps) => {
             setMainCategory(category_data);
 
             //Posts
-            const postResponse = await fetch(`${API_URL}/category/${postUrl}/posts?page=1&limit=30`);
-            const {response_data, response_code} = await postResponse.json();
-            if(!response_code){
-                setNotFoundPage(true);
+            if(checkCategory){
+                const postResponse = await fetch(`${API_URL}/category/${postUrl}/posts?page=1&limit=30`);
+                const {response_data, response_code} = await postResponse.json();
+                if(!response_code){
+                    setNotFoundPage(true);
+                }
+                setAllPosts(response_data);
             }
-            setAllPosts(response_data);
         }catch(err: unknown){
             console.log('Category API is something wrong: ', (err as Error).message);
         }finally{
