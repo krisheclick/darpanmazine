@@ -9,7 +9,7 @@ interface MainCategory {
         categoryName?: string;
         permalink?: string;
         imageDir?: string;
-    }[];
+    }[] | undefined;
 }
 
 interface Postdata {
@@ -36,7 +36,7 @@ interface MostReadArticle {
         imageDir?: string;
         images?: {
             file_url?: string;
-        }[];
+        }[] | undefined;
     }
 }
 

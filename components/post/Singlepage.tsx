@@ -29,7 +29,7 @@ type PageData = {
         file_url?: string;
     }[];
 }
-const Singlepage = ({url}:PageProps) => {
+const Singlepage = ({url = []}:PageProps) => {
     const { setOtherSlider } = useLayoutContext();
     useEffect(() => {
         setOtherSlider(true);
@@ -42,7 +42,7 @@ const Singlepage = ({url}:PageProps) => {
     const {setLoading, hasLoading, setReadMostArticle} = usePostContext();
     const {setArticle} = useLayoutContext();
 
-    const fetchData = useCallback(async() => {
+    const fetchData = async() => {
         try{
             const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/posts/${[...url].join('/')}`);
             const {response_code, response_data} = await response.json();
@@ -57,17 +57,17 @@ const Singlepage = ({url}:PageProps) => {
         }finally{
             setLoading(false);
         }
-    }, [data]);
+    };
 
     useEffect(() => {
         fetchData();
-    }, [fetchData]);
+    }, []);
 
     if(notFound){
         return <NotFoundPage />
     }
 
-    const poster = data?.images[0]?.file_url ?? undefined;
+    const poster = data?.images?.[0]?.file_url;
     return (
         !hasLoading && (
             <div className={Styles.single_page}>
