@@ -1,5 +1,8 @@
 "use client";
 
+import { useEffect, useRef, useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+
 import Sliderbanner from "../common/banner/Sliderbanner";
 import PostView from "./PostView";
 import PostList from "./PostList";
@@ -7,8 +10,6 @@ import Singlepage from "./Singlepage";
 import NotFoundPage from "@/app/notFound";
 
 import { usePostContext } from "@/context/post_context";
-import { useEffect, useRef, useState } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
 
 type PageProps = {
     checkCategory?: boolean;
@@ -16,79 +17,71 @@ type PageProps = {
 };
 
 const PostPageComponent = ({ checkCategory = false, slug }: PageProps) => {
+    // -------- URL parsing --------
+    const reversed = [...slug].reverse();
+    const currentUrl = reversed[0];
+    const urlArray = reversed.slice(1);
+
+    const parentCategory =
+        urlArray.length > 0 ? [...urlArray].reverse().join("/") : currentUrl;
+
+    const postUrl =
+        urlArray.length > 0 ? [...slug].join("/") : currentUrl;
+
+    const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
     const router = useRouter();
     const searchParams = useSearchParams();
     const postListRef = useRef<HTMLDivElement | null>(null);
     const isNextClickRef = useRef(false);
 
     const page = Number(searchParams.get("page")) || 1;
-    const [hasNextPage, setHasNextPage] = useState(true);
-    const [notFound, setNotFoundPage] = useState(false);
+
+    const [notFound, setNotFound] = useState(false);
+    const [hasNextPage, setHasNextPage] = useState(false);
+    const [totalPages, setTotalPages] = useState(1);
+
     const { setLoading, setMainCategory, setAllPosts } = usePostContext();
 
-    // -------- URL parsing --------
-    const reversed = [...slug].reverse();
-    const current_url = reversed[0];
-    const urlArray = reversed.slice(1);
-
-    const parentCategory = urlArray.length > 0 ? [...urlArray].reverse().join("/") : current_url;
-    const postUrl = urlArray.length > 0 ? [...slug].join("/") : current_url;
-
-    const API_URL = process.env.NEXT_PUBLIC_API_URL;
-
-    // -------- Fetch data --------
-    const fetchData = async (page: number) => {
+    const fetchPosts = async (page: number) => {
         try {
             setLoading(true);
 
-            // Category data
+            // Fetch category
             const categoryRes = await fetch(
                 `${API_URL}/category/${parentCategory}/`,
                 { cache: "no-store" }
             );
+
             const { response_data: categoryData } =
                 await categoryRes.json();
 
             setMainCategory(categoryData);
 
-            // Posts data
+            // Fetch posts (only for category pages)
             if (checkCategory) {
                 const postRes = await fetch(
                     `${API_URL}/category/${postUrl}/posts?page=${page}&limit=9`,
                     { cache: "no-store" }
                 );
 
-                const { response_data, response_code } = await postRes.json();
+                const { response_data, response_code } =
+                    await postRes.json();
 
                 if (!response_code) {
-                    setNotFoundPage(true);
+                    setNotFound(true);
                     return;
                 }
 
-                setAllPosts(response_data);
-
-                setHasNextPage(response_data.length > 12);
+                setAllPosts(response_data?.data ?? []);
+                setTotalPages(response_data.totalPages);
+                setHasNextPage(page < response_data.totalPages);
             }
-        } catch (err: unknown) {
-            console.error(
-                "API error:",
-                (err as Error).message
-            );
+        } catch (error) {
+            console.error("API error:", (error as Error).message);
         } finally {
             setLoading(false);
         }
-    };
-
-    const handlePrev = () => {
-        if (page === 1) return;
-
-        isNextClickRef.current = true;
-        router.push(`?page=${page - 1}`, { scroll: false });
-    };
-
-    const handleNext = () => {
-        isNextClickRef.current = true;
-        router.push(`?page=${page + 1}`, { scroll: false });
     };
 
     const scrollToPostList = () => {
@@ -104,26 +97,32 @@ const PostPageComponent = ({ checkCategory = false, slug }: PageProps) => {
         });
     };
 
+    const handleNext = () => {
+        if (hasNextPage) {
+            isNextClickRef.current = true;
+            router.push(`?page=${page + 1}`);
+        }
+    };
 
-    // Refetch when page changes
+    const handlePrev = () => {
+        if (page > 1) {
+            isNextClickRef.current = true;
+            router.push(`?page=${page - 1}`);
+        }
+    };
+
     useEffect(() => {
-        fetchData(page);
+        if (!checkCategory) return;
 
-        // scroll after render
-        // setTimeout(() => {
-        //     postListRef.current?.scrollIntoView({
-        //         behavior: "smooth",
-        //         block: "start",
-        //     });
-        // }, 300);
+        fetchPosts(page);
 
         if (isNextClickRef.current) {
             setTimeout(() => {
                 scrollToPostList();
                 isNextClickRef.current = false; // reset
-            }, 300);
+            }, 150);
         }
-    }, [page]);
+    }, [page, checkCategory]);
 
 
     if (!checkCategory) {
@@ -138,27 +137,30 @@ const PostPageComponent = ({ checkCategory = false, slug }: PageProps) => {
         <>
             <Sliderbanner />
             <PostView />
+
             <div ref={postListRef}>
                 <PostList />
             </div>
-            {/* 
-            <div className="btn_center d-flex gap-3 justify-content-center">
-                <button
-                    className="rj-btn-next specialButton text-uppercase"
-                    onClick={handlePrev}
-                    disabled={page === 1}
-                >
-                    Prev Page
-                </button>
 
-                <button
-                    className="rj-btn-next specialButton text-uppercase"
-                    onClick={handleNext}
-                    disabled={!hasNextPage}
-                >
-                    Next Page
-                </button>
-            </div> */}
+            {totalPages > 1 && (
+                <div className="btn_center d-flex gap-3 justify-content-center">
+                    <button
+                        className="rj-btn-next specialButton text-uppercase"
+                        onClick={handlePrev}
+                        disabled={page === 1}
+                    >
+                        Prev Page
+                    </button>
+
+                    <button
+                        className="rj-btn-next specialButton text-uppercase"
+                        onClick={handleNext}
+                        disabled={!hasNextPage}
+                    >
+                        Next Page
+                    </button>
+                </div>
+            )}
         </>
     );
 };

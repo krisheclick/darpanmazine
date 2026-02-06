@@ -268,6 +268,10 @@ form{
 [class*="rj-btn-"].round {
 	border-radius: 50px;
 }
+[class*="rj-btn-"].disabled, [class*="rj-btn-"][disabled] {
+	opacity: .6;
+	cursor: not-allowed !important;
+}
 .btn_center, .btn_left {
     margin-top: 50px;
 }

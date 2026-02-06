@@ -1,7 +1,6 @@
 "use client";
 import Link from "next/link";
 import Styles from "./style.module.css";
-import PostList from "./PostList";
 import { usePostContext } from "@/context/post_context";
 import { usePathname } from "next/navigation";
 
