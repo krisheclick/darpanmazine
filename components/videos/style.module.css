@@ -20,7 +20,7 @@
     margin-bottom: 16px;
 }
 .subtitle{
-    font: normal 20px / 1.2 var(--font-secondary);
+    font: normal 22px / 1.2 var(--font-secondary);
     color: inherit;
     min-height: 22px;
 }

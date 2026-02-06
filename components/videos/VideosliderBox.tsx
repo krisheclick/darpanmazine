@@ -11,7 +11,7 @@ type Props = {
 }
 const VideosliderBox = ({title, url, poster, videoTimer}: Props) => {
     return (
-        <Link href={url || ""} className={`videoBox ${Styles.sliderBox}`} target='_blank'>
+        <Link href={`${process.env.NEXT_PUBLIC_ENV_URL}${url}`} className={`videoBox ${Styles.sliderBox}`}>
             <figure className={Styles.poster}>
                 <Image
                     src={`${process.env.NEXT_PUBLIC_MEDIA_URL}${poster}`}

@@ -26,7 +26,7 @@ const PhotoBox = ({tag, title, slug, thumbnail} : Props) => {
                 {tag ? <span className="photoTag">{tag}</span> : ''}
             </figure>
             <div className="photoBoxText">
-                <div className="subtitle">{title}</div>
+                <div className="subheading">{title}</div>
             </div>
         </Link>
     )

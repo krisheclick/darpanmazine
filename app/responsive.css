@@ -1,5 +1,5 @@
 @media only screen and (max-width: 1600px){
-    .columnRow {
+    /* .columnRow {
         --add: 260px;
         --space: 24px;
     }
@@ -21,5 +21,5 @@
     }
     [class*="rj-btn-"]{
         font-size: 13px !important;
-    }
+    } */
 }
