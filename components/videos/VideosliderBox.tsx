@@ -26,7 +26,7 @@ const VideosliderBox = ({title, url, poster, videoTimer}: Props) => {
                 <span className={Styles.videoTimer}>{videoTimer || '0:00'}</span>
             </figure>
             <div className={Styles.boxContent}>
-                <div className={Styles.subtitle}>{title}</div>
+                <div className={`subtitle ${Styles.subtitle}`}>{title}</div>
             </div>
         </Link>
     )

@@ -439,12 +439,12 @@ form{
 /* =========== Title & Heading Area Ends ================= */
 
 /* =========== Editor Area Ends ================= */
-.rj_editor_text :is(p, div):has( > img){
+/* .rj_editor_text :is(p, div):has( > img){
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 24px;
     margin: 48px 0px;
-}
+} */
 /* =========== Editor Area Ends ================= */
 
 /* =========== Row Column Sperarate Start ================= */

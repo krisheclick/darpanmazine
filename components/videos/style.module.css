@@ -19,11 +19,11 @@
 .boxContent::before{
     margin-bottom: 16px;
 }
-.subtitle{
+/* .subtitle{
     font: normal 22px / 1.2 var(--font-secondary);
     color: inherit;
     min-height: 22px;
-}
+} */
 .videoTimer{
     position: absolute;
     z-index: 1;

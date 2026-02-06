@@ -22,8 +22,9 @@ const PostPageComponent = ({ checkCategory = false, slug }: PageProps) => {
     const isNextClickRef = useRef(false);
 
     const page = Number(searchParams.get("page")) || 1;
+    const [hasNextPage, setHasNextPage] = useState(true);
     const [notFound, setNotFoundPage] = useState(false);
-     const { setLoading, setMainCategory, setAllPosts } = usePostContext();
+    const { setLoading, setMainCategory, setAllPosts } = usePostContext();
 
     // -------- URL parsing --------
     const reversed = [...slug].reverse();
@@ -57,7 +58,7 @@ const PostPageComponent = ({ checkCategory = false, slug }: PageProps) => {
                     { cache: "no-store" }
                 );
 
-                const {response_data, response_code} = await postRes.json();
+                const { response_data, response_code } = await postRes.json();
 
                 if (!response_code) {
                     setNotFoundPage(true);
@@ -65,6 +66,8 @@ const PostPageComponent = ({ checkCategory = false, slug }: PageProps) => {
                 }
 
                 setAllPosts(response_data);
+
+                setHasNextPage(response_data.length > 12);
             }
         } catch (err: unknown) {
             console.error(
@@ -74,6 +77,13 @@ const PostPageComponent = ({ checkCategory = false, slug }: PageProps) => {
         } finally {
             setLoading(false);
         }
+    };
+
+    const handlePrev = () => {
+        if (page === 1) return;
+
+        isNextClickRef.current = true;
+        router.push(`?page=${page - 1}`, { scroll: false });
     };
 
     const handleNext = () => {
@@ -106,7 +116,7 @@ const PostPageComponent = ({ checkCategory = false, slug }: PageProps) => {
         //         block: "start",
         //     });
         // }, 300);
-        
+
         if (isNextClickRef.current) {
             setTimeout(() => {
                 scrollToPostList();
@@ -131,10 +141,24 @@ const PostPageComponent = ({ checkCategory = false, slug }: PageProps) => {
             <div ref={postListRef}>
                 <PostList />
             </div>
+            {/* 
+            <div className="btn_center d-flex gap-3 justify-content-center">
+                <button
+                    className="rj-btn-next specialButton text-uppercase"
+                    onClick={handlePrev}
+                    disabled={page === 1}
+                >
+                    Prev Page
+                </button>
 
-            <div className="btn_center">
-                <button className="rj-btn-next specialButton text-uppercase" onClick={handleNext}>Next Page</button>
-            </div>
+                <button
+                    className="rj-btn-next specialButton text-uppercase"
+                    onClick={handleNext}
+                    disabled={!hasNextPage}
+                >
+                    Next Page
+                </button>
+            </div> */}
         </>
     );
 };

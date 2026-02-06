@@ -18,7 +18,6 @@ import MagazinePost from "@/components/home/MagazinePost";
 import TrendingPostAd from "@/components/common/advertiesment/poster-ad/TrendingPostAd";
 import VideoSlider from "@/components/home/VideoSlider";
 import VideoAd from "@/components/common/advertiesment/poster-ad/VideoAd";
-import Link from "next/link";
 import ImageFunction from "@/utlis/ImageFunction";
 
 export default function Home() {
@@ -63,8 +62,8 @@ export default function Home() {
                             <BcEventsList />
                         </article>
                         <aside className={Styles.advertiesmentColumn}>
-                            <QuizAd />
                             <VideoAd />
+                            <QuizAd />
                         </aside>
                     </div>
                 </Container>
@@ -124,25 +123,7 @@ export default function Home() {
 
                             {/* Videos */}
                             <div className={`section-area sm ${Styles.videoPost ?? ''}`}>
-                                <div className="rj_content border-block mb-lg-4">
-                                    <h5 className="title mb-0">Videos</h5>
-                                    <div className={Styles.videoCategory}>
-                                        <ul className="inlineList">
-                                            <li>
-                                                <Link href="#">BOLLYWOOD</Link>
-                                            </li>
-                                            <li>
-                                                <Link href="#">PUNJABI</Link>
-                                            </li>
-                                            <li>
-                                                <Link href="#">HOLLYWOOD</Link>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div className="videoList">
-                                    <VideoSlider />
-                                </div>
+                                <VideoSlider />
                             </div>
 
                             {/* Featured From Darpan Magazine */}
