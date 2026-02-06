@@ -7,8 +7,23 @@ import "swiper/css/navigation";
 import "swiper/css/free-mode";
 import Styles from './style.module.css';
 import ImageFunction from '@/utlis/ImageFunction';
+import { usePostContext } from '@/context/post_context';
 
 const Sliderbanner = () => {
+    const {hasLoading, banner} = usePostContext();
+    const bannerData = banner?.[0];
+    const dateObj = new Date(bannerData?.publishDate ?? '');
+
+    const formattedDate = dateObj.toLocaleDateString("en-GB", {
+        month: "short",
+        day: "2-digit",
+    })+ ', '+ dateObj.getFullYear();
+
+    const formattedTime = dateObj.toLocaleTimeString("en-US", {
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: true
+    });
     return (
         <div className={Styles.sliderBanner}>
             <Swiper
@@ -24,17 +39,25 @@ const Sliderbanner = () => {
                 modules={[Autoplay, Navigation, FreeMode]}
                 className='slider_banenr'
             >
-                <SwiperSlide className={Styles.bannerItem}>
-                    <ImageFunction
-                        className={Styles.poster}
-                        src={`${process.env.NEXT_PUBLIC_ASSET_PREFIX}assets/images/innerbanner.png`}
-                        alt={'Poster Banner'}
-                    />
-                    <div className={Styles.bannerText}>
-                        <div className={Styles.title}>Interior health says parents should ensure kids caught <br /> up vaccination</div>
-                        <div className={Styles.datetime}>Darpan Desk | <span> 05 Dec, 2025</span> <span>10:34 AM</span></div>
-                    </div>
-                </SwiperSlide>
+                {!hasLoading ? (
+                    <SwiperSlide className={Styles.bannerItem}>
+                        <ImageFunction
+                            className={Styles.poster}
+                            src={`${process.env.NEXT_PUBLIC_ASSET_PREFIX}${bannerData?.thumbnail?.file_url}`}
+                            alt={bannerData?.heading || 'Poster Banner'}
+                            style={{objectFit: "cover", objectPosition: "top"}}
+                        />
+                        <div className={Styles.bannerText}>
+                            <div className={Styles.title}>{bannerData?.heading}</div>
+                            <div className={Styles.datetime}>Darpan Desk | <span> {formattedDate}</span> <span>{formattedTime}</span></div>
+                        </div>
+                    </SwiperSlide>
+
+                ) : (
+                    <SwiperSlide className={Styles.bannerItem}>
+                        <div className='custom_image fixedImage skeleton'></div>
+                    </SwiperSlide>
+                )}
             </Swiper>
         </div>
     )

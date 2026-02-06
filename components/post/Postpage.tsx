@@ -41,7 +41,7 @@ const PostPageComponent = ({ checkCategory = false, slug }: PageProps) => {
     const [hasNextPage, setHasNextPage] = useState(false);
     const [totalPages, setTotalPages] = useState(1);
 
-    const { setLoading, setMainCategory, setAllPosts } = usePostContext();
+    const { setLoading, setMainCategory, setAllPosts, setReadMostArticle, setBanner} = usePostContext();
 
     const fetchPosts = async (page: number) => {
         try {
@@ -57,6 +57,8 @@ const PostPageComponent = ({ checkCategory = false, slug }: PageProps) => {
                 await categoryRes.json();
 
             setMainCategory(categoryData);
+            setBanner(categoryData?.is_featured);
+            setReadMostArticle(categoryData?.most_read_articles);
 
             // Fetch posts (only for category pages)
             if (checkCategory) {

@@ -53,6 +53,21 @@ interface Categoryview  {
     slug?: string;
     imageDir?: string;
 }
+interface BannerData {
+    author?: string;
+    heading?: string;
+    permalink?: string;
+    shortDescription?: string;
+    publishDate?: string;
+    categoryview?: {
+        categoryName?: string;
+        slug?: string;
+        imageDir?: string;
+    };
+    thumbnail?: {
+        file_url?: string;
+    }[];
+}[];
 interface PostContextData {
     hasLoading: boolean;
     setLoading: (hasLoading: boolean) => void;
@@ -70,6 +85,9 @@ interface PostContextData {
     postCategory: Categoryview | null;
     setPostCategory: (postCategory: Categoryview) => void;
 
+    banner: BannerData | null;
+    setBanner: (banner: BannerData) => void;
+
     // Other Slider
     otherSlider: boolean | null;
     setOtherSlider: (otherSlider: boolean) => void;
@@ -85,6 +103,7 @@ export const PostProvider = ({children}: {children: ReactNode}) => {
     const [latestArticle, setLatestArticle] = useState<MostReadArticle[] | null>(null);
     const [article, setArticle] = useState<MostArticle[] | null>(null);
     const [postCategory, setPostCategory] = useState<Categoryview | null>(null);
+    const [banner, setBanner] = useState<BannerData | null>(null);
     const [otherSlider, setOtherSlider] = useState(false);
     return(
         <PostContext.Provider
@@ -96,7 +115,8 @@ export const PostProvider = ({children}: {children: ReactNode}) => {
                 latestArticle, setLatestArticle,
                 otherSlider, setOtherSlider,
                 article, setArticle,
-                postCategory, setPostCategory
+                postCategory, setPostCategory,
+                banner, setBanner
             }}
         >
             {children}
