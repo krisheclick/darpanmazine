@@ -13,7 +13,7 @@ const PhotoBox = ({tag, title, slug, thumbnail} : Props) => {
         <Link href={`${process.env.NEXT_PUBLIC_ENV_URL}${slug}`} className="photoBox">
             <figure className="boxPoster">
                 <Image
-                    src={thumbnail || `${process.env.NEXT_PUBLIC_ENV_URL}assets/images/deleted/tamanna_punjabi_kapoora’s.png`}
+                    src={`${process.env.NEXT_PUBLIC_MEDIA_URL}${thumbnail}` || `${process.env.NEXT_PUBLIC_ENV_URL}assets/images/deleted/tamanna_punjabi_kapoora’s.png`}
                     alt={title || "Poster Title"}
                     fill
                     priority

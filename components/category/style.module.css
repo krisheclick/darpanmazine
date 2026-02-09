@@ -1,0 +1,23 @@
+.wrapper{
+    background: #F6F6F6;
+    padding: 4px 0px 6px;
+    margin-top: 3px;
+    margin-bottom: 40px;
+}
+.wrapper ul{
+    gap: 8px 24px;
+    font: normal 16px / 1 var(--font-secondary);
+}
+.link {
+    min-width: 80px;
+    color: inherit;
+    padding: 8px 0;
+    min-height: 42px;
+    display: grid;
+    align-content: center;
+}
+.isActive .link,
+.link:hover{
+    color: var(--primary-color);
+    text-decoration: underline;
+}
