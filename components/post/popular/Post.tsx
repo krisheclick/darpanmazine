@@ -6,6 +6,7 @@ import ImageFunction from '@/utlis/ImageFunction';
 
 const PopularPost = () => {
     const { mostReadArticle } = usePostContext();
+    console.log('mostReadArticle', mostReadArticle)
     return (
         <div className={Styles.popular_post}>
             <div className={Styles.bar_title}>Most Popular</div>
@@ -16,7 +17,7 @@ const PopularPost = () => {
                             <li key={index}>
                                 <Link href={`${value.permalink}`} className={Styles.box}>
                                     <ImageFunction
-                                        src={`${process.env.NEXT_PUBLIC_MEDIA_URL}${value.images?.[0]?.file_url}`}
+                                        src={`${process.env.NEXT_PUBLIC_MEDIA_URL}${value.images?.file_url}`}
                                         alt={value.heading || "Thumbnail poster"}
                                     />
                                     <div className={Styles.content}>

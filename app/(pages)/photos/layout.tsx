@@ -1,10 +1,11 @@
-import Sidebar from "@/components/sidebar/Sidebar";
 import { Container } from "react-bootstrap";
 import PhotosCatData from "@/components/category/PhotosCatData";
+import PhotosAds from "@/components/photos/ads/Ads";
+import { PhotosContextProvider } from "@/context/photos_context";
 
 const PhotosLayout = async ({ children }: Readonly<{ children: React.ReactNode }>) => {
     return (
-        <>
+        <PhotosContextProvider>
             <PhotosCatData />
             <div className="mainLayout">
                 <Container>
@@ -13,12 +14,12 @@ const PhotosLayout = async ({ children }: Readonly<{ children: React.ReactNode }
                             {children}
                         </article>
                         <aside className="sidebar_column">
-                            {/* <Sidebar /> */}
+                            <PhotosAds />
                         </aside>
                     </div>
                 </Container>
             </div>
-        </>
+        </PhotosContextProvider>
     )
 }
 

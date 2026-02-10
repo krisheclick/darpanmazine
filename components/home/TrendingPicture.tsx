@@ -80,7 +80,7 @@ const TrendingPicture = () => {
                             tag=""
                             title={value.heading}
                             slug={value.url}
-                            thumbnail={`${process.env.NEXT_PUBLIC_MEDIA_URL}${value?.thumbnail?.file_url}`}
+                            thumbnail={value?.thumbnail?.file_url}
                         />
                     </SwiperSlide>
                 )

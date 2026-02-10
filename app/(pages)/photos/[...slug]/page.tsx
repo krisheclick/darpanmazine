@@ -16,7 +16,7 @@ const PhotosPage = async ({ params }: { params: Promise<{ slug: string }> }) => 
         isCategory= true;
     }
     return (
-        isCategory ? <PhotosData slug={[...slug]} categoryCheck={isCategory} /> : <DetailsPage />        
+        isCategory ? <PhotosData slug={[...slug]} categoryCheck={isCategory} /> : <DetailsPage slug={[...slug]} />        
     )
 }
 

@@ -37,7 +37,7 @@ interface MostReadArticle {
     };
     images?: {
         file_url?: string;
-    }[];
+    };
 }
 interface MostArticle {
     heading?: string;
@@ -46,7 +46,7 @@ interface MostArticle {
     publishDate?: string;
     images?: {
         file_url?: string;
-    }[];
+    };
 }
 interface Categoryview  {
     categoryName?: string;

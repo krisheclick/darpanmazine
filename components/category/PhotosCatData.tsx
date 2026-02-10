@@ -52,7 +52,7 @@ const PhotosCatData = () => {
                             })
                         ) : (
                             [...Array(6)].map((_, index) => (
-                                <li key={index} className={`skeleton ${Styles.link}`}></li>
+                                <li key={index} className={`skeleton ${Styles.link} ${Styles.skeletonlink}`}></li>
                             ))
                         )
                     }

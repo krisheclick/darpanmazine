@@ -3,18 +3,23 @@
     padding: 4px 0px 6px;
     margin-top: 3px;
     margin-bottom: 40px;
+    min-height: 52px;
+    display: grid;
+    align-content: center;
 }
 .wrapper ul{
-    gap: 8px 24px;
+    gap: 8px 36px;
     font: normal 16px / 1 var(--font-secondary);
 }
 .link {
-    min-width: 80px;
     color: inherit;
     padding: 8px 0;
-    min-height: 42px;
+    min-height: 32px;
     display: grid;
     align-content: center;
+}
+.skeletonlink{
+    width: 8%;
 }
 .isActive .link,
 .link:hover{

@@ -30,13 +30,11 @@
 body {
     font: 400 16px / 1.5 var(--font-primary);
 }
-@-moz-document url-prefix() {
-    html{
-        scrollbar-width: thin;
-        scroll-behavior: smooth;
-        scrollbar-color: var(--primary-color) #e1e1e1;
-        scrollbar-gutter: stable;
-    }
+::-moz-selection,
+::-webkit-selection,
+::selection{
+    background: var(--primary-color);
+    color: var(--white-color);
 }
 .container {
     position: relative;
@@ -44,7 +42,7 @@ body {
 }
 @media only screen and (min-width: 1601px) {
     .container{
-        max-width: 1600px;
+        max-width: 1620px;
     }
 }
 
@@ -54,6 +52,7 @@ body {
             scrollbar-width: thin;
             scroll-behavior: smooth;
             scrollbar-color: var(--primary-color) #ccc;
+            scrollbar-gutter: stable;
         }
     }
 
@@ -463,9 +462,10 @@ form{
 }
 .columnRow aside {
     width: var(--add);
-    display: flex;
-    flex-flow: column wrap;
-    row-gap: 16px;
+    --margin: 16px;
+}
+.columnRow aside > *{
+    margin-bottom: var(--margin);
 }
 .rowGap{
     row-gap: var(--bs-gutter-x);
@@ -513,6 +513,14 @@ form{
 .fixedImage{
 	padding-top: 56.25%;
 }
+.staticImage{
+    padding-top: 0 !important;
+}
+.staticImage img{
+    position: static !important;
+    width: auto !important;
+    height: auto !important;
+}
 .auto-img, .auto-img img{
     max-width: max-content;
     height: auto;
@@ -536,4 +544,18 @@ form{
     aspect-ratio: 16/9;
     margin-bottom: 16px;
     width: 100%;
+}
+/* Post Socials */
+.posterAd {
+	margin-top: 40px;
+}
+.post_share {
+    margin-bottom: 36px;
+}
+.post_social{
+    gap: 8px;
+    font-size: 1.25em;
+}
+.post_social a{
+    color: inherit;
 }

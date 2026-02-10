@@ -11,9 +11,9 @@ import Styles from './style.module.css';
 import BoxSkeleton from "../common/box/BoxSkeleton";
 import { usePostContext } from "@/context/post_context";
 const ReadMoreSlider = () => {
-    const { otherSlider, article, postCategory} = usePostContext();
+    const { otherSlider, article = [], postCategory} = usePostContext();
     return (
-        otherSlider && (
+        otherSlider && (article?.length ?? 0) > 0 &&(
             <div className={`section-area ${Styles.readMore_section ?? ''}`}>
                 <Container>
                     <div className="rj_content border-block border-another">
@@ -40,7 +40,7 @@ const ReadMoreSlider = () => {
                                             title={value.heading}
                                             slug={`${postCategory?.slug}${value.permalink}`}
                                             publish_date={value.publishDate}
-                                            thumbnail={`${process.env.NEXT_PUBLIC_MEDIA_URL}${value.images?.[0]?.file_url}`}
+                                            thumbnail={`${process.env.NEXT_PUBLIC_MEDIA_URL}${value.images?.file_url}`}
                                             timestring={true}
                                         />
                                     </SwiperSlide>

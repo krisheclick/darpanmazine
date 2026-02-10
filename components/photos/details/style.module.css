@@ -1,0 +1,52 @@
+.vertical_slider {
+    display: flex;
+    gap: 13px;
+    height: 1137px;
+    margin-bottom: 24px;
+}
+.posterSliderWrapper{
+    width: calc(100% - 268px);
+    position: relative;
+    z-index: 1;
+    color: var(--white-color);
+}
+.verticalPosterSlider {
+    height: 100%;
+    width: 100%;
+}
+.verticalPosterSlider figure::before{
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 41.35%, rgba(0, 0, 0, 0.538462) 73.08%, #000000 100%);
+    z-index: 1;
+}
+.vertical_thumbslider {
+    height: 100%;
+    width: 268px !important;
+    flex-shrink: 0;
+}
+.thumbItem {
+    cursor: pointer;
+    overflow: hidden;
+}
+.vertical_slider figure{
+    height: 100%;
+    padding-top: 0;
+}
+.bannerText{
+    position: absolute;
+    bottom: 30px;
+    padding: 48px;
+    z-index: 2;
+    inset-inline: 0;
+}
+.catName{
+    display: inline-block;
+    vertical-align: middle;
+    background: var(--tertiary-color);
+    color: var(--black-color);
+    font: 600 12px / 1.25 var(--font-primary);
+    padding: 6px 12px;
+    margin-bottom: 12px;
+}

@@ -10,6 +10,7 @@ interface ImageProps {
     height?: number;
     fallBack?: string;
     style?: CSSProperties;
+    staticImage?: boolean;
 }
 const default_image = 'assets/images/noimage.webp';
 const asset_prefix = process.env.NEXT_PUBLIC_ASSET_PREFIX;
@@ -25,6 +26,7 @@ const ImageFunction = ({
     height,
     fallBack,
     style,
+    staticImage = false,
 }: ImageProps) => {
     const [hasLoading, setLoading] = useState(true);
 
@@ -33,7 +35,7 @@ const ImageFunction = ({
     const isFixed = typeof width === "number" && typeof height === "number";
     return(
         <figure
-            className={`custom_image${!isFixed ? " fixedImage" : ""} ${className || ''}`}
+            className={`custom_image${!isFixed ? " fixedImage" : ""}${staticImage ? ' staticImage':''} ${className || ''}`}
         >
             <Image
                 loader={imageLoader}

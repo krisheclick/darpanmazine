@@ -1,47 +1,39 @@
 .area_section{
     margin-block: 32px;
 }
-.categoryList{
-    font-family: var(--font-secondary)
+.topcontent{
+    margin-bottom: 48px;
 }
-.poster{
-    margin-bottom: 24px;
+.catName{
+    color: var(--black-color);
+    font-size: 1.05em;
+    text-transform: uppercase;
+    font-weight: 500;
+    margin-bottom: 12px;
+}
+.pageTitle{
+    font: normal 42px / 1.05 var(--font-secondary);
+    margin-bottom: 12px;
+    text-wrap: balance;
 }
 .tagWrap{
     display: flex;
     flex-wrap: wrap;
+    gap: 8px;
     color: rgb(58, 58, 58);
     font-weight: 500;
-    font-size: 1.15em;
+    font-size: 1em;
     margin: 0px 0px 12px;
-    gap: 8px;
 }
-.post_share {
-    margin-bottom: 24px;
-    font-size: 0.95em;
-    font-weight: 500;
-}
-.social{
-    gap: 8px;
-    font-size: 1.25em;
-}
-.social a{
-    color: inherit;
-}
-.pageTitle{
-    font: normal 42px / 1.05 var(--font-secondary);
+.poster{
     margin-bottom: 30px;
 }
-.rj_editor_text p{
+/* .rj_editor_text p{
     margin-bottom: 24px;
-}
+} */
 .rj_editor_text p:last-child{
     margin-bottom: 0px;
 }
-.posterAd{
-    margin-top: 40px;
-}
-
 .skeletonPill{
     width: 80px;
     height: 24px;
