@@ -9,6 +9,9 @@
     gap: 16px;
     font: 400 19px / 1.25 var(--font-secondary);
 }
+.subscribeFormWrap{
+    font-size: .85em;
+}
 .formRow{
     display: flex;
     align-items: start;
@@ -25,6 +28,9 @@
     --input-color: var(--black-color);
     background: transparent !important;
     box-shadow: none !important;
+}
+.inputColumnGroup span{
+    margin-top: 4px;
 }
 
 @media only screen and (max-width: 1600px){
