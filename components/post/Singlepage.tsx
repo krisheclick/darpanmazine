@@ -100,7 +100,7 @@ const Singlepage = ({ url = [] }: PageProps) => {
                     staticImage={true}
                 />
                 <div className={Styles.single_content}>
-                    <Share/>
+                    <Share title={data?.heading}/>
                     {/* <div className={`d-flex align-items-start gap-4 post_share ${Styles.post_share ?? ''}`}>                        
                         <span className='mt-1'>Share in Post: </span>
                         <div className={`d-flex align-items-center flex-wrap post_social ${Styles.social}`}>
