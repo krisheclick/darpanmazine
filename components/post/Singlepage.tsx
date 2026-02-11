@@ -9,6 +9,8 @@ import ImageFunction from '@/utlis/ImageFunction';
 import { useEffect, useState } from 'react';
 import { usePostContext } from '@/context/post_context';
 import NotFoundPage from '@/app/notFound';
+import { usePathname } from 'next/navigation';
+import Share from '../common/share/Share';
 
 type PageProps = {
     url?: string[];
@@ -29,7 +31,7 @@ type PageData = {
     }[];
 }
 const Singlepage = ({ url = [] }: PageProps) => {
-
+    const pathname = usePathname();
     const [notFound, setNotFoundPage] = useState(false);
     const [data, setData] = useState<PageData | null>(null);
     const { setLoading, hasLoading, setReadMostArticle, setOtherSlider, setArticle, setPostCategory } = usePostContext();
@@ -98,16 +100,17 @@ const Singlepage = ({ url = [] }: PageProps) => {
                     staticImage={true}
                 />
                 <div className={Styles.single_content}>
-                    <div className={`d-flex align-items-start gap-4 post_share ${Styles.post_share ?? ''}`}>
+                    <Share/>
+                    {/* <div className={`d-flex align-items-start gap-4 post_share ${Styles.post_share ?? ''}`}>                        
                         <span className='mt-1'>Share in Post: </span>
                         <div className={`d-flex align-items-center flex-wrap post_social ${Styles.social}`}>
-                            <Link href="#"><FontAwesomeIcon icon={faXTwitter} /></Link>
-                            <Link href="#"><FontAwesomeIcon icon={faFacebook} /></Link>
-                            <Link href="#"><FontAwesomeIcon icon={faLinkedin} /></Link>
+                            <Link href={`https://twitter.com/intent/tweet?text=${data?.heading}&url=${process.env.NEXT_PUBLIC_ENV_URL}${pathname}`}><FontAwesomeIcon icon={faXTwitter} /></Link>
+                            <Link href={`https://www.facebook.com/sharer/sharer.php?u=${process.env.NEXT_PUBLIC_ENV_URL}${pathname}`}><FontAwesomeIcon icon={faFacebook} /></Link>
+                            <Link href={`https://www.linkedin.com/sharing/share-offsite/?url=${process.env.NEXT_PUBLIC_ENV_URL}${pathname}`}><FontAwesomeIcon icon={faLinkedin} /></Link>
                             <Link href="#"><FontAwesomeIcon icon={faLink} /></Link>
                             <Link href="#"><FontAwesomeIcon icon={faWhatsapp} /></Link>
                         </div>
-                    </div>
+                    </div> */}
                     <div className={`rj_editor_text ${Styles.rj_editor_text}`}
                         dangerouslySetInnerHTML={{ __html: data?.description || '' }}
                     />
