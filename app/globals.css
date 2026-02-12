@@ -336,7 +336,7 @@ form{
 .homeslider:not(:hover) [class*="swiper-button-"]{
     --leftX: -72px;
 }
-.banner_thumbslider .swiper-slide-thumb-active::after{
+.swiper-slide-thumb-active::after{
     opacity: 0;
 }
 /* Trending Slider */
@@ -469,6 +469,9 @@ form{
 }
 .rowGap{
     row-gap: var(--bs-gutter-x);
+}
+.rowGap2{
+    row-gap: calc(var(--bs-gutter-x) * 1.5);
 }
 .mainLayout{
     margin-block: 30px;

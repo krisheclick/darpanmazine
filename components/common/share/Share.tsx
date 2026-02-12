@@ -15,9 +15,10 @@ import Styles from './style.module.css';
 
 interface ShareProps {
   title?: string; // Changed from data to title to match your usage
+  classname?: string;
 }
 
-const Share: React.FC<ShareProps> = ({ title }) => {
+const Share: React.FC<ShareProps> = ({ title, classname}) => {
   const pathname = usePathname();
   const baseUrl = process.env.NEXT_PUBLIC_ENV_URL || '';
   const fullUrl = `${baseUrl}${pathname}`;
@@ -33,7 +34,7 @@ const Share: React.FC<ShareProps> = ({ title }) => {
   };
 
   return (
-    <div className={`d-flex align-items-start gap-4 post_share ${Styles.post_share ?? ''}`}>
+    <div className={`d-flex align-items-start gap-4 post_share ${Styles.post_share ?? ''} ${classname ?  Styles[classname] : ''}`}>
       <span className='mt-1'>Share in Post: </span>
       <div className={`d-flex align-items-center flex-wrap post_social ${Styles.social}`}>
         <Link 

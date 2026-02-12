@@ -117,6 +117,7 @@ const VideoSlider = () => {
                                         poster={value?.thumbnail?.file_url}
                                         videoTimer={value.video_duration}
                                         publish_date={value?.publish_date}
+                                        strip={true}
                                     />
                                 </SwiperSlide>
                             )

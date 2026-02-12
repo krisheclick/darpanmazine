@@ -1,0 +1,14 @@
+.bar_title{
+    padding: 14px 20px;
+    font: normal 22px / 1.2 var(--font-bold);
+    letter-spacing: 0.5px;
+    background: var(--primary-color);
+    color: var(--white-color);
+}
+.gallery_slider{
+    padding: 10px;
+    background: #161616;
+}
+.poster img{
+    object-fit: cover;
+}

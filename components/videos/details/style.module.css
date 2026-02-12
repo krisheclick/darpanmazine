@@ -1,0 +1,29 @@
+.pageTitle{
+    font: normal 36px / 1 var(--font-bold);
+}
+.single_content {
+    margin-top: 30px;
+}
+.single_content time{
+    display: inline-block;
+    margin-left: 4px;
+}
+.catName{
+    display: inline-block;
+    vertical-align: middle;
+    background: var(--tertiary-color);
+    color: var(--black-color);
+    font: 600 12px / 1.25 var(--font-primary);
+    padding: 6px 12px;
+    margin-bottom: 12px;
+}
+.youtubeIcon{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    font-size: 60px;
+    color: #ff0000;
+    pointer-events: none;
+}

@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { Container, FormControl } from "react-bootstrap";
 import Social from "../social/Social";
-import Image from "next/image";
 import "./style.css"
 import ImageFunction from "@/utlis/ImageFunction";
 import ImageFunctionLink from "@/utlis/ImageFunctionLink";

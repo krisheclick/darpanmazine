@@ -4,12 +4,9 @@ import SliderPoster from "./SliderPoster";
 import Styles from "./style.module.css";
 import { usePhotosContext } from "@/context/photos_context";
 import NotFoundPage from "@/app/notFound";
-import Link from "next/link";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFacebook, faLinkedin, faWhatsapp, faXTwitter } from "@fortawesome/free-brands-svg-icons";
-import { faLink } from "@fortawesome/free-solid-svg-icons";
 import ImageFunction from "@/utlis/ImageFunction";
 import BollywoodGallery from "./BollywoodGallery";
+import Share from "@/components/common/share/Share";
 interface DataItem {
     photo_source?: string;
     photo_heading?: string;
@@ -67,16 +64,7 @@ const DetailsPage = ({ slug }: { slug: string[] }) => {
         <div className={Styles.details_page}>
             <SliderPoster banner={data} />
             <div className={Styles.single_content}>
-                <div className={`d-flex align-items-start gap-4 post_share ${Styles.post_share ?? ''}`}>
-                    <span className='mt-1'>Share in Post: </span>
-                    <div className={`d-flex align-items-center flex-wrap post_social ${Styles.social}`}>
-                        <Link href="#"><FontAwesomeIcon icon={faXTwitter} /></Link>
-                        <Link href="#"><FontAwesomeIcon icon={faFacebook} /></Link>
-                        <Link href="#"><FontAwesomeIcon icon={faLinkedin} /></Link>
-                        <Link href="#"><FontAwesomeIcon icon={faLink} /></Link>
-                        <Link href="#"><FontAwesomeIcon icon={faWhatsapp} /></Link>
-                    </div>
-                </div>
+                <Share title={data?.photo_heading}/>
                 <div className={`rj_editor_text ${Styles.rj_editor_text}`}
                     dangerouslySetInnerHTML={{ __html: data?.photo_description || '' }}
                 />
