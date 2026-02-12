@@ -1,10 +1,5 @@
 "use client";
-import Image from 'next/image';
 import Styles from './style.module.css';
-import Link from 'next/link';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFacebook, faLinkedin, faWhatsapp, faXTwitter } from '@fortawesome/free-brands-svg-icons';
-import { faLink } from '@fortawesome/free-solid-svg-icons';
 import ImageFunction from '@/utlis/ImageFunction';
 import { useEffect, useState } from 'react';
 import { usePostContext } from '@/context/post_context';
@@ -31,7 +26,6 @@ type PageData = {
     }[];
 }
 const Singlepage = ({ url = [] }: PageProps) => {
-    const pathname = usePathname();
     const [notFound, setNotFoundPage] = useState(false);
     const [data, setData] = useState<PageData | null>(null);
     const { setLoading, hasLoading, setReadMostArticle, setOtherSlider, setArticle, setPostCategory } = usePostContext();
@@ -97,7 +91,7 @@ const Singlepage = ({ url = [] }: PageProps) => {
                     className={Styles.poster}
                     src={`${process.env.NEXT_PUBLIC_MEDIA_URL}${poster}`}
                     alt={data?.heading || "Single Poster"}
-                    staticImage={true}
+                    staticImage={false}
                 />
                 <div className={Styles.single_content}>
                     <Share title={data?.heading}/>
