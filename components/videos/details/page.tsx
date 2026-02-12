@@ -30,7 +30,7 @@ const DetailsPage = ({ slug }: { slug: string[] }) => {
     const [currentUrl, ...urlArray] = [...slug].reverse();
     const [notFound, setNotFound] = useState(false);
     const [data, setData] = useState<DataItem | null>(null);
-    const { setLoading, setFeaturedVideo, setMostVideo} = useVideosContext();
+    const { setLoading, setFeaturedVideo, setMostVideo, setadTrue} = useVideosContext();
     const fetchData = async () => {
         try {
             setLoading(true);
@@ -46,6 +46,7 @@ const DetailsPage = ({ slug }: { slug: string[] }) => {
             setData(response_data);
             setFeaturedVideo(response_data?.is_featured);
             setMostVideo(response_data?.most_videos);
+            setadTrue(false);
         } catch (err: unknown) {
             console.log('Videos APi Response is somethig wrong', (err as Error).message);
         } finally {

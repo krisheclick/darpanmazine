@@ -25,6 +25,8 @@ interface MostVideoData {
 interface VideoContextData {
     hasLoading: boolean;
     setLoading: (hasLoading: boolean) => void;
+    adTrue: boolean;
+    setadTrue: (adTrue: boolean) => void;
 
     featuredVideo: FeaturedVideoData[] | null;
     setFeaturedVideo: (featuredVideo: FeaturedVideoData[]) => void;
@@ -37,6 +39,7 @@ const VideoContext = createContext<VideoContextData | undefined>(undefined);
 export const VideoContextProvider = ({children}: {children: ReactNode}) => {
 
     const [hasLoading, setLoading] = useState(true);
+    const [adTrue, setadTrue] = useState(true);
     const [featuredVideo, setFeaturedVideo] = useState<FeaturedVideoData[] | null>(null);
     const [mostVideo, setMostVideo] = useState<MostVideoData[] | null>(null);
 
@@ -44,6 +47,7 @@ export const VideoContextProvider = ({children}: {children: ReactNode}) => {
         <VideoContext.Provider
             value={{
                 hasLoading, setLoading,
+                adTrue, setadTrue,
                 featuredVideo, setFeaturedVideo,
                 mostVideo, setMostVideo
             }}
