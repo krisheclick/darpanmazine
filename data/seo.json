@@ -1,0 +1,23 @@
+{
+    title: "Eclick Softwares: Innovation-Driven Web Development & Digital Agency",
+    description:
+        "Eclick Softwares is a leading digital agency delivering web development, app development, branding & performance-driven digital solutions.",
+    openGraph: {
+        type: "website",
+        locale: "en_US",
+        site_name: "Eclick Softwares",
+        url: "https://www.eclicksoftwares.com",
+        title:
+            "Eclick Softwares: Innovation-Driven Web Development & Digital Agency",
+        description:
+            "Eclick Softwares is a leading digital agency delivering web development, branding & performance-driven digital solutions.",
+        images: [
+            {
+                url: "https://www.eclicksoftwares.com/default-og.jpg",
+                width: 1200,
+                height: 630,
+                alt: "Eclick Softwares",
+            },
+        ],
+    }
+}

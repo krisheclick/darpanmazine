@@ -13,6 +13,9 @@ type DataItem = {
     thumbnail?: {
         file_url?: string;
     }
+    category: {
+        name: string;
+    }
     publish_date?: string;
 }
 const MagazinePost = () => {
@@ -45,7 +48,7 @@ const MagazinePost = () => {
                                 return (
                                     <div className="magazineBox" key={index}>
                                         <EventsBox
-                                            tag="Events"
+                                            tag={value.category.name}
                                             title={value.heading}
                                             slug={value.url}
                                             author_name={value.author}
@@ -70,13 +73,12 @@ const MagazinePost = () => {
                             return (
                                 <div className="magazineBoxFirst" key={index}>
                                     <EventsBox
-                                        tag="Events"
+                                        tag={value.category.name}
                                         title={value.heading}
                                         slug={value.url}
                                         author_name={value.author}
                                         publish_date={value.publish_date}
                                         thumbnail={`${process.env.NEXT_PUBLIC_MEDIA_URL}${value.thumbnail?.file_url}`}
-                                        errorImg="assets/images/deleted/poster-woman.png"
                                     />
                                 </div>
                             )

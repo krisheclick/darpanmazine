@@ -26,7 +26,6 @@ type PageData = {
     }[];
 }
 const Singlepage = ({ url = [] }: PageProps) => {
-    const pathname = usePathname();
     const [notFound, setNotFoundPage] = useState(false);
     const [data, setData] = useState<PageData | null>(null);
     const { setLoading, hasLoading, setReadMostArticle, setOtherSlider, setArticle, setPostCategory } = usePostContext();
@@ -92,7 +91,7 @@ const Singlepage = ({ url = [] }: PageProps) => {
                     className={Styles.poster}
                     src={`${process.env.NEXT_PUBLIC_MEDIA_URL}${poster}`}
                     alt={data?.heading || "Single Poster"}
-                    staticImage={true}
+                    staticImage={false}
                 />
                 <div className={Styles.single_content}>
                     <Share title={data?.heading}/>

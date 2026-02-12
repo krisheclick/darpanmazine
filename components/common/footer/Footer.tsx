@@ -1,6 +1,9 @@
+"use client";
+
 import Link from "next/link";
 import { Container, FormControl } from "react-bootstrap";
 import Social from "../social/Social";
+import { FormEvent, useState } from "react";
 import "./style.css"
 import ImageFunction from "@/utlis/ImageFunction";
 import ImageFunctionLink from "@/utlis/ImageFunctionLink";
@@ -27,11 +30,55 @@ type Props = {
     menu?: MenuItem;
 }
 const Footer = ({data, menu} : Props) => {
+    const [email, setEmail] = useState("");
+    const [error, setError] = useState("");
+    const [statusMessage, setStatusMessage] = useState("");
+    const [isSubmitting, setIsSubmitting] = useState(false);
+
     const webLink = process.env.NEXT_PUBLIC_ENV_URL;
     const mediaLink = process.env.NEXT_PUBLIC_MEDIA_URL;
     const staticLink = process.env.NEXT_PUBLIC_ASSET_PREFIX;
     const title = data?.site?.title;
     const logo = data?.site?.logo_mobile;
+
+    const handleSubscribe = async (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        setError("");
+        setStatusMessage("");
+
+        const trimmedEmail = email.trim();
+        if (!trimmedEmail) {
+            setError("Email is required.");
+            return;
+        }
+
+        if (!/^\S+@\S+\.\S+$/.test(trimmedEmail)) {
+            setError("Please enter a valid email.");
+            return;
+        }
+
+        setIsSubmitting(true);
+        try {
+            const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/subscription`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ email: trimmedEmail }),
+            });
+
+            if (!res.ok) throw new Error("Failed to submit");
+
+            const data = await res.json();
+            if(!data.response_code){
+                setStatusMessage(data?.response_message);                
+            }
+            setStatusMessage(data?.response_message || "Subscription successful!");
+            setEmail("");
+        } catch {
+            setStatusMessage("Something went wrong. Please try again later.");
+        } finally {
+            setIsSubmitting(false);
+        }
+    };
 
     return(
         <footer className="mainFooter">
@@ -79,16 +126,32 @@ const Footer = ({data, menu} : Props) => {
                         />
                         <div className="subscribe-part">
                             <p>{`Subscribe to 'The Week Unwrapped' your weekly passport to what matters - news, culture, community`}</p>
-                            <form action="#" className="subscribeForm">
+                            <form onSubmit={handleSubscribe} className="subscribeForm">
                                 <div className="subscribeInput d-flex align-items-start">
                                     <FormControl
-                                        type="text"
-                                        name="subscribe_input"
+                                        type="email"
+                                        name="email"
                                         placeholder="Enter  Your Email"
                                         className="rounded-0 bg-white"
+                                        value={email}
+                                        onChange={(e) => {
+                                            setEmail(e.target.value);
+                                            if (error) setError("");
+                                        }}
+                                        disabled={isSubmitting}
                                     />
-                                    <button type="submit" className="rj-btn-subscribe transparent-btn text-white">Subscribe Now</button>
+                                    <button type="submit" className="rj-btn-subscribe transparent-btn text-white" disabled={isSubmitting}>
+                                        {isSubmitting ? "Submitting..." : "Subscribe Now"}
+                                    </button>
                                 </div>
+                                {error && <span className="text-danger mt-1 d-inline-block">{error}</span>}
+                                {statusMessage && !error && (
+                                    <span
+                                        className={`mt-1 d-inline-block ${statusMessage.toLowerCase().includes("success") ? "text-success" : "text-danger"}`}
+                                    >
+                                        {statusMessage}
+                                    </span>
+                                )}
                             </form>
                         </div>
                         <div className="darpan-issue">
