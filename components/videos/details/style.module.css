@@ -1,5 +1,6 @@
 .pageTitle{
     font: normal 36px / 1 var(--font-bold);
+    margin-bottom: 20px;
 }
 .single_content {
     margin-top: 30px;
@@ -26,4 +27,7 @@
     font-size: 60px;
     color: #ff0000;
     pointer-events: none;
+}
+.rj_editor_text{
+    margin-top: 30px;
 }
