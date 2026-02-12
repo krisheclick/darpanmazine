@@ -8,22 +8,27 @@ import "swiper/css/free-mode";
 import Styles from './style.module.css';
 import ImageFunction from '@/utlis/ImageFunction';
 import { usePostContext } from '@/context/post_context';
+import Link from 'next/link';
 
 const Sliderbanner = () => {
     const { hasLoading, banner } = usePostContext();
-    const bannerData = banner?.[0];
-    const dateObj = new Date(bannerData?.publishDate ?? '');
+    const bannerData = banner;
+    // const dateObj = new Date(bannerData?.publishDate ?? '');
 
-    const formattedDate = dateObj.toLocaleDateString("en-GB", {
-        month: "short",
-        day: "2-digit",
-    }) + ', ' + dateObj.getFullYear();
+    const dateFormat = (dateObj: Date)=>{
+        const formattedDate = dateObj.toLocaleDateString("en-GB", {
+            month: "short",
+            day: "2-digit",
+        }) + ', ' + dateObj.getFullYear();
 
-    const formattedTime = dateObj.toLocaleTimeString("en-US", {
-        hour: "2-digit",
-        minute: "2-digit",
-        hour12: true
-    });
+        const formattedTime = dateObj.toLocaleTimeString("en-US", {
+            hour: "2-digit",
+            minute: "2-digit",
+            hour12: true
+        });
+        return `<span> ${formattedDate}</span> <span>${formattedTime}</span>`
+    }
+    
     return (
         hasLoading ? (
             <div className={Styles.sliderBanner}>
@@ -33,7 +38,7 @@ const Sliderbanner = () => {
             </div>
         ) : (
 
-            bannerData && (
+            banner && (
                 <div className={Styles.sliderBanner}>
                     <Swiper
                         slidesPerView={1}
@@ -48,18 +53,21 @@ const Sliderbanner = () => {
                         modules={[Autoplay, Navigation, FreeMode]}
                         className='slider_banenr'
                     >
-                        <SwiperSlide className={Styles.bannerItem}>
-                            <ImageFunction
-                                className={Styles.poster}
-                                src={`${process.env.NEXT_PUBLIC_MEDIA_URL}${bannerData?.thumbnail?.file_url}`}
-                                alt={bannerData?.heading || 'Poster Banner'}
-                                style={{ objectFit: "cover", objectPosition: "top" }}
-                            />
-                            <div className={Styles.bannerText}>
-                                <div className={Styles.title}>{bannerData?.heading}</div>
-                                <div className={Styles.datetime}>Darpan Desk | <span> {formattedDate}</span> <span>{formattedTime}</span></div>
-                            </div>
-                        </SwiperSlide>
+                        {banner.map((bannerData, index) => (
+                            <SwiperSlide key={index} className={Styles.bannerItem}>                            
+                                <ImageFunction
+                                    className={Styles.poster}
+                                    src={`${process.env.NEXT_PUBLIC_MEDIA_URL}${bannerData?.thumbnail?.file_url}`}
+                                    alt={bannerData?.heading || 'Poster Banner'}
+                                    style={{ objectFit: "cover", objectPosition: "top" }}
+                                />
+                                <div className={Styles.bannerText}>
+                                    <Link href={`${process.env.NEXT_PUBLIC_ENV_URL}/${bannerData.categoryview?.slug}${bannerData.permalink}`} className={`${Styles.title} color-inherit`}>{bannerData?.heading}</Link>
+                                    <div className={Styles.datetime}>Darpan Desk | <span dangerouslySetInnerHTML={{ __html: dateFormat(new Date(bannerData?.publishDate?? '')) }}/></div>
+                                </div>
+                            </SwiperSlide>
+                        ))}
+                        
                     </Swiper>
                 </div>
             )
