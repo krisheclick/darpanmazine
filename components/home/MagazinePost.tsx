@@ -79,7 +79,6 @@ const MagazinePost = () => {
                                         author_name={value.author}
                                         publish_date={value.publish_date}
                                         thumbnail={`${process.env.NEXT_PUBLIC_MEDIA_URL}${value.thumbnail?.file_url}`}
-                                        errorImg="assets/images/deleted/poster-woman.png"
                                     />
                                 </div>
                             )
