@@ -13,6 +13,9 @@ type DataItem = {
     thumbnail?: {
         file_url?: string;
     }
+    category: {
+        name: string;
+    }
     publish_date?: string;
 }
 const MagazinePost = () => {
@@ -45,7 +48,7 @@ const MagazinePost = () => {
                                 return (
                                     <div className="magazineBox" key={index}>
                                         <EventsBox
-                                            tag="Events"
+                                            tag={value.category.name}
                                             title={value.heading}
                                             slug={value.url}
                                             author_name={value.author}
