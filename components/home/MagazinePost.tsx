@@ -73,7 +73,7 @@ const MagazinePost = () => {
                             return (
                                 <div className="magazineBoxFirst" key={index}>
                                     <EventsBox
-                                        tag="Events"
+                                        tag={value.category.name}
                                         title={value.heading}
                                         slug={value.url}
                                         author_name={value.author}
