@@ -36,7 +36,7 @@ const seoConfig = {
         "Darpan"
     ],
     openGraph: {
-        type: "website",
+        type: "article",
         locale: "en_US",
         site_name: "DARPAN Magazine",
         url: "https://www.darpanmagazine.com",
@@ -51,7 +51,17 @@ const seoConfig = {
                 alt: "DARPAN Magazine",
             },
         ],
-    }
+    },
+    twitter: {
+        card: "summary_large_image",
+        site: "@DarpanMagazine",
+        creator: "@DarpanMagazine",
+        title: "DARPAN Magazine | Premium Canadian South Asian Magazine",
+        description:
+            "Canada’s leading South Asian magazine covering Bollywood, lifestyle, fashion, business, travel and more.",
+        images: ["https://media.darpanmagazine.com/library/uploads/logo/darpan_logo_big.jpg"],
+    },
+
 };
 
 export default seoConfig;
