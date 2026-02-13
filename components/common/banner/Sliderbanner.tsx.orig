@@ -67,8 +67,13 @@ const Sliderbanner = ({hasLoading, bannerData}: BannerProps) => {
                                     style={{ objectFit: "cover", objectPosition: "top" }}
                                 />
                                 <div className={Styles.bannerText}>
+<<<<<<< HEAD
                                     <Link href={bannerItem?.link} className={`${Styles.title} color-inherit`}>{bannerItem?.title}</Link>
                                     <div className={Styles.datetime}>Darpan Desk | <span dangerouslySetInnerHTML={{ __html: dateFormat(new Date(bannerItem?.publishDate?? '')) }}/></div>
+=======
+                                    <Link href={`${process.env.NEXT_PUBLIC_ENV_URL}/${bannerData.categoryview?.slug??bannerData.categoryview?.permalink}${bannerData.permalink}`} className={`${Styles.title} color-inherit`}>{bannerData?.heading}</Link>
+                                    <div className={Styles.datetime}>Darpan Desk | <span dangerouslySetInnerHTML={{ __html: dateFormat(new Date(bannerData?.publishDate?? '')) }}/></div>
+>>>>>>> 4a8928e4d828b9d9562d702deb700974c546791a
                                 </div>
                             </SwiperSlide>
                         ))}

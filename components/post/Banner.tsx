@@ -6,7 +6,7 @@ const Banner = () => {
     const { hasLoading, banner } = usePostContext();
     const bannerData = banner?.map((bannerItem) => ({
         poster: `${process.env.NEXT_PUBLIC_MEDIA_URL}${bannerItem?.thumbnail?.file_url}`,
-        link: `${process.env.NEXT_PUBLIC_ENV_URL}/${bannerItem?.categoryview?.slug}${bannerItem?.permalink}`,
+        link: `${process.env.NEXT_PUBLIC_ENV_URL}/${bannerItem.categoryview?.slug??bannerItem.categoryview?.permalink}${bannerItem.permalink}`,
         title: bannerItem?.heading,
         publishDate: bannerItem?.publishDate,
     })) || [];
