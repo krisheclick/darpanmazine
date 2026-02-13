@@ -6,7 +6,21 @@ import EventView from "./EventView";
 import EventList from "./EventList";
 import { useEventsContext } from "@/context/events_context";
 import { usePostContext } from "@/context/post_context";
-
+interface BannerItem {
+    author?: string;
+    heading?: string;
+    permalink?: string;
+    short_description?: string;
+    publish_date?: string;
+    category?: {
+        category_name?: string;
+        permalink?: string;
+        imageDir?: string;
+    };
+    thumbnail?: {
+        file_url?: string;
+    };
+}
 const EventsIndex = () => {
     const API_URL = process.env.NEXT_PUBLIC_API_URL;
     const { setLoading, setMainCategory, setAllEvents } = useEventsContext();
@@ -46,8 +60,9 @@ const EventsIndex = () => {
 
             setAllEvents(response_data?.events ?? []);     
             setBanner(
-                response_data?.is_featured?.map((item: any) => ({
+                response_data?.is_featured?.map((item: BannerItem) => ({
                     ...item,
+                    publishDate: item.publish_date,
                     'categoryview': {
                         'categoryName': item?.category?.category_name,
                         'slug': `events/${item?.category?.permalink}/`

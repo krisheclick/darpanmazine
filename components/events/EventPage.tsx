@@ -16,6 +16,21 @@ type PageProps = {
     checkCategory?: boolean;
     slug: string[];
 };
+interface BannerItem {
+    author?: string;
+    heading?: string;
+    permalink?: string;
+    short_description?: string;
+    publish_date?: string;
+    category?: {
+        category_name?: string;
+        permalink?: string;
+        imageDir?: string;
+    };
+    thumbnail?: {
+        file_url?: string;
+    };
+}
 
 const EventPageComponent = ({ checkCategory = false, slug }: PageProps) => {
     const reversed = [...slug].reverse();
@@ -73,8 +88,9 @@ const EventPageComponent = ({ checkCategory = false, slug }: PageProps) => {
                 setMainCategory(categoryData);
             }
             setBanner(categoryData?.is_featured.map(
-                (item: any) => ({
+                (item: BannerItem) => ({
                     ...item,
+                    publishDate: item.publish_date,
                     'categoryview': {
                         'categoryName': item?.category?.category_name,
                         'slug': `events/${item?.category?.permalink}/`

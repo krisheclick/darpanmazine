@@ -24,6 +24,19 @@ type PageData = {
         file_url?: string;
     }[];
 }
+interface MostReadArticle {
+    heading?: string;
+    permalink?: string;
+    category?: {
+        category_name?: string;
+        permalink?: string;
+        imageDir?: string;
+    };
+    images?: [{
+        file_url?: string;
+    }];
+    publish_date?: string;
+}
 
 const EventSingle = ({ url = [] }: PageProps) => {
     const [notFound, setNotFoundPage] = useState(false);
@@ -45,7 +58,7 @@ const EventSingle = ({ url = [] }: PageProps) => {
             }
             setData(response_data);
             setReadMostArticle(response_data?.mostarticles.map(
-                (item: any) => ({
+                (item: MostReadArticle) => ({
                     ...item,
                     'images': item?.images?.[0],
                     'publishDate': item?.publish_date,
@@ -60,7 +73,7 @@ const EventSingle = ({ url = [] }: PageProps) => {
                 'slug': `/events/${response_data?.category?.permalink}/`
             });
             setArticle(response_data?.latest_articles.map(
-                (item: any) => ({
+                (item: MostReadArticle) => ({
                     ...item,
                     'images': item?.images?.[0],
                     'publishDate': item?.publish_date,
