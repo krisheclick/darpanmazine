@@ -11,6 +11,7 @@ import "./globals.css";
 import "./responsive.css";
 import "@/components/common/box/style.css";
 import ProgressLink from "@/utlis/ProgressLink";
+import { Analytics } from "@vercel/analytics/next";
 
 const inter = Inter({
   variable: "--font-primary",
@@ -50,6 +51,7 @@ export default async function RootLayout({
         <Header data={response_data} menu={navigation} />
         <main className="mainContainer">{children}</main>
         <Footer data={response_data} menu={navigation} />
+        <Analytics />
       </body>
     </html>
   );
