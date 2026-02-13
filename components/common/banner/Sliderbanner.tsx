@@ -1,3 +1,4 @@
+"use client";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, FreeMode, Navigation } from 'swiper/modules';
 import "swiper/css";
@@ -6,6 +7,7 @@ import "swiper/css/navigation";
 import "swiper/css/free-mode";
 import Styles from './style.module.css';
 import ImageFunction from '@/utlis/ImageFunction';
+import { usePostContext } from '@/context/post_context';
 import Link from 'next/link';
 
 interface BannerItem {
@@ -67,7 +69,7 @@ const Sliderbanner = ({hasLoading, bannerData}: BannerProps) => {
                                     style={{ objectFit: "cover", objectPosition: "top" }}
                                 />
                                 <div className={Styles.bannerText}>
-                                    <Link href={bannerItem?.link} className={`${Styles.title} color-inherit`}>{bannerItem?.title}</Link>
+                                    <Link href={`${process.env.NEXT_PUBLIC_ENV_URL}/${bannerData.categoryview?.slug??bannerData.categoryview?.permalink}${bannerData.permalink}`} className={`${Styles.title} color-inherit`}>{bannerData?.heading}</Link>
                                     <div className={Styles.datetime}>Darpan Desk | <span dangerouslySetInnerHTML={{ __html: dateFormat(new Date(bannerItem?.publishDate?? '')) }}/></div>
                                 </div>
                             </SwiperSlide>
