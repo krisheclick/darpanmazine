@@ -23,6 +23,7 @@ type PageData = {
     images?: {
         file_url?: string;
     }[];
+    address: string;
 }
 interface MostReadArticle {
     heading?: string;
@@ -88,6 +89,20 @@ const EventSingle = ({ url = [] }: PageProps) => {
             setLoading(false);
         }
     };
+    function MapEmbed(address: string) {
+        const src = `https://www.google.com/maps?q=${encodeURIComponent(address)}&z=18&output=embed`;
+
+        return (
+            <iframe
+                width="100%"
+                height="600"
+                style={{ border: 0 }}
+                loading="lazy"
+                allowFullScreen
+                src={src}
+            ></iframe>
+        );
+    }
 
     useEffect(() => {
         fetchData();
@@ -131,9 +146,10 @@ const EventSingle = ({ url = [] }: PageProps) => {
                 />
                 <div className={Styles.single_content}>
                     <Share title={data?.heading}/>
-                    <div className={`rj_editor_text ${Styles.rj_editor_text}`}
+                    <div className={`rj_editor_text ${Styles.rj_editor_text} mb-5`}
                         dangerouslySetInnerHTML={{ __html: data?.description || '' }}
                     />
+                    {MapEmbed(data?.address||'')}
                 </div>
             </div>
         )
