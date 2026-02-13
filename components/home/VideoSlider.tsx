@@ -9,7 +9,7 @@ import "swiper/css/navigation";
 import VideosliderBox from "../videos/VideosliderBox";
 import VideoSkeleton from "../videos/videoSkeleton";
 import Link from "next/link";
-import Styles from "@/app/page.module.css";
+import Styles from "@/app/(pages)/(home)/page.module.css";
 
 type VideoItem = {
     heading?: string;
