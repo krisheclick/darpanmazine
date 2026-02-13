@@ -31,7 +31,7 @@ const EventList = () => {
                     ))
                 ) : (
                     <Col xs={12}>
-                        <h5 className="text-center">Events not found</h5>
+                        <h5 className="text-center">Magazine not found</h5>
                     </Col>
                 )}
             </Row>
