@@ -96,7 +96,7 @@ const Header = ({ data, menu}: Props) => {
                                         placeholder="Search"
                                         className="rounded-0"
                                     />
-                                    <button type="submit"><FontAwesomeIcon icon={faSearch} /></button>
+                                    <button type="submit" aria-label="Search Button"><FontAwesomeIcon icon={faSearch} /></button>
                                 </div>
                             </form>
                         </div>

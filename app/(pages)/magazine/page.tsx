@@ -1,11 +1,7 @@
-import React from 'react'
+import MagazineList from "@/components/magazine/List"
 
 const page = () => {
-    return (
-        <div>
-
-        </div>
-    )
+    return <MagazineList />
 }
 
 export default page

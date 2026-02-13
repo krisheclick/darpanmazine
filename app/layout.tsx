@@ -15,12 +15,14 @@ import ProgressLink from "@/utlis/ProgressLink";
 const inter = Inter({
   variable: "--font-primary",
   subsets: ["latin"],
+  preload: false,
 });
 
 const tinos = Tinos({
   weight: ["400", "700"],
   variable: "--font-tinos",
   subsets: ["latin"],
+  preload: false,
 });
 
 export async function generateMetadata() {
@@ -37,7 +39,7 @@ export default async function RootLayout({
   const webInfo = await fetch(`${apiURL}/settings-items`, { cache: "no-store" });
   const { response_data } = await webInfo.json();
 
-  const menu = await fetch(`${apiURL}/menu`);
+  const menu = await fetch(`${apiURL}/menu`, { cache: "no-store" });
   const navigation = await menu.json();
 
 

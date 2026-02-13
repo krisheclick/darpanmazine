@@ -3,13 +3,13 @@
 import { useEffect, useRef, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 
-import Sliderbanner from "../common/banner/Sliderbanner";
 import PostView from "./PostView";
 import PostList from "./PostList";
 import Singlepage from "./Singlepage";
 import NotFoundPage from "@/app/notFound";
 
 import { usePostContext } from "@/context/post_context";
+import Banner from "./Banner";
 
 type PageProps = {
     checkCategory?: boolean;
@@ -137,7 +137,7 @@ const PostPageComponent = ({ checkCategory = false, slug }: PageProps) => {
 
     return (
         <>
-            <Sliderbanner />
+            <Banner />
             <PostView />
 
             <div ref={postListRef}>
