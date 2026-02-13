@@ -34,7 +34,7 @@ interface MostReadArticle {
     };
     publish_date?: string;
 }
-const EventsIndex = () => {
+const MagazineIndex = () => {
     const API_URL = process.env.NEXT_PUBLIC_API_URL;
     const { setLoading, setMainCategory, setAllEvents } = useEventsContext();
     const { setLoading:postsetLoading,setReadMostArticle, setBanner} = usePostContext();
@@ -138,4 +138,4 @@ const EventsIndex = () => {
     );
 };
 
-export default EventsIndex;
+export default MagazineIndex;

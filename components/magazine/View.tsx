@@ -4,7 +4,7 @@ import Styles from "@/components/post/style.module.css";
 import { useEventsContext } from "@/context/events_context";
 import { usePathname } from "next/navigation";
 
-const EventView = () => {
+const MagazineView = () => {
     const { hasLoading, mainCategory } = useEventsContext();
     const pathName = usePathname();
 
@@ -39,4 +39,4 @@ const EventView = () => {
     )
 }
 
-export default EventView;
+export default MagazineView;

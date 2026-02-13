@@ -7,7 +7,7 @@ import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import Navigation from "./Navigation";
 import "./style.css";
 import ImageFunctionLink from "@/utlis/ImageFunctionLink";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect } from "react";
 
 type Site = {
     favicon?: string;
@@ -69,8 +69,38 @@ const Header = ({ data, menu}: Props) => {
 
     // console.log('ads', ads)
 
+    useEffect(() => {
+        const body = document.body as HTMLElement;
+        let previousScroll = 0;
+
+        const handleScroll = () => {
+            const currentScroll = window.scrollY;
+            if (currentScroll > 20) {
+                if (currentScroll > previousScroll) {
+                    body.classList.remove('sticky');
+                } else {
+                    body.classList.add('sticky');
+                }
+            } else if (currentScroll < 20) {
+                body.classList.remove('sticky');
+                body.classList.add('stickyFixed');
+            } else {
+                body.classList.add('sticky');
+                body.classList.add('stickyFixed');
+            }
+
+            previousScroll = currentScroll;
+        };
+
+        window.addEventListener('scroll', handleScroll);
+
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, []);
+
     return (
-        <header className="mainHeader">
+        <header className={"mainHeader"}>
             <div className="topHeader primary-background">
                 <Container>
                     <div className="topHeaderWrapper">

@@ -5,7 +5,7 @@ import EventsBox from "../common/box/Box";
 import BoxSkeleton from "../common/box/BoxSkeleton";
 import { useEventsContext } from "@/context/events_context";
 
-const EventList = () => {
+const MagzineList = () => {
     const { hasLoading, allEvents } = useEventsContext();
     return (
         <div className={Styles.postList}>
@@ -39,4 +39,4 @@ const EventList = () => {
     )
 }
 
-export default EventList;
+export default MagzineList;

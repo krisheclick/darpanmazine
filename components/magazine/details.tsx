@@ -38,7 +38,7 @@ interface MostReadArticle {
     publish_date?: string;
 }
 
-const EventSingle = ({ url = [] }: PageProps) => {
+const MagazineSingle = ({ url = [] }: PageProps) => {
     const [notFound, setNotFoundPage] = useState(false);
     const [data, setData] = useState<PageData | null>(null);
     const { setLoading, hasLoading, setMainCategory } = useEventsContext();
@@ -140,4 +140,4 @@ const EventSingle = ({ url = [] }: PageProps) => {
     )
 }
 
-export default EventSingle;
+export default MagazineSingle;
