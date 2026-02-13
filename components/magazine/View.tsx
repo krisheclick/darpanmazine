@@ -23,7 +23,7 @@ const EventView = () => {
                                 const isActive = pathName === `/${mainCategory?.permalink}/${value?.permalink}` || (pathName.startsWith(`${value?.permalink}`) && pathName !== "/");
                                 return (
                                     <li key={index}>
-                                        <Link href={`${process.env.NEXT_PUBLIC_ENV_URL}/${mainCategory?.permalink}/${value?.permalink}`} className={isActive ? "active" : ""}>{value?.category_name}</Link>
+                                        <Link href={`${process.env.NEXT_PUBLIC_ENV_URL}/${mainCategory?.permalink}${value?.permalink}`} className={isActive ? "active" : ""}>{value?.category_name}</Link>
                                     </li>
                                 )
                             })
