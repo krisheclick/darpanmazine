@@ -6,6 +6,7 @@
         url('./times-webfont.woff') format('woff'),
         url('./times-webfont.ttf') format('truetype'),
         url('./times-webfont.svg#times_new_romanregular') format('svg');
+    font-display: swap;
     font-weight: normal;
     font-style: normal;
 
@@ -19,6 +20,7 @@
         url('./timesbd-webfont.woff') format('woff'),
         url('./timesbd-webfont.ttf') format('truetype'),
         url('./timesbd-webfont.svg#times_new_romanbold') format('svg');
+    font-display: swap;
     font-weight: normal;
     font-style: normal;
 }

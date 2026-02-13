@@ -95,16 +95,6 @@ const Singlepage = ({ url = [] }: PageProps) => {
                 />
                 <div className={Styles.single_content}>
                     <Share title={data?.heading}/>
-                    {/* <div className={`d-flex align-items-start gap-4 post_share ${Styles.post_share ?? ''}`}>                        
-                        <span className='mt-1'>Share in Post: </span>
-                        <div className={`d-flex align-items-center flex-wrap post_social ${Styles.social}`}>
-                            <Link href={`https://twitter.com/intent/tweet?text=${data?.heading}&url=${process.env.NEXT_PUBLIC_ENV_URL}${pathname}`}><FontAwesomeIcon icon={faXTwitter} /></Link>
-                            <Link href={`https://www.facebook.com/sharer/sharer.php?u=${process.env.NEXT_PUBLIC_ENV_URL}${pathname}`}><FontAwesomeIcon icon={faFacebook} /></Link>
-                            <Link href={`https://www.linkedin.com/sharing/share-offsite/?url=${process.env.NEXT_PUBLIC_ENV_URL}${pathname}`}><FontAwesomeIcon icon={faLinkedin} /></Link>
-                            <Link href="#"><FontAwesomeIcon icon={faLink} /></Link>
-                            <Link href="#"><FontAwesomeIcon icon={faWhatsapp} /></Link>
-                        </div>
-                    </div> */}
                     <div className={`rj_editor_text ${Styles.rj_editor_text}`}
                         dangerouslySetInnerHTML={{ __html: data?.description || '' }}
                     />

@@ -113,7 +113,7 @@ const NewsletterForm = () => {
                 <Col className={Styles.inputColumn} style={{ flex: "inherit" }}>
                     <div className={Styles.inputColumnGroup}>
                         <Button type="submit" id="subscribe-button" className='rj-btn-subscribe' disabled={isSubmitting}>
-                            SUBMIT <span className={`rj_spinner${isSubmitting ? 'active' : ''}`}></span>
+                            SUBMIT <span className={`rj_spinner${isSubmitting ? ' active' : ''}`}></span>
                         </Button>
                     </div>
                 </Col>

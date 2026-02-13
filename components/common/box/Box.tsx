@@ -42,7 +42,7 @@ const EventsBox = ({tag, title, slug, author_name, publish_date, thumbnail, erro
                 </div>
             </div>
             <div className="eventsBox-end">
-                {author_name ? <div className="authorName">{author_name}</div> : ''}                
+                {author_name ? <div className="authorName" title={author_name}>{author_name}</div> : ''}                
                 <div className="publishDate">
                     <span>{formattedDate}</span> {timestring ? <span>{formattedTime}</span> : ''}
                 </div>

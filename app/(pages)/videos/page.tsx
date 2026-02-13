@@ -1,13 +1,7 @@
-import { Row } from "react-bootstrap";
+import VideoList from "@/components/videos/List";
 
 const VideosPage = async() => {
-    return(
-        <div>
-            <Row>
-                
-            </Row>
-        </div>
-    )
+    return <VideoList />
 }
 
 export default VideosPage;
