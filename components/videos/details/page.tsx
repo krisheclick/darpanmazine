@@ -30,7 +30,7 @@ const DetailsPage = ({ slug }: { slug: string[] }) => {
     const [currentUrl, ...urlArray] = [...slug].reverse();
     const [notFound, setNotFound] = useState(false);
     const [data, setData] = useState<DataItem | null>(null);
-    const { setLoading, setFeaturedVideo, setMostVideo, setadTrue} = useVideosContext();
+    const { setLoading, setFeaturedVideo, setMostVideo, setadTrue } = useVideosContext();
     const fetchData = async () => {
         try {
             setLoading(true);
@@ -77,7 +77,10 @@ const DetailsPage = ({ slug }: { slug: string[] }) => {
 
     return (
         <div className={Styles.details_page}>
-            <div className={`position-relative ${Styles.imageWraper ?? ''}`}>
+            <div className={Styles.iframePoster}>
+                <iframe src={data?.video_url} frameBorder="0"></iframe>
+            </div>
+            {/* <div className={`position-relative ${Styles.imageWraper ?? ''}`}>
                 <ImageFunctionLink
                     href={data?.video_url}
                     className={Styles.poster}
@@ -90,14 +93,14 @@ const DetailsPage = ({ slug }: { slug: string[] }) => {
                     <FontAwesomeIcon icon={faYoutube} />
                 </div>
 
-            </div>
+            </div> */}
             <div className={Styles.single_content}>
-                <Share title={data?.heading} classname="videoPost"/>
+                <Share title={data?.heading} classname="videoPost" />
                 <div className={Styles.topcontent}>
                     <div className={Styles.catName}>{data?.category?.permalink}</div>
                     <h1 className={Styles.pageTitle}>{data?.heading}</h1>
                     <div className={Styles.tagWrap}>
-                        <span>by {data?.author},</span>                         
+                        <span>by {data?.author},</span>
                         <span>{formattedDate}, </span>
                         <time dateTime={formattedTime}>{formattedTime}</time>
                     </div>

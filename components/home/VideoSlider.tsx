@@ -68,7 +68,7 @@ const VideoSlider = () => {
                 <h5 className="title mb-0">Videos</h5>
                 <div className={Styles.videoCategory}>
                     <ul className="inlineList">
-                        {categoryData?.map((value, index) => (
+                        {categoryData?.slice(0, 3)?.map((value, index) => (
                             <li key={index}>
                                 <Link href={`${process.env.NEXT_PUBLIC_ENV_URL}/videos/${value.permalink}`}>{value.category_name}</Link>
                             </li>

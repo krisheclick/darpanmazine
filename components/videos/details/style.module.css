@@ -31,3 +31,8 @@
 .rj_editor_text{
     margin-top: 30px;
 }
+.iframePoster iframe{
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 16/9;
+}
