@@ -6,7 +6,6 @@ import ImageFunction from '@/utlis/ImageFunction';
 
 const PopularPost = () => {
     const { mostReadArticle } = usePostContext();
-    console.log('mostReadArticle', mostReadArticle)
     return (
         <div className={Styles.popular_post}>
             <div className={Styles.bar_title}>Most Popular</div>

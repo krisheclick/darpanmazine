@@ -61,7 +61,8 @@ interface BannerItem {
     publishDate?: string;
     categoryview?: {
         categoryName?: string;
-        slug?: string;
+        slug?: string;        
+        permalink?: string;
         imageDir?: string;
     };
     thumbnail?: {
