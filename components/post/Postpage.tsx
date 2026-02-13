@@ -9,7 +9,7 @@ import Singlepage from "./Singlepage";
 import NotFoundPage from "@/app/notFound";
 
 import { usePostContext } from "@/context/post_context";
-import Banner from "./Banner";
+import Sliderbanner from "@/components/common/banner/Sliderbanner";
 
 type PageProps = {
     checkCategory?: boolean;
@@ -137,7 +137,7 @@ const PostPageComponent = ({ checkCategory = false, slug }: PageProps) => {
 
     return (
         <>
-            <Banner />
+            <Sliderbanner />
             <PostView />
 
             <div ref={postListRef}>
