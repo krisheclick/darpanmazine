@@ -6,6 +6,7 @@ import ImageFunction from '@/utlis/ImageFunction';
 
 const PopularPost = () => {
     const { mostReadArticle } = usePostContext();
+    console.log('mostReadArticle', mostReadArticle)
     const dateFormat = (dateObj: Date)=>{
         const formattedDate = dateObj.toLocaleDateString("en-GB", {
             month: "short",
@@ -20,35 +21,38 @@ const PopularPost = () => {
         return `<span> ${formattedDate}</span>`
     }
     return (
-        <div className={Styles.popular_post}>
-            <div className={Styles.bar_title}>Most Popular</div>
-            <div className={Styles.list}>
-                {mostReadArticle ? (
-                    <ul className='noList'>
-                        {mostReadArticle.slice(0,6).map((value, index) => (
-                            <li key={index}>
-                                <Link href={`${value.permalink}`} className={Styles.box}>
-                                    <ImageFunction
-                                        src={`${process.env.NEXT_PUBLIC_MEDIA_URL}${value.images?.file_url}`}
-                                        alt={value.heading || "Thumbnail poster"}
-                                    />
-                                    <div className={Styles.content}>
-                                        <div className={Styles.title}>{value.heading}</div>
-                                        {value.publish_date && (
-                                            <div className={Styles.postDate}
-                                                dangerouslySetInnerHTML={{ __html: dateFormat(new Date(value?.publish_date?? '')) }}
-                                            />
-                                        )}
-                                    </div>
-                                </Link>
-                            </li>
-                        ))}
-                    </ul>
-                ) : (
-                    <></>
-                )}
+        mostReadArticle && mostReadArticle.length > 0 &&(
+            <div className={Styles.popular_post}>
+                <div className={Styles.bar_title}>Most Popular</div>
+                <div className={Styles.list}>
+                    {mostReadArticle ? (
+                        <ul className='noList'>
+                            {mostReadArticle.slice(0,6).map((value, index) => (
+                                <li key={index}>
+                                    <Link href={`${value.permalink}`} className={Styles.box}>
+                                        <ImageFunction
+                                            src={`${process.env.NEXT_PUBLIC_MEDIA_URL}${value.images?.file_url}`}
+                                            alt={value.heading || "Thumbnail poster"}
+                                        />
+                                        <div className={Styles.content}>
+                                            <div className={Styles.title}>{value.heading}</div>
+                                            {value.publish_date && (
+                                                <div className={Styles.postDate}
+                                                    dangerouslySetInnerHTML={{ __html: dateFormat(new Date(value?.publish_date?? '')) }}
+                                                />
+                                            )}
+                                        </div>
+                                    </Link>
+                                </li>
+                            ))}
+                        </ul>
+                    ) : (
+                        <></>
+                    )}
+                </div>
             </div>
-        </div>
+
+        )
     )
 }
 

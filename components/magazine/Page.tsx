@@ -33,7 +33,7 @@ interface BannerItem {
 }
 interface MostReadArticle {
     heading?: string;
-    permalink?: string;
+    slug?: string;
     category?: {
         category_name?: string;
         permalink?: string;
@@ -119,10 +119,12 @@ const MagazinePageComponent = ({ checkCategory = false, slug }: PageProps) => {
                 (item: MostReadArticle) => ({
                     ...item,
                     'images': item?.thumbnail,
+                    'permalink': `/magazine${item?.slug}`,
                     'publishDate': item?.publish_date,
                     'categoryview': {
                         'categoryName': item?.category?.category_name,
-                        'permalink': `/magazine/${item?.category?.permalink}/`
+                        'slug': ``
+                        // 'permalink': `/magazine/${item?.category?.permalink}/`
                     }
                 })
             ));

@@ -97,7 +97,20 @@ const EventPageComponent = ({ checkCategory = false, slug }: PageProps) => {
                     }
                 })
             ));
-            setReadMostArticle(categoryData?.most_read_Events);
+            // setReadMostArticle(categoryData?.most_read_Events);
+            
+            setReadMostArticle(categoryData?.most_read_Events.map((value: {
+                    permalink: string,
+                    category: {
+                        permalink: string
+                    },
+                    thumbnail: string;
+                }) => ({
+                    ...value,
+                    permalink: `/events/${value.category.permalink}/${value.permalink}`,
+                    images: value.thumbnail,
+                })) ?? []
+            );
 
             // Fetch events (only for category pages)
             if (checkCategory) {

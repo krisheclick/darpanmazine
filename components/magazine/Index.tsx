@@ -23,7 +23,7 @@ interface BannerItem {
 }
 interface MostReadArticle {
     heading?: string;
-    permalink?: string;
+    slug?: string;
     category?: {
         category_name?: string;
         permalink?: string;
@@ -92,6 +92,7 @@ const MagazineIndex = () => {
                 (item: MostReadArticle) => ({
                     ...item,
                     'images': item?.thumbnail,
+                    'permalink': `/magazine${item?.slug}`,
                     'publish_date': item?.publish_date,
                     'categoryview': {
                         'categoryName': item?.category?.category_name,

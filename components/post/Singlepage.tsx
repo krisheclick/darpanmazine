@@ -4,7 +4,6 @@ import ImageFunction from '@/utlis/ImageFunction';
 import { useEffect, useState } from 'react';
 import { usePostContext } from '@/context/post_context';
 import NotFoundPage from '@/app/notFound';
-import { usePathname } from 'next/navigation';
 import Share from '../common/share/Share';
 
 type PageProps = {
@@ -46,6 +45,8 @@ const Singlepage = ({ url = [] }: PageProps) => {
             setReadMostArticle(response_data?.most_read_articles);
             setArticle(response_data?.mostarticles);
             setPostCategory(response_data?.categoryview);
+
+            
         } catch (err: unknown) {
             console.log('Category API is something wrong: ', (err as Error).message);
         } finally {

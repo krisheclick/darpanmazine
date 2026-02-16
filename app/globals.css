@@ -548,6 +548,9 @@ form{
     margin-bottom: 16px;
     width: 100%;
 }
+.editor_frame_div iframe, .editor_img_fig {
+	margin-bottom: 16px;
+}
 /* Post Socials */
 .posterAd {
 	margin-top: 40px;
