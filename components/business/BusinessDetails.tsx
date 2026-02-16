@@ -50,22 +50,22 @@ const BusinessDetails = ({slug = []}: {slug?: string[]})=> {
                 return;
             }
             setData(response_data.business);
-            // setReadMostArticle(response_data?.mostarticles.map(
-            //     (item: MostReadArticle) => ({
-            //         ...item,
-            //         'images': item?.thumbnail,
-            //         'publishDate': item?.business_publish_date,
-            //         'categoryview': {
-            //             'categoryName': item?.category?.category_name,
-            //             'permalink': `/events/${item?.category?.permalink}/`
-            //         }
-            //     })
-            // ));
 
             setPostCategory({
                 'categoryName': response_data?.business_category?.business_category_name,
                 'slug': `/magazine/${response_data?.business_category?.business_category_slug}/`
             });
+
+            setReadMostArticle(response_data?.mostBusiness.map(
+                (value: MostReadArticle) => ({
+                    ...value,
+                    heading: value?.business_heading,
+                    permalink: value?.business_slug,
+                    images: value?.thumbnail,
+                    publish_date: value?.business_publish_date,
+                })
+            ));
+
             setArticle(response_data?.mostBusiness.map(
                 (item: MostReadArticle) => ({
                     ...item,

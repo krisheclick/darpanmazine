@@ -12,7 +12,6 @@ import Link from 'next/link';
 
 const Sliderbanner = () => {
     const { hasLoading, banner } = usePostContext();
-    console.log(banner);
     // const bannerData = banner;
     // const dateObj = new Date(bannerData?.publishDate ?? '');
 

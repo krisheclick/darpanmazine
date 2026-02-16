@@ -7,7 +7,6 @@ import BusinessList from './BusinessList';
 import Sliderbanner from '../common/banner/Sliderbanner';
 import NotFoundPage from '@/app/notFound';
 import BusinessCategory from './BusinessCategory';
-import Styles from './style.module.css';
 
 interface dataCheck {
     slug?: string[];
@@ -73,7 +72,8 @@ const BusinessIndex = ({ slug = [], categoryCheck = false }: dataCheck) => {
                     (value: {
                         business_heading: string, 
                         business_slug: string;
-                        business_category: { business_category_slug: string } 
+                        publish_date?: string;
+                        business_category: { business_category_slug: string };
                     }
 
                 ) => ({
@@ -83,7 +83,7 @@ const BusinessIndex = ({ slug = [], categoryCheck = false }: dataCheck) => {
                     categoryview: {
                         slug: `${value.business_category.business_category_slug}`,
                     },
-
+                    publishDate: value.publish_date,
                 })) || []
             );
 

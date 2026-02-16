@@ -92,7 +92,7 @@ const MagazineIndex = () => {
                 (item: MostReadArticle) => ({
                     ...item,
                     'images': item?.thumbnail,
-                    'publishDate': item?.publish_date,
+                    'publish_date': item?.publish_date,
                     'categoryview': {
                         'categoryName': item?.category?.category_name,
                         'permalink': `/magazine/${item?.category?.permalink}/`
