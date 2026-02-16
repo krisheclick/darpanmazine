@@ -5,9 +5,9 @@ import Social from "../social/Social";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import Navigation from "./Navigation";
-import "./style.css";
 import ImageFunctionLink from "@/utlis/ImageFunctionLink";
 import { useEffect } from "react";
+import "./style.css";
 
 type Site = {
     favicon?: string;

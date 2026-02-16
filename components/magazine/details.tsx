@@ -82,7 +82,7 @@ const MagazineSingle = ({ url = [] }: PageProps) => {
             setOtherSlider(true);
             setMainCategory(response_data?.categoryview ?? null);
         } catch (err: unknown) {
-            console.log('Event API error: ', (err as Error).message);
+            console.log('Magazine API error: ', (err as Error).message);
         } finally {
             postsetLoading(false);
             setLoading(false);

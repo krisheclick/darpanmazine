@@ -2,8 +2,8 @@
 import { useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Sliderbanner from "../common/banner/Sliderbanner";
-import EventView from "./View";
-import EventList from "./List";
+import MagazineView from "./View";
+import MagazineList from "./List";
 import { useEventsContext } from "@/context/events_context";
 import { usePostContext } from "@/context/post_context";
 interface BannerItem {
@@ -53,8 +53,7 @@ const MagazineIndex = () => {
             // Fetch categories
             const catRes = await fetch(`${API_URL}/magazines/category/`, { cache: "no-store" });
             const { response_data: categories } = await catRes.json();
-            // set a synthetic mainCategory to let EventView render category pills
-            console.log('categories', categories);
+            
             setMainCategory({
                 category_name: "Magazine",
                 permalink: "magazine",
@@ -124,9 +123,9 @@ const MagazineIndex = () => {
     return (
         <>
             <Sliderbanner />
-            <EventView />
+            <MagazineView />
 
-            <EventList />
+            <MagazineList />
 
             {totalPages > 1 && (
                 <div className="btn_center d-flex gap-3 justify-content-center">

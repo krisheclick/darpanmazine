@@ -18,7 +18,7 @@ const MagazineMainPage = async () => {
                     </div>
                 </Container>
             </div>
-            <ReadMoreSlider/>
+            <ReadMoreSlider />
         </>
     );
 };

@@ -53,8 +53,7 @@ const PostPageComponent = ({ checkCategory = false, slug }: PageProps) => {
                 { cache: "no-store" }
             );
 
-            const { response_data: categoryData } =
-                await categoryRes.json();
+            const { response_data: categoryData } = await categoryRes.json();
 
             setMainCategory(categoryData);
             setBanner(categoryData?.is_featured);
