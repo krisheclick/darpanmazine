@@ -41,7 +41,6 @@ const EventsIndex = () => {
             const catRes = await fetch(`${API_URL}/event/category/`, { cache: "no-store" });
             const { response_data: categories } = await catRes.json();
             // set a synthetic mainCategory to let EventView render category pills
-            console.log('categories', categories);
             setMainCategory({
                 category_name: "Events",
                 permalink: "events",
@@ -69,7 +68,18 @@ const EventsIndex = () => {
                     }
                 }))
             );
-            setReadMostArticle(response_data?.most_read_Events);
+            setReadMostArticle(response_data?.most_read_Events.map((value: {
+                    permalink: string,
+                    category: {
+                        permalink: string
+                    },
+                    thumbnail: string;
+                }) => ({
+                    ...value,
+                    permalink: `/events/${value.category.permalink}/${value.permalink}`,
+                    images: value.thumbnail,
+                })) ?? []
+            );
             setTotalPages(response_data?.totalPages ?? 1);
         } catch (err) {
             console.error((err as Error).message);

@@ -1,12 +1,12 @@
 "use client";
-import Styles from "../post/style.module.css";
-import { Col, Row } from "react-bootstrap";
-import EventsBox from "../common/box/Box";
-import BoxSkeleton from "../common/box/BoxSkeleton";
-import { useEventsContext } from "@/context/events_context";
+import { useBusinessContext } from '@/context/business_context';
+import { Col, Row } from 'react-bootstrap';
+import BoxSkeleton from '@/components/common/box/BoxSkeleton';
+import EventsBox from '@/components/common/box/Box';
+import Styles from './style.module.css';
 
-const MagzineList = () => {
-    const { hasLoading, allEvents } = useEventsContext();
+const BusinessList = () => {
+    const {hasLoading, businessData} = useBusinessContext();
     return (
         <div className={Styles.postList}>
             <Row className="rowGap">
@@ -16,13 +16,13 @@ const MagzineList = () => {
                             <BoxSkeleton />
                         </Col>
                     ))
-                ) : allEvents && allEvents.length > 0 ? (
-                    allEvents.map((value, index) => (
+                ) : businessData && businessData.length > 0 ? (
+                    businessData.map((value, index) => (
                         <Col xl={4} sm={6} key={index}>
                             <EventsBox
-                                tag={value.category?.category_name}
-                                title={value.heading}
-                                slug={`/magazine${value.permalink}`}
+                                tag={value.business_category?.business_category_name}
+                                title={value.business_heading}
+                                slug={`/business/${value.business_category?.business_category_slug}/${value.business_slug}`}
                                 publish_date={value.publish_date}
                                 thumbnail={`${process.env.NEXT_PUBLIC_MEDIA_URL}${value.thumbnail?.file_url}`}
                                 timestring={true}
@@ -31,7 +31,7 @@ const MagzineList = () => {
                     ))
                 ) : (
                     <Col xs={12}>
-                        <h5 className="text-center">Magazine not found</h5>
+                        <h5 className="text-center">Business not found</h5>
                     </Col>
                 )}
             </Row>
@@ -39,4 +39,4 @@ const MagzineList = () => {
     )
 }
 
-export default MagzineList;
+export default BusinessList

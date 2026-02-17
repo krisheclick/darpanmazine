@@ -53,12 +53,17 @@ const PostPageComponent = ({ checkCategory = false, slug }: PageProps) => {
                 { cache: "no-store" }
             );
 
-            const { response_data: categoryData } =
-                await categoryRes.json();
+            const { response_data: categoryData } = await categoryRes.json();
 
             setMainCategory(categoryData);
-            setBanner(categoryData?.is_featured);
-            setReadMostArticle(categoryData?.most_read_articles);
+            setBanner(categoryData?.is_featured.map((value: {publish_date: string}) => ({
+                ...value,
+                publishDate: value.publish_date
+            })) ?? []);
+            setReadMostArticle(categoryData?.most_read_articles.map((value: {permalink: string; categoryview: {slug: string}}) => ({
+                ...value,
+                permalink: `${value.categoryview.slug}${value.permalink}`
+            })));
 
             // Fetch posts (only for category pages)
             if (checkCategory) {

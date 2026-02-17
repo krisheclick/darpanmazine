@@ -2,8 +2,8 @@
 import { useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Sliderbanner from "../common/banner/Sliderbanner";
-import EventView from "./View";
-import EventList from "./List";
+import MagazineView from "./View";
+import MagazineList from "./List";
 import { useEventsContext } from "@/context/events_context";
 import { usePostContext } from "@/context/post_context";
 interface BannerItem {
@@ -23,7 +23,7 @@ interface BannerItem {
 }
 interface MostReadArticle {
     heading?: string;
-    permalink?: string;
+    slug?: string;
     category?: {
         category_name?: string;
         permalink?: string;
@@ -34,7 +34,7 @@ interface MostReadArticle {
     };
     publish_date?: string;
 }
-const EventsIndex = () => {
+const MagazineIndex = () => {
     const API_URL = process.env.NEXT_PUBLIC_API_URL;
     const { setLoading, setMainCategory, setAllEvents } = useEventsContext();
     const { setLoading:postsetLoading,setReadMostArticle, setBanner} = usePostContext();
@@ -53,8 +53,7 @@ const EventsIndex = () => {
             // Fetch categories
             const catRes = await fetch(`${API_URL}/magazines/category/`, { cache: "no-store" });
             const { response_data: categories } = await catRes.json();
-            // set a synthetic mainCategory to let EventView render category pills
-            console.log('categories', categories);
+            
             setMainCategory({
                 category_name: "Magazine",
                 permalink: "magazine",
@@ -93,7 +92,8 @@ const EventsIndex = () => {
                 (item: MostReadArticle) => ({
                     ...item,
                     'images': item?.thumbnail,
-                    'publishDate': item?.publish_date,
+                    'permalink': `/magazine${item?.slug}`,
+                    'publish_date': item?.publish_date,
                     'categoryview': {
                         'categoryName': item?.category?.category_name,
                         'permalink': `/magazine/${item?.category?.permalink}/`
@@ -124,9 +124,9 @@ const EventsIndex = () => {
     return (
         <>
             <Sliderbanner />
-            <EventView />
+            <MagazineView />
 
-            <EventList />
+            <MagazineList />
 
             {totalPages > 1 && (
                 <div className="btn_center d-flex gap-3 justify-content-center">
@@ -138,4 +138,4 @@ const EventsIndex = () => {
     );
 };
 
-export default EventsIndex;
+export default MagazineIndex;

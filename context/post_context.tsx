@@ -30,6 +30,7 @@ interface Postdata {
 interface MostReadArticle {
     heading?: string;
     permalink?: string;
+    publish_date?: string;
     categoryview?: {
         categoryName?: string;
         slug?: string;

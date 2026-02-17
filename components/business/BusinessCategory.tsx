@@ -1,13 +1,12 @@
 "use client";
-import Link from "next/link";
 import Styles from "@/components/post/style.module.css";
-import { useEventsContext } from "@/context/events_context";
+import { useBusinessContext } from "@/context/business_context";
+import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-const MagazineView = () => {
-    const { hasLoading, mainCategory } = useEventsContext();
+const BusinessCategory = () => {
+    const {hasLoading, mainCategory} = useBusinessContext();
     const pathName = usePathname();
-
     return (
         <div className={Styles.area_section}>
             <div className="rj_content border-block mb-lg-4 border-another" style={{ borderBlockColor: "rgba(217, 217, 217, 1)" }}>
@@ -23,7 +22,7 @@ const MagazineView = () => {
                                 const isActive = pathName === `/${mainCategory?.permalink}/${value?.permalink}` || (pathName.startsWith(`${value?.permalink}`) && pathName !== "/");
                                 return (
                                     <li key={index}>
-                                        <Link href={`${process.env.NEXT_PUBLIC_ENV_URL}/${mainCategory?.permalink}${value?.permalink}`} className={isActive ? "active" : ""}>{value?.category_name}</Link>
+                                        <Link href={`${process.env.NEXT_PUBLIC_ENV_URL}/${mainCategory?.permalink}/${value?.permalink}`} className={isActive ? "active" : ""}>{value?.category_name}</Link>
                                     </li>
                                 )
                             })
@@ -39,4 +38,4 @@ const MagazineView = () => {
     )
 }
 
-export default MagazineView;
+export default BusinessCategory

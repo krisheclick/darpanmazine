@@ -12,8 +12,7 @@ import Link from 'next/link';
 
 const Sliderbanner = () => {
     const { hasLoading, banner } = usePostContext();
-    console.log(banner);
-    const bannerData = banner;
+    // const bannerData = banner;
     // const dateObj = new Date(bannerData?.publishDate ?? '');
 
     const dateFormat = (dateObj: Date)=>{
@@ -63,7 +62,7 @@ const Sliderbanner = () => {
                                     style={{ objectFit: "cover", objectPosition: "top" }}
                                 />
                                 <div className={Styles.bannerText}>
-                                    <Link href={`${process.env.NEXT_PUBLIC_ENV_URL}/${bannerData.categoryview?.slug??bannerData.categoryview?.permalink}${bannerData.permalink}`} className={`${Styles.title} color-inherit`}>{bannerData?.heading}</Link>
+                                    <Link href={`${bannerData.categoryview?.slug??bannerData.categoryview?.permalink}${bannerData.permalink}`} className={`${Styles.title} color-inherit`}>{bannerData?.heading}</Link>
                                     <div className={Styles.datetime}>Darpan Desk | <span dangerouslySetInnerHTML={{ __html: dateFormat(new Date(bannerData?.publishDate?? '')) }}/></div>
                                 </div>
                             </SwiperSlide>

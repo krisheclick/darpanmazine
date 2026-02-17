@@ -2,89 +2,83 @@
 import Styles from '../post/style.module.css';
 import ImageFunction from '@/utlis/ImageFunction';
 import { useEffect, useState } from 'react';
-import { useEventsContext } from '@/context/events_context';
 import NotFoundPage from '@/app/notFound';
 import Share from '../common/share/Share';
 import { usePostContext } from '@/context/post_context';
 
-type PageProps = {
-    url?: string[];
-}
 type PageData = {
-    heading?: string;
+    business_source?: string;
+    business_heading?: string;
+    business_slug?: string;
+    business_description?: string;
+    business_publish_date?: string;
     author?: string;
-    description?: string;
-    publish_date?: string;
-    permalink?: string;
-    category?: {
-        category_name?: string;
-        permalink?: string;
+    business_category?: {
+        business_category_name?: string;
+        business_category_slug?: string;
     }
     images?: {
         file_url?: string;
     }[];
 }
 interface MostReadArticle {
-    heading?: string;
-    permalink?: string;
+    business_heading?: string;
+    business_slug?: string;
     category?: {
         category_name?: string;
         permalink?: string;
         imageDir?: string;
     };
-    images?: [{
+    thumbnail?: [{
         file_url?: string;
     }];
-    publish_date?: string;
+    business_publish_date?: string;
 }
 
-const MagazineSingle = ({ url = [] }: PageProps) => {
+const BusinessDetails = ({slug = []}: {slug?: string[]})=> {
     const [notFound, setNotFoundPage] = useState(false);
     const [data, setData] = useState<PageData | null>(null);
-    const { setLoading, hasLoading, setMainCategory } = useEventsContext();
-    const { setLoading:postsetLoading, setReadMostArticle, setArticle, setOtherSlider, setPostCategory} = usePostContext();
-
-    useEffect(() => {
-        return () => {};
-    }, []);
+    const { setLoading, hasLoading, setReadMostArticle, setArticle, setOtherSlider, setPostCategory} = usePostContext();
 
     const fetchData = async () => {
         try {
-            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/magazines/${url.at(-1)}`);
+            setLoading(true);
+            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/business/${slug.at(-1)}`);
             const { response_code, response_data } = await response.json();
             if (!response_code) {
                 setNotFoundPage(true);
                 return;
             }
-            setData(response_data);
-            setReadMostArticle(response_data?.mostmagazine.map(
-                (item: MostReadArticle) => ({
-                    ...item,
-                    'images': item?.images?.[0],
-                    'publishDate': item?.publish_date,
-                    'categoryview': {
-                        'categoryName': item?.category?.category_name,
-                        'permalink': `/magazine/${item?.category?.permalink}/`
-                    }
+            setData(response_data.business);
+
+            setPostCategory({
+                'categoryName': response_data?.business_category?.business_category_name,
+                'slug': `/magazine/${response_data?.business_category?.business_category_slug}/`
+            });
+
+            setReadMostArticle(response_data?.mostBusiness.map(
+                (value: MostReadArticle) => ({
+                    ...value,
+                    heading: value?.business_heading,
+                    permalink: value?.business_slug,
+                    images: value?.thumbnail,
+                    publish_date: value?.business_publish_date,
                 })
             ));
-            setPostCategory({
-                'categoryName': response_data?.category?.category_name,
-                'slug': `/magazine/${response_data?.category?.permalink}/`
-            });
-            setArticle(response_data?.latest_articles.map(
+
+            setArticle(response_data?.mostBusiness.map(
                 (item: MostReadArticle) => ({
                     ...item,
-                    'images': item?.images?.[0],
-                    'publishDate': item?.publish_date,
+                    'heading': item?.business_heading,
+                    'permalink': item?.business_slug,
+                    'images': item?.thumbnail,
+                    'publishDate': item?.business_publish_date,
                 })
             ));
             setOtherSlider(true);
-            setMainCategory(response_data?.categoryview ?? null);
         } catch (err: unknown) {
-            console.log('Magazine API error: ', (err as Error).message);
+            console.log('Business API error: ', (err as Error).message);
         } finally {
-            postsetLoading(false);
             setLoading(false);
         }
     };
@@ -98,12 +92,12 @@ const MagazineSingle = ({ url = [] }: PageProps) => {
     }
 
     const poster = data?.images?.[0]?.file_url;
-    const publishDate = data?.publish_date;
+    const publishDate = data?.business_publish_date;
     const dateObj = new Date(publishDate ?? '');
     const formattedDate = dateObj.toLocaleDateString("en-GB", {
         day: "2-digit",
         month: "long",
-    }) + dateObj.getFullYear();
+    }) + ' ' + dateObj.getFullYear();
 
     const formattedTime = dateObj.toLocaleTimeString("en-US", {
         hour: "2-digit",
@@ -115,10 +109,10 @@ const MagazineSingle = ({ url = [] }: PageProps) => {
         !hasLoading && (
             <div className={Styles.single_page}>
                 <div className={Styles.topcontent}>
-                    <div className={Styles.catName}>{data?.category?.category_name}</div>
-                    <h1 className={Styles.pageTitle}>{data?.heading}</h1>
+                    <div className={Styles.catName}>{data?.business_category?.business_category_name}</div>
+                    <h1 className={Styles.pageTitle}>{data?.business_heading}</h1>
                     <div className={Styles.tagWrap}>
-                        <span>by {data?.author},</span>
+                        <span>by {data?.business_source},</span>
                         <span>{formattedDate}, </span>
                         <time dateTime={formattedTime}>{formattedTime}</time>
                     </div>
@@ -126,13 +120,13 @@ const MagazineSingle = ({ url = [] }: PageProps) => {
                 <ImageFunction
                     className={Styles.poster}
                     src={`${process.env.NEXT_PUBLIC_MEDIA_URL}${poster}`}
-                    alt={data?.heading || "Event Poster"}
+                    alt={data?.business_heading || "Business Poster"}
                     staticImage={false}
                 />
                 <div className={Styles.single_content}>
-                    <Share title={data?.heading}/>
-                    <div className={`rj_editor_text ${Styles.rj_editor_text}`}
-                        dangerouslySetInnerHTML={{ __html: data?.description || '' }}
+                    <Share title={data?.business_heading}/>
+                    <div className={`rj_editor_text ${Styles.rj_editor_text} mb-5`}
+                        dangerouslySetInnerHTML={{ __html: data?.business_description || '' }}
                     />
                 </div>
             </div>
@@ -140,4 +134,4 @@ const MagazineSingle = ({ url = [] }: PageProps) => {
     )
 }
 
-export default MagazineSingle;
+export default BusinessDetails;

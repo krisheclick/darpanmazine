@@ -1,17 +1,16 @@
-import EventsIndex from "@/components/magazine/Index";
+import MagazineIndex from "@/components/magazine/Index";
 import ReadMoreSlider from "@/components/readmore/ReadMore";
 import Sidebar from "@/components/sidebar/Sidebar";
 import { Container } from "react-bootstrap";
 
-const EventsMainPage = async () => {
+const MagazineMainPage = async () => {
     return (
         <>
             <div className="mainLayout">
                 <Container>
                     <div className="columnRow">
                         <article className="content_column">
-                            {/* EventsIndex is a client component that will fetch categories + events */}
-                            <EventsIndex />
+                            <MagazineIndex />
                         </article>
                         <aside className="sidebar_column">
                             <Sidebar />
@@ -19,9 +18,9 @@ const EventsMainPage = async () => {
                     </div>
                 </Container>
             </div>
-            <ReadMoreSlider/>
+            <ReadMoreSlider />
         </>
     );
 };
 
-export default EventsMainPage;
+export default MagazineMainPage;

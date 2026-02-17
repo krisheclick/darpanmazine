@@ -1,11 +1,11 @@
-import EventPageComponent from "@/components/magazine/Page";
+import MagazinePageComponent from "@/components/magazine/Page";
 import ReadMoreSlider from "@/components/readmore/ReadMore";
 import Sidebar from "@/components/sidebar/Sidebar";
 import { Container } from "react-bootstrap";
 
 export const dynamicParams = true;
 
-const EventPage = async ({ params }: { params: Promise<{ slug: string }> }) => {
+const MagazinePage = async ({ params }: { params: Promise<{ slug: string }> }) => {
     const { slug } = await params;
 
     let isCategory = true;
@@ -24,7 +24,7 @@ const EventPage = async ({ params }: { params: Promise<{ slug: string }> }) => {
                 <Container>
                     <div className="columnRow">
                         <article className="content_column">
-                            <EventPageComponent
+                            <MagazinePageComponent
                                 checkCategory={isCategory}
                                 slug={[...slug]}
                             />
@@ -40,4 +40,4 @@ const EventPage = async ({ params }: { params: Promise<{ slug: string }> }) => {
 
     )
 }
-export default EventPage;
+export default MagazinePage;

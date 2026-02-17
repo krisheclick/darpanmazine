@@ -4,13 +4,13 @@ import { useEffect, useRef, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 
 import Sliderbanner from "../common/banner/Sliderbanner";
-import EventView from "./View";
-import EventList from "./List";
-import EventSingle from "./details";
+import MagazineView from "./View";
+import MagzineList from "./List";
 import NotFoundPage from "@/app/notFound";
 
 import { useEventsContext } from "@/context/events_context";
 import { usePostContext } from "@/context/post_context";
+import MagazineSingle from "./details";
 
 type PageProps = {
     checkCategory?: boolean;
@@ -33,7 +33,7 @@ interface BannerItem {
 }
 interface MostReadArticle {
     heading?: string;
-    permalink?: string;
+    slug?: string;
     category?: {
         category_name?: string;
         permalink?: string;
@@ -45,7 +45,7 @@ interface MostReadArticle {
     publish_date?: string;
 }
 
-const EventPageComponent = ({ checkCategory = false, slug }: PageProps) => {
+const MagazinePageComponent = ({ checkCategory = false, slug }: PageProps) => {
     const reversed = [...slug].reverse();
     const currentUrl = reversed[0];
     const urlArray = reversed.slice(1);
@@ -119,10 +119,12 @@ const EventPageComponent = ({ checkCategory = false, slug }: PageProps) => {
                 (item: MostReadArticle) => ({
                     ...item,
                     'images': item?.thumbnail,
+                    'permalink': `/magazine${item?.slug}`,
                     'publishDate': item?.publish_date,
                     'categoryview': {
                         'categoryName': item?.category?.category_name,
-                        'permalink': `/magazine/${item?.category?.permalink}/`
+                        'slug': ``
+                        // 'permalink': `/magazine/${item?.category?.permalink}/`
                     }
                 })
             ));
@@ -200,7 +202,7 @@ const EventPageComponent = ({ checkCategory = false, slug }: PageProps) => {
 
 
     if (!checkCategory) {
-        return <EventSingle url={[...slug]} />;
+        return <MagazineSingle url={[...slug]} />;
     }
 
     if (notFound) {
@@ -210,10 +212,10 @@ const EventPageComponent = ({ checkCategory = false, slug }: PageProps) => {
     return (
         <>
             <Sliderbanner />
-            <EventView />
+            <MagazineView />
 
             <div ref={postListRef}>
-                <EventList />
+                <MagzineList />
             </div>
 
             {totalPages > 1 && (
@@ -239,4 +241,4 @@ const EventPageComponent = ({ checkCategory = false, slug }: PageProps) => {
     );
 };
 
-export default EventPageComponent;
+export default MagazinePageComponent;
