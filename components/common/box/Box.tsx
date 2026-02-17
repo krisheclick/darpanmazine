@@ -6,6 +6,7 @@ type Props = {
     slug?: string;
     author_name?: string;
     publish_date?: string;
+    backGroundImage?: boolean;
     thumbnail?: string;
     errorImg?: string;
     timestring?: boolean | false;
@@ -27,8 +28,10 @@ const EventsBox = ({tag, title, slug, author_name, publish_date, thumbnail, erro
         <div className="eventsBox">
             <div className="eventsBox-top">
                 <ImageFunctionLink
-                    href={`${process.env.NEXT_PUBLIC_ENV_URL}${slug}`} className="boxPoster"
+                    href={`${process.env.NEXT_PUBLIC_ENV_URL}${slug}`}
+                    className="boxPoster"
                     src={thumbnail}
+                    backGroundImage={true}
                     alt={title}
                     fallBack={errorImg}
                 />

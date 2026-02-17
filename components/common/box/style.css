@@ -9,12 +9,23 @@
     position: relative;
     z-index: 1;
     display: block;
-    padding-top: 88%;
+    padding-top: 56.25%;
+    /* padding-top: 88%; */
     margin-bottom: var(--leftY);
 }
+/* .boxPoster::after {
+	content: "";
+	background: var(--bg-image);
+	background-position: center;
+	background-size: cover;
+	position: absolute;
+	inset: 0;
+	filter: blur(5px);
+	z-index: -1;
+} */
 .boxPoster img{
-    object-fit: cover;
-    object-position: top;
+    object-fit: contain;
+    object-position: center;
 }
 .boxTag {
     padding: 4px 8px;
@@ -54,7 +65,10 @@
 .swiper-slide:has(.eventsBox) {
 	height: auto;
 }
-.trending_slider .boxPoster,
+/* .trending_slider .boxPoster,
+.photoBox .boxPoster {
+	padding-top: 110%;
+} */
 .photoBox .boxPoster {
 	padding-top: 110%;
 }
@@ -62,15 +76,19 @@
 .magazineBoxFirst .boxPoster{
     padding-top: 132.5%;
 }
-.magazineBox .boxPoster{
+/* .magazineBox .boxPoster{
     padding-top: 60%;
-}
+} */
 
 /* ==========Photos========== */
 .photoBox {
 	display: block;
 	position: relative;
 	z-index: 1;
+}
+.photoBox img{
+    object-fit: cover;
+    object-position: top;
 }
 .innerPhotos {
     margin-bottom: 16px;

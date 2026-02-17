@@ -13,6 +13,7 @@ interface ImageProps {
     fallBack?: string;
     style?: CSSProperties;
     target?: boolean;
+    backGroundImage?: boolean;
 }
 const noImage = "assets/images/noimage.webp";
 const ImageFunctionLink = ({
@@ -24,7 +25,8 @@ const ImageFunctionLink = ({
     height,
     fallBack,
     style,
-    target= false
+    target= false,
+    backGroundImage = false
 }:ImageProps) => {
     const [hasLoading, setLoading] = useState(true);
     const fallBackImage = `${process.env.NEXT_PUBLIC_ASSET_PREFIX}${fallBack || noImage}`;
@@ -36,6 +38,11 @@ const ImageFunctionLink = ({
             href={href}
             className={`custom_image ${!isFixed ? 'fixedImage': ''} ${className || ''}`}
             target={target ? "_blank" : ""}
+            // style={
+            //     backGroundImage
+            //     ? { "--bg-image": `url(${imageSrc})` } as React.CSSProperties
+            //     : undefined
+            // }
         >
             <Image
                 src={imageSrc}
