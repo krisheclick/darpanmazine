@@ -1,0 +1,144 @@
+.flipbookWrapper {
+    /* min-height: 100vh; */
+    padding: 24px 16px 36px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    overflow: hidden;
+    background: #f5f5f5;
+}
+
+.flipbookSkeleton {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    overflow: hidden;
+    border-radius: 10px;
+    border: 1px solid #d7dce2;
+    background: #eef1f5;
+    box-shadow: 0 10px 30px rgba(10, 24, 48, 0.08);
+}
+
+.flipbookSkeletonPage {
+    flex: 1 1 0;
+    background: linear-gradient(180deg, #f8fafc 0%, #eef2f7 100%);
+}
+
+.flipbookSkeletonSpine {
+    width: 18px;
+    background: linear-gradient(180deg, #c9d2de 0%, #b8c3d1 100%);
+    box-shadow: inset 0 0 0 1px rgba(108, 123, 145, 0.2);
+}
+
+.flipbookSkeletonShimmer {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        110deg,
+        rgba(255, 255, 255, 0) 35%,
+        rgba(255, 255, 255, 0.55) 50%,
+        rgba(255, 255, 255, 0) 65%
+    );
+    transform: translateX(-120%);
+    animation: flipbookSkeletonShimmer 1.4s ease-in-out infinite;
+}
+
+.flipbookSkeletonCaption {
+    color: #4a5568;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.flipbookControlsSkeleton {
+    width: min(1000px, calc(100vw - 32px));
+    display: grid;
+    gap: 10px;
+}
+
+.flipbookControlsSkeletonRow,
+.flipbookControlsSkeletonRowSmall {
+    height: 18px;
+    border-radius: 8px;
+    background: linear-gradient(
+        110deg,
+        rgba(217, 224, 232, 0.8) 35%,
+        rgba(239, 243, 248, 1) 50%,
+        rgba(217, 224, 232, 0.8) 65%
+    );
+    background-size: 200% 100%;
+    animation: flipbookSkeletonControlsShimmer 1.4s ease-in-out infinite;
+}
+
+.flipbookControlsSkeletonRowSmall {
+    width: 42%;
+}
+
+@keyframes flipbookSkeletonShimmer {
+    to {
+        transform: translateX(120%);
+    }
+}
+
+@keyframes flipbookSkeletonControlsShimmer {
+    to {
+        background-position: -200% 0;
+    }
+}
+
+.flipbookStage {
+    position: relative;
+}
+
+.flipBook {
+    margin: 0 auto;
+    background: #000;
+}
+
+.flipBookPage {
+    height: 100%;
+    width: 100%;
+    background: #fff;
+    border: 0;
+    box-shadow: none;
+}
+
+.flipBookCover {
+    /*background: linear-gradient(160deg, #0f172a, #1d4ed8 50%, #0f172a); */
+    color: #f8fafc;
+    border: 1px solid #0b1b38;
+}
+
+.flipBookPageContent {
+    height: 100%;
+    width: 100%;
+    padding: 0;
+    display: flex;
+    /* flex-direction: column; */
+    overflow: hidden;
+}
+
+.flipBookCoverContent {
+    /* justify-content: center;
+    align-items: center; */
+}
+
+.flipBookPageImage {
+  flex: 1 1 auto;
+  min-height: 0;
+  width: 100%;
+  overflow: hidden;
+  background: #fff;
+}
+
+.flipBookPageImageEL {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: #fff;
+  display: block;
+}
