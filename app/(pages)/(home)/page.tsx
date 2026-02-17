@@ -113,12 +113,7 @@ export default function Home() {
 
                             {/* Day in Pictures */}
                             <div className={`section-area sm ${Styles.picturePost ?? ''}`}>
-                                <div className="rj_content border-block">
-                                    <h4 className="title">Day in Pictures</h4>
-                                </div>
-                                <div className="pictureList">
-                                    <TrendingPicture />
-                                </div>
+                                <TrendingPicture />
                             </div>
 
                             {/* Videos */}

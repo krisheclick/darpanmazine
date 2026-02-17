@@ -70,7 +70,7 @@ const VideoSlider = () => {
                     <ul className="inlineList">
                         {categoryData?.slice(0, 3)?.map((value, index) => (
                             <li key={index}>
-                                <Link href={`${process.env.NEXT_PUBLIC_ENV_URL}/videos/${value.permalink}`}>{value.category_name}</Link>
+                                <Link href={`${process.env.NEXT_PUBLIC_ENV_URL}/videos/${value.permalink}`}>{value.category_name?.toUpperCase()}</Link>
                             </li>
                         ))}
                     </ul>
