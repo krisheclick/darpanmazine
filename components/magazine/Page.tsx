@@ -107,7 +107,7 @@ const MagazinePageComponent = ({ checkCategory = false, slug }: PageProps) => {
                 categoryData?.is_featured?.map((item: BannerItem) => ({
                     ...item,
                     publishDate: item.publish_date,
-                    'permalink': `magazine${item?.slug}`,
+                    'permalink': `/magazine${item?.slug}`,
                     'categoryview': {
                         'categoryName': item?.category?.category_name,
                         'slug': ``
