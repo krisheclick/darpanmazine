@@ -23,7 +23,7 @@ type Webdata = {
     socials?: SocialItem[];
 };
 type MenuItem = {
-    url: string;
+    link: string;
     label: string;
     before_footer_menu?: MenuItem[];
 }
@@ -98,7 +98,7 @@ const Footer = ({ data, menu }: Props) => {
     const scrollToTop = () => {
         window.scrollTo({ top: 0, behavior: "smooth" });
     };
-
+    console.log("Footer data:", menu?.before_footer_menu, webLink);
     return (
         <>
             <footer className="mainFooter">
@@ -109,10 +109,10 @@ const Footer = ({ data, menu }: Props) => {
                                 <div className="fnav">
                                     <ul>
                                         {menu?.before_footer_menu.map((value, index) => {
-                                            const { url, label } = value;
+                                            const { link, label } = value;
                                             return (
                                                 <li key={index} className="menu-item">
-                                                    <Link href={`${webLink}/${url}`}>{label}</Link>
+                                                    <Link href={`${webLink}/${link}`}>{label}</Link>
                                                 </li>
                                             )
                                         })}
