@@ -11,6 +11,7 @@ interface ImageProps {
     fallBack?: string;
     style?: CSSProperties;
     staticImage?: boolean;
+    backGroundImage?: boolean;
 }
 const default_image = 'assets/images/noimage.webp';
 const asset_prefix = process.env.NEXT_PUBLIC_ASSET_PREFIX;
@@ -27,15 +28,22 @@ const ImageFunction = ({
     fallBack,
     style,
     staticImage = false,
+    backGroundImage = false
 }: ImageProps) => {
     const [hasLoading, setLoading] = useState(true);
 
     const imageFallback = `${asset_prefix}${fallBack || default_image}`;
     const imageSrc = src || imageFallback;
     const isFixed = typeof width === "number" && typeof height === "number";
+    
     return(
         <figure
             className={`custom_image${!isFixed ? " fixedImage" : ""}${staticImage ? ' staticImage':''} ${className || ''}`}
+            // style={
+            //     backGroundImage
+            //     ? { "--bg-image": `url(${imageSrc})` } as React.CSSProperties
+            //     : undefined
+            // }
         >
             <Image
                 loader={imageLoader}
