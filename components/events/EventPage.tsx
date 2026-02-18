@@ -93,7 +93,7 @@ const EventPageComponent = ({ checkCategory = false, slug }: PageProps) => {
                     publishDate: item.publish_date,
                     'categoryview': {
                         'categoryName': item?.category?.category_name,
-                        'slug': `events/${item?.category?.permalink}/`
+                        'slug': `/events/${item?.category?.permalink}/`
                     }
                 })
             ));
