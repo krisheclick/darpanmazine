@@ -81,7 +81,7 @@ const BusinessIndex = ({ slug = [], categoryCheck = false }: dataCheck) => {
                     heading: value.business_heading,
                     permalink: `/${value.business_slug}`,
                     categoryview: {
-                        slug: `${value.business_category.business_category_slug}`,
+                        slug: `/business/${value.business_category.business_category_slug}`,
                     },
                     publishDate: value.publish_date,
                 })) || []
