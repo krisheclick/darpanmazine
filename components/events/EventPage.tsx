@@ -70,7 +70,7 @@ const EventPageComponent = ({ checkCategory = false, slug }: PageProps) => {
 
             // Fetch category (event category details)
             const categoryRes = await fetch(
-                `${API_URL}event/category/${parentCategory}/`,
+                `${API_URL}/event/category/${parentCategory}/`,
                 { cache: "no-store" }
             );
 

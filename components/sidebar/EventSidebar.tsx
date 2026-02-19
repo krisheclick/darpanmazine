@@ -42,9 +42,9 @@ const Sidebar = ({ checkCategory = false, slug }: PageProps) => {
 
                 const month = activeStartDate.getMonth() + 1; // 1-12
                 const year = activeStartDate.getFullYear();
-                let API = `${process.env.NEXT_PUBLIC_API_URL}event/calender-list?month=${month}&year=${year}`;
+                let API = `${process.env.NEXT_PUBLIC_API_URL}/event/calender-list?month=${month}&year=${year}`;
                 if(checkCategory) {
-                    API = `${process.env.NEXT_PUBLIC_API_URL}event/${slug.at(-1)}/calender-list?month=${month}&year=${year}`;
+                    API = `${process.env.NEXT_PUBLIC_API_URL}/event/${slug.at(-1)}/calender-list?month=${month}&year=${year}`;
                 }
 
                 const response = await fetch(API);
