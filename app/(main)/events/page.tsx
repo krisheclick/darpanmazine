@@ -1,6 +1,6 @@
 import EventsIndex from "@/components/events/EventsIndex";
 import ReadMoreSlider from "@/components/readmore/ReadMore";
-import Sidebar from "@/components/sidebar/Sidebar";
+import EventSidebar from "@/components/sidebar/EventSidebar";
 import { Container } from "react-bootstrap";
 
 const EventsMainPage = async () => {
@@ -14,7 +14,7 @@ const EventsMainPage = async () => {
                             <EventsIndex />
                         </article>
                         <aside className="sidebar_column">
-                            <Sidebar />
+                            <EventSidebar />
                         </aside>
                     </div>
                 </Container>

@@ -7,7 +7,7 @@ import "swiper/css/free-mode";
 import "swiper/css/autoplay";
 import "swiper/css/navigation";
 import PhotoBox from "../common/box/PhotoBox";
-import Styles from "@/app/(pages)/(home)/page.module.css";
+import Styles from "@/app/(main)/(home)/page.module.css";
 import Link from "next/link";
 import PhotoBoxSkeleton from "../common/box/PhotoBoxSkeleton";
 
@@ -59,7 +59,7 @@ const TrendingPicture = () => {
     return (
         <>
             <div className="rj_content border-block mb-lg-4">
-                <h4 className="title mb-0">Day in Pictures</h4>
+                <h4 className="title mb-0"><Link href={`${process.env.NEXT_PUBLIC_ENV_URL}/photos`} className="text-dark">Day in Pictures</Link> </h4>
                 <div className={Styles.videoCategory}>
                     <ul className="inlineList text-uppercase">
                         {categoryData?.slice(0, 3)?.map((value, index) => (

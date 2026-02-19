@@ -11,6 +11,7 @@ import NotFoundPage from "@/app/notFound";
 
 import { useEventsContext } from "@/context/events_context";
 import { usePostContext } from "@/context/post_context";
+import SearchEvent from "./EventSearch";
 
 type PageProps = {
     checkCategory?: boolean;
@@ -51,6 +52,9 @@ const EventPageComponent = ({ checkCategory = false, slug }: PageProps) => {
     const isNextClickRef = useRef(false);
 
     const page = Number(searchParams.get("page")) || 1;
+    const date = searchParams.get("date") || "";
+    const from_date = searchParams.get("from_date") || "";
+    const to_date = searchParams.get("to_date") || "";
 
     const [notFound, setNotFound] = useState(false);
     const [hasNextPage, setHasNextPage] = useState(false);
@@ -66,7 +70,7 @@ const EventPageComponent = ({ checkCategory = false, slug }: PageProps) => {
 
             // Fetch category (event category details)
             const categoryRes = await fetch(
-                `${API_URL}/event/category/${parentCategory}/`,
+                `${API_URL}event/category/${parentCategory}/`,
                 { cache: "no-store" }
             );
 
@@ -116,7 +120,7 @@ const EventPageComponent = ({ checkCategory = false, slug }: PageProps) => {
             if (checkCategory) {
                 // Using category-specific list endpoint pattern
                 const eventRes = await fetch(
-                    `${API_URL}/event/${postUrl}/list?page=${page}&limit=9`,
+                    `${API_URL}/event/${postUrl}/list?page=${page}&limit=9${date ? `&date=${date}` : ''}${from_date ? `&from_date=${from_date}` : ''}${to_date ? `&to_date=${to_date}` : ''}`,
                     { cache: "no-store" }
                 );
 
@@ -178,7 +182,7 @@ const EventPageComponent = ({ checkCategory = false, slug }: PageProps) => {
                 isNextClickRef.current = false; // reset
             }, 150);
         }
-    }, [page, checkCategory]);
+    }, [page, date, from_date, to_date, checkCategory]);
 
 
     if (!checkCategory) {
@@ -193,6 +197,7 @@ const EventPageComponent = ({ checkCategory = false, slug }: PageProps) => {
         <>
             <Sliderbanner />
             <EventView />
+            <SearchEvent />
 
             <div ref={postListRef}>
                 <EventList />

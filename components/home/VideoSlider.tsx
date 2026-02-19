@@ -9,7 +9,7 @@ import "swiper/css/navigation";
 import VideosliderBox from "../videos/VideosliderBox";
 import VideoSkeleton from "../videos/videoSkeleton";
 import Link from "next/link";
-import Styles from "@/app/(pages)/(home)/page.module.css";
+import Styles from "@/app/(main)/(home)/page.module.css";
 
 type VideoItem = {
     heading?: string;
@@ -65,7 +65,7 @@ const VideoSlider = () => {
         <>
 
             <div className="rj_content border-block mb-lg-4">
-                <h5 className="title mb-0">Videos</h5>
+                <h5 className="title mb-0"><Link href={`${process.env.NEXT_PUBLIC_ENV_URL}/videos`} className="text-dark">Videos</Link></h5>
                 <div className={Styles.videoCategory}>
                     <ul className="inlineList text-uppercase">
                         {categoryData?.slice(0, 3)?.map((value, index) => (

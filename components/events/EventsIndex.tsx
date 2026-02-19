@@ -6,6 +6,7 @@ import EventView from "./EventView";
 import EventList from "./EventList";
 import { useEventsContext } from "@/context/events_context";
 import { usePostContext } from "@/context/post_context";
+import SearchEvent from "./EventSearch";
 interface BannerItem {
     author?: string;
     heading?: string;
@@ -29,7 +30,9 @@ const EventsIndex = () => {
     const searchParams = useSearchParams();
     const router = useRouter();
     const page = Number(searchParams.get("page")) || 1;
-
+    const date = searchParams.get("date") || "";
+    const from_date = searchParams.get("from_date") || "";
+    const to_date = searchParams.get("to_date") || "";
     const [totalPages, setTotalPages] = useState(1);
 
     const fetchData = async (page: number) => {
@@ -48,7 +51,7 @@ const EventsIndex = () => {
             });
 
             // Fetch all events (paginated)
-            const listRes = await fetch(`${API_URL}/event/list/?page=${page}&limit=9`, { cache: "no-store" });
+            const listRes = await fetch(`${API_URL}/event/list/?page=${page}&limit=9${date ? `&date=${date}` : ''}${from_date ? `&from_date=${from_date}` : ''}${to_date ? `&to_date=${to_date}` : ''}`, { cache: "no-store" });
             const { response_data, response_code } = await listRes.json();
 
             if (!response_code) {
@@ -91,7 +94,8 @@ const EventsIndex = () => {
 
     useEffect(() => {
         fetchData(page);
-    }, [page]);
+    }, [page, date, from_date, to_date]);
+
 
     const handleNext = () => {
         if (page < totalPages) router.push(`?page=${page + 1}`);
@@ -105,7 +109,7 @@ const EventsIndex = () => {
         <>
             <Sliderbanner />
             <EventView />
-
+            <SearchEvent />
             <EventList />
 
             {totalPages > 1 && (

@@ -1,0 +1,29 @@
+.calendarPopup {
+    position: absolute;
+    z-index: 1;
+    margin-top: 5px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    background: white;
+    border-radius: 8px;
+    padding: 10px;
+}
+
+.search_event {
+    position: relative;
+}
+
+.date_input {
+    cursor: pointer;
+}
+
+.searchForm {
+    z-index: 9;
+}
+.searchEventWrap{
+    padding-bottom: 20px;
+    margin: 0px 0px 20px;
+    border-bottom: 1px solid rgba(217, 217, 217, 1);
+}
+.searchEventWrap button {
+    height: 48px;
+}

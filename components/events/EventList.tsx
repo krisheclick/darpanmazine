@@ -8,6 +8,7 @@ import { useEventsContext } from "@/context/events_context";
 const EventList = () => {
     const { hasLoading, allEvents } = useEventsContext();
     return (
+        <>
         <div className={Styles.postList}>
             <Row className="rowGap">
                 {hasLoading ? (
@@ -36,6 +37,7 @@ const EventList = () => {
                 )}
             </Row>
         </div>
+        </>
     )
 }
 

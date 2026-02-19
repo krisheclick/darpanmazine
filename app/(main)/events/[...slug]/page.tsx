@@ -1,6 +1,6 @@
 import EventPageComponent from "@/components/events/EventPage";
 import ReadMoreSlider from "@/components/readmore/ReadMore";
-import Sidebar from "@/components/sidebar/Sidebar";
+import EventSidebar from "@/components/sidebar/EventSidebar";
 import { Container } from "react-bootstrap";
 
 export const dynamicParams = true;
@@ -30,7 +30,7 @@ const EventPage = async ({ params }: { params: Promise<{ slug: string }> }) => {
                             />
                         </article>
                         <aside className="sidebar_column">
-                            <Sidebar />
+                            <EventSidebar checkCategory={isCategory} slug={[...slug]}/>
                         </aside>
                     </div>
                 </Container>
