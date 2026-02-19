@@ -14,7 +14,7 @@ const EventsMainPage = async () => {
                             <EventsIndex />
                         </article>
                         <aside className="sidebar_column">
-                            <EventSidebar />
+                            <EventSidebar slug={[]}/>
                         </aside>
                     </div>
                 </Container>
