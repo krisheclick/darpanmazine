@@ -7,6 +7,7 @@ import NotFoundPage from "@/app/notFound";
 import ImageFunction from "@/utlis/ImageFunction";
 import BollywoodGallery from "./BollywoodGallery";
 import Share from "@/components/common/share/Share";
+import DangerHTML from "@/components/common/DangerHTML";
 interface DataItem {
     photo_source?: string;
     photo_heading?: string;
@@ -65,9 +66,7 @@ const DetailsPage = ({ slug }: { slug: string[] }) => {
             <SliderPoster banner={data} />
             <div className={Styles.single_content}>
                 <Share title={data?.photo_heading}/>
-                <div className={`rj_editor_text ${Styles.rj_editor_text}`}
-                    dangerouslySetInnerHTML={{ __html: data?.photo_description || '' }}
-                />
+                <DangerHTML html={data?.photo_description || ''} className={`rj_editor_text ${Styles.rj_editor_text} mb-5`} />
 
                 <BollywoodGallery />
 

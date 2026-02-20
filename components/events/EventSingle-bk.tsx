@@ -6,6 +6,8 @@ import { useEventsContext } from '@/context/events_context';
 import NotFoundPage from '@/app/notFound';
 import Share from '../common/share/Share';
 import { usePostContext } from '@/context/post_context';
+import Script from "next/script";
+import { usePathname } from 'next/navigation';
 import DangerHTML from '../common/DangerHTML';
 
 type PageProps = {
@@ -44,10 +46,11 @@ const EventSingle = ({ url = [] }: PageProps) => {
     const [notFound, setNotFoundPage] = useState(false);
     const [data, setData] = useState<PageData | null>(null);
     const { setLoading, hasLoading, setMainCategory } = useEventsContext();
-    const { setLoading:postsetLoading, setReadMostArticle, setArticle, setOtherSlider, setPostCategory} = usePostContext();
+    const { setLoading: postsetLoading, setReadMostArticle, setArticle, setOtherSlider, setPostCategory } = usePostContext();
+    const pathname = usePathname();
 
     useEffect(() => {
-        return () => {};
+        return () => { };
     }, []);
 
     const fetchData = async () => {
@@ -112,6 +115,46 @@ const EventSingle = ({ url = [] }: PageProps) => {
     if (notFound) {
         return <NotFoundPage />
     }
+    // window.instgrm?.Embeds.process();
+    // if (window.twttr?.widgets) {
+    //     window.twttr.widgets.load();
+    // }
+    // useEffect(() => {
+    //     if (!data) return;
+    //     window.instgrm?.Embeds.process();
+    //     if (window.twttr?.widgets) {
+    //         window.twttr.widgets.load();
+    //     }
+    //     const timer = setTimeout(() => {
+    //         if (window.twttr?.widgets) {
+    //             window.twttr.widgets.load();
+    //         }
+    //         window.instgrm?.Embeds.process();
+    //     }, 500); // wait for DOM paint
+
+    //     return () => clearTimeout(timer);
+    // }, [data, pathname]);
+    // const handleSameClick = () => {
+    //     setTimeout(() => {
+    //         window.twttr?.widgets.load();
+    //     }, 100);
+    // };
+    // handleSameClick()
+    // useEffect(() => {
+    //     alert('Pathname changed, reloading Twitter widgets and Instagram embeds');
+    //     const tweets = document.querySelectorAll(".twitter-tweet");
+    //     tweets.forEach((tweet) => {
+    //         tweet.innerHTML = tweet.innerHTML; // reset
+    //     });
+    //     const interval = setInterval(() => {
+    //         if (window.twttr?.widgets) {
+    //             window.twttr.widgets.load();
+    //             clearInterval(interval);
+    //         }
+    //     }, 300);
+
+    //     return () => clearInterval(interval);
+    // }, [pathname]);
 
     const poster = data?.images?.[0]?.file_url;
     const publishDate = data?.publish_date;
@@ -146,10 +189,11 @@ const EventSingle = ({ url = [] }: PageProps) => {
                     staticImage={false}
                 />
                 <div className={Styles.single_content}>
-                    <Share title={data?.heading}/>
+                    <Share title={data?.heading} />
                     <DangerHTML html={data?.description || ''} className={`rj_editor_text ${Styles.rj_editor_text} mb-5`} />
-                    {MapEmbed(data?.address||'')}
+                    {MapEmbed(data?.address || '')}
                 </div>
+                
             </div>
         )
     )

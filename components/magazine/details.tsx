@@ -6,6 +6,7 @@ import { useEventsContext } from '@/context/events_context';
 import NotFoundPage from '@/app/notFound';
 import Share from '../common/share/Share';
 import { usePostContext } from '@/context/post_context';
+import DangerHTML from '../common/DangerHTML';
 
 type PageProps = {
     url?: string[];
@@ -131,9 +132,7 @@ const MagazineSingle = ({ url = [] }: PageProps) => {
                 />
                 <div className={Styles.single_content}>
                     <Share title={data?.heading}/>
-                    <div className={`rj_editor_text ${Styles.rj_editor_text}`}
-                        dangerouslySetInnerHTML={{ __html: data?.description || '' }}
-                    />
+                    <DangerHTML html={data?.description || ''} className={`rj_editor_text ${Styles.rj_editor_text} mb-5`} />
                 </div>
             </div>
         )

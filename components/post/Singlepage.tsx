@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import { usePostContext } from '@/context/post_context';
 import NotFoundPage from '@/app/notFound';
 import Share from '../common/share/Share';
+import DangerHTML from '../common/DangerHTML';
 
 type PageProps = {
     url?: string[];
@@ -96,9 +97,7 @@ const Singlepage = ({ url = [] }: PageProps) => {
                 />
                 <div className={Styles.single_content}>
                     <Share title={data?.heading}/>
-                    <div className={`rj_editor_text ${Styles.rj_editor_text}`}
-                        dangerouslySetInnerHTML={{ __html: data?.description || '' }}
-                    />
+                    <DangerHTML html={data?.description || ''} className={`rj_editor_text ${Styles.rj_editor_text} mb-5`} />
                     <div className="posterAd">
                         <ImageFunction
                             src={`${process.env.NEXT_PUBLIC_ASSET_PREFIX}assets/images/poster-ad.jpg`}

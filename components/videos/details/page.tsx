@@ -8,6 +8,7 @@ import BollywoodVideoGallery from "./BollywoodGallery";
 import ImageFunctionLink from "@/utlis/ImageFunctionLink";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faYoutube } from "@fortawesome/free-brands-svg-icons";
+import DangerHTML from "@/components/common/DangerHTML";
 interface DataItem {
     source?: string;
     author?: string;
@@ -105,9 +106,7 @@ const DetailsPage = ({ slug }: { slug: string[] }) => {
                         <time dateTime={formattedTime}>{formattedTime}</time>
                     </div>
                 </div>
-                <div className={`rj_editor_text ${Styles.rj_editor_text}`}
-                    dangerouslySetInnerHTML={{ __html: data?.description || '' }}
-                />
+                <DangerHTML html={data?.description || ''} className={`rj_editor_text ${Styles.rj_editor_text} mb-5`} />
 
                 <BollywoodVideoGallery catLink={data?.category?.permalink} />
             </div>
