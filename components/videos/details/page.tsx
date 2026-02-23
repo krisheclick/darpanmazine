@@ -78,9 +78,7 @@ const DetailsPage = ({ slug }: { slug: string[] }) => {
 
     return (
         <div className={Styles.details_page}>
-            <div className={Styles.iframePoster}>
-                <iframe src={data?.video_url} frameBorder="0"></iframe>
-            </div>
+            <div className={Styles.iframePoster} dangerouslySetInnerHTML={{ __html: data?.video_url||'' }} />
             {/* <div className={`position-relative ${Styles.imageWraper ?? ''}`}>
                 <ImageFunctionLink
                     href={data?.video_url}
