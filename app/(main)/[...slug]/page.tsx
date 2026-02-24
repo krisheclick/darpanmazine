@@ -29,6 +29,7 @@ const PostPage = async ({ params }: { params: Promise<{ slug: string }> }) => {
                                 slug={[...slug]}
                             />
                         </article>
+                        
                         <aside className="sidebar_column">
                             <Sidebar />
                         </aside>
