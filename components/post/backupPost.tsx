@@ -127,7 +127,7 @@ const PostPageComponent = ({ checkCategory = false, slug }: PageProps) => {
     return (
         <>
             <Sliderbanner />
-            <PostView />
+            <PostView parentCategory={parentCategory}/>
             <div ref={postListRef}>
                 <PostList />
             </div>
