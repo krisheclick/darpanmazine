@@ -29,6 +29,7 @@ const SliderPoster = ({ banner }: { banner: DataItem | null }) => {
     const [thumbsSwiper, setThumbsSwiper] = useState<SwiperType | null>(null);
     if (!banner) return null;
     const bannerData = banner.images;
+    console.log(bannerData);
     const dateObj = new Date(banner?.publish_date ?? '');
     const formattedDate = dateObj.toLocaleDateString("en-GB", {
         day: "2-digit",

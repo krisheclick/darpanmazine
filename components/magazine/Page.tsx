@@ -11,6 +11,8 @@ import NotFoundPage from "@/app/notFound";
 import { useEventsContext } from "@/context/events_context";
 import { usePostContext } from "@/context/post_context";
 import MagazineSingle from "./details";
+import { Col, Row } from "react-bootstrap";
+import BoxSkeleton from "../common/box/BoxSkeleton";
 
 type PageProps = {
     checkCategory?: boolean;
@@ -63,17 +65,63 @@ const MagazinePageComponent = ({ checkCategory = false, slug }: PageProps) => {
     const postListRef = useRef<HTMLDivElement | null>(null);
     const isNextClickRef = useRef(false);
 
-    const page = Number(searchParams.get("page")) || 1;
+    const [page, setPage] = useState(Number(searchParams.get("page")) || 1);
+    const observer = useRef<IntersectionObserver | null>(null);
+    const loaderRef = useRef<HTMLDivElement | null>(null);
+    const [hasMore, setHasMore] = useState(true);
+    const [loadMoreData, setLoadMoreData] = useState(false);;
+    const [totalPages, setTotalPages] = useState(1);
 
     const [notFound, setNotFound] = useState(false);
     const [hasNextPage, setHasNextPage] = useState(false);
-    const [totalPages, setTotalPages] = useState(1);
 
-    const { setLoading, setMainCategory, setAllEvents} = useEventsContext();
+    const { hasLoading, setLoading, setMainCategory, setAllEvents} = useEventsContext();
     const { setLoading:postsetLoading, setReadMostArticle, setBanner} = usePostContext();
 
     const fetchEvents = async (page: number) => {
         try {
+            // Using category-specific list endpoint pattern
+            const response = await fetch(
+                `${API_URL}/magazines/category/${postUrl}/magazines?page=${page}&limit=3`,
+                { cache: "no-store" }
+            );
+            if (!response.ok) {
+                throw new Error("API data is not ok. Please check & fixed...");
+            }
+
+            const { response_data, response_code } =
+                await response.json();
+
+            if (!response_code) {
+                setNotFound(true);
+                return;
+            }
+            if(page == 1) {
+                setAllEvents(response_data?.magazines.map((item:{category_name:string,slug:string})=>({
+                    ...item,
+                    permalink:item.slug
+                })));
+                setTotalPages(response_data.totalPages);
+                setHasNextPage(page < response_data.totalPages);
+                return;
+            }
+
+            setAllEvents((prev)=> [...prev, ...response_data?.magazines.map((item:{category_name:string,slug:string})=>({
+                    ...item,
+                    permalink:item.slug
+                }))]);
+            setHasMore(page < response_data.totalPages);
+            setLoadMoreData(false);
+        } catch (error) {
+            console.error("API error:", (error as Error).message);
+        } finally {
+            setLoading(false);
+            postsetLoading(false);
+        }
+    };
+
+    const fetchCategories = async () => {
+        try {            
             setLoading(true);
             postsetLoading(true);
 
@@ -128,37 +176,42 @@ const MagazinePageComponent = ({ checkCategory = false, slug }: PageProps) => {
                     }
                 })
             ));
-
-            // Fetch events (only for category pages)
-            if (checkCategory) {
-                // Using category-specific list endpoint pattern
-                const eventRes = await fetch(
-                    `${API_URL}/magazines/category/${postUrl}/magazines?page=${page}&limit=9`,
-                    { cache: "no-store" }
-                );
-
-                const { response_data, response_code } =
-                    await eventRes.json();
-
-                if (!response_code) {
-                    setNotFound(true);
-                    return;
-                }
-
-                setAllEvents(response_data?.magazines.map((item:{category_name:string,slug:string})=>({
-                    ...item,
-                    permalink:item.slug
-                })));
-                setTotalPages(response_data.totalPages);
-                setHasNextPage(page < response_data.totalPages);
-            }
-        } catch (error) {
-            console.error("API error:", (error as Error).message);
-        } finally {
-            setLoading(false);
-            postsetLoading(false);
+        } catch (err) {
+            console.error((err as Error).message);
         }
-    };
+    }
+    useEffect(() => {
+        if (!checkCategory) return;
+
+        fetchCategories();
+    },[]);
+
+    useEffect(() => {
+        if (!checkCategory) return;
+
+        fetchEvents(page);
+
+        if (isNextClickRef.current) {
+            setTimeout(() => {
+                scrollToPostList();
+                isNextClickRef.current = false; // reset
+            }, 150);
+        }
+    }, [page, checkCategory]);
+
+    useEffect(() => {
+        if (loadMoreData) return;
+        if (!hasMore) return;
+        if (observer.current) observer.current.disconnect();
+        // console.log('observer-------',observer)
+        observer.current = new window.IntersectionObserver(entries => {
+            if (entries[0].isIntersecting) {
+                setLoadMoreData(true);
+                setPage(prev => prev + 1);
+            }
+        });
+        if (loaderRef.current) observer.current.observe(loaderRef.current);
+    }, [hasLoading, hasMore]);
 
     const scrollToPostList = () => {
         if (!postListRef.current) return;
@@ -187,19 +240,6 @@ const MagazinePageComponent = ({ checkCategory = false, slug }: PageProps) => {
         }
     };
 
-    useEffect(() => {
-        if (!checkCategory) return;
-
-        fetchEvents(page);
-
-        if (isNextClickRef.current) {
-            setTimeout(() => {
-                scrollToPostList();
-                isNextClickRef.current = false; // reset
-            }, 150);
-        }
-    }, [page, checkCategory]);
-
 
     if (!checkCategory) {
         return <MagazineSingle url={[...slug]} />;
@@ -216,9 +256,23 @@ const MagazinePageComponent = ({ checkCategory = false, slug }: PageProps) => {
 
             <div ref={postListRef}>
                 <MagzineList />
+                {
+                    loadMoreData && hasMore && (
+                        <Row className="rowGap mt-4">
+                        {
+                            [...Array(6)].map((_, index) => (
+                                <Col xl={4} sm={6} key={index}>
+                                    <BoxSkeleton />
+                                </Col>
+                            ))
+                        }
+                        </Row>
+                    )
+                }
+                {!hasMore && !loadMoreData ? '' : <div ref={loaderRef} />}
             </div>
 
-            {totalPages > 1 && (
+            {/* {totalPages > 1 && (
                 <div className="btn_center d-flex gap-3 justify-content-center">
                     <button
                         className="rj-btn-next specialButton text-uppercase"
@@ -236,7 +290,7 @@ const MagazinePageComponent = ({ checkCategory = false, slug }: PageProps) => {
                         Next Page
                     </button>
                 </div>
-            )}
+            )} */}
         </>
     );
 };
