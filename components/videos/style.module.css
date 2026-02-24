@@ -6,9 +6,9 @@
     display: block;
     color: var(--black-color);
 }
-/* .poster{
-    padding-top: 62%;
-} */
+.poster{
+    padding-top: 56.25%;
+}
 .stripLine::before, .stripLine .boxContent::before{
     content: '';
     width: calc(100% + 20px);

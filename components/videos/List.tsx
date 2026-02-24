@@ -7,6 +7,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import NotFoundPage from "@/app/notFound";
 import { useVideosContext } from "@/context/video_context";
 import VideoSkeleton from "./videoSkeleton";
+import BoxSkeleton from "../common/box/BoxSkeleton";
 
 type SlugProps = {
     slug?: string[];
@@ -39,16 +40,22 @@ const VideoList = ({ slug = [], categoryCheck = false }: SlugProps) => {
     // pagination
     const router = useRouter();
     const searchParams = useSearchParams();
-    const page = Number(searchParams.get("page")) || 1;
+    const [page, setPage] = useState(Number(searchParams.get("page")) || 1);
+    const observer = useRef<IntersectionObserver | null>(null);
+    const loaderRef = useRef<HTMLDivElement | null>(null);
+    const [hasMore, setHasMore] = useState(true);
+    const [loadMoreData, setLoadMoreData] = useState(false);;
+    const [totalPages, setTotalPages] = useState(1);
     const videoListRef = useRef<HTMLDivElement | null>(null);
     const isNextClickRef = useRef(false);
     const [hasNextPage, setHasNextPage] = useState(false);
-    const [totalPages, setTotalPages] = useState(1);
     const LIMIT = 21;
 
     const fetchData = async (page: number) => {
         try {
-            setLoading(true);
+            if(page === 1) {
+                setLoading(true);
+            }
             const response = await fetch(`
                 ${api_url}/${categoryCheck ? (`video/category/${urlArray}`) : 'videos'}?page=${page}&limit=${LIMIT}`,
                 { cache: "no-store" });
@@ -59,16 +66,36 @@ const VideoList = ({ slug = [], categoryCheck = false }: SlugProps) => {
                 setNotFound(true);
                 return;
             }
-            setData(response_data?.videos);
-            setTotalPages(response_data?.totalPages);
-            setHasNextPage(page < response_data?.totalPages);
-            setFeaturedVideo(response_data?.is_featured);
+            if(page === 1) {
+                setData(response_data?.videos);
+                setTotalPages(response_data?.totalPages);
+                setHasNextPage(page < response_data?.totalPages);
+                setFeaturedVideo(response_data?.is_featured);
+                return;
+            }
+            setData((prev) => prev ? [...prev, ...(response_data?.videos ?? [])] : response_data?.videos ?? []);
+            setHasMore(page < response_data?.totalPages);
+            setLoadMoreData(false);
         } catch (err: unknown) {
             console.log('Videos APi Response is somethig wrong', (err as Error).message);
         } finally {
             setLoading(false);
         }
     }
+
+    useEffect(() => {
+        if (loadMoreData) return;
+        if (!hasMore) return;
+        if (observer.current) observer.current.disconnect();
+        // console.log('observer-------',observer)
+        observer.current = new window.IntersectionObserver(entries => {
+            if (entries[0].isIntersecting) {
+                setLoadMoreData(true);
+                setPage(prev => prev + 1);
+            }
+        });
+        if (loaderRef.current) observer.current.observe(loaderRef.current);
+    }, [hasLoading, hasMore]);
 
     if (notFound) {
         <NotFoundPage />
@@ -137,7 +164,21 @@ const VideoList = ({ slug = [], categoryCheck = false }: SlugProps) => {
                     )
                 )}
             </Row>
-            {totalPages > 1 && (
+            {
+                loadMoreData && hasMore && (
+                    <Row className="rowGap mt-4">
+                    {
+                        [...Array(21)].map((_, index) => (
+                            <Col lg={4} sm={6} key={index}>
+                                <VideoSkeleton />
+                            </Col>
+                        ))
+                    }
+                    </Row>
+                )
+            }
+            {!hasMore && !loadMoreData ? '' : <div ref={loaderRef} />}
+            {/* {totalPages > 1 && (
                 <div className="btn_center d-flex gap-3 justify-content-center">
                     <button
                         className="rj-btn-next specialButton text-uppercase"
@@ -155,7 +196,7 @@ const VideoList = ({ slug = [], categoryCheck = false }: SlugProps) => {
                         Next Page
                     </button>
                 </div>
-            )}
+            )} */}
         </div>
     )
 }
