@@ -1,5 +1,5 @@
 "use client";
-import { createContext, ReactNode, useContext, useState } from "react";
+import { createContext, Dispatch, ReactNode, SetStateAction, useContext, useState } from "react";
 
 interface MainCategory {
     categoryName?: string;
@@ -48,6 +48,9 @@ interface MostArticle {
     images?: {
         file_url?: string;
     };
+    thumbnail?: {
+        file_url?: string;
+    };
 }
 interface Categoryview  {
     categoryName?: string;
@@ -76,8 +79,9 @@ interface PostContextData {
     setLoading: (hasLoading: boolean) => void;
     mainCategory: MainCategory | null;
     setMainCategory: (mainCategory: MainCategory) => void;
-    allPosts: Postdata[] | null;
-    setAllPosts: (allPosts: Postdata[]) => void;
+    allPosts: Postdata[] | [];
+    // setAllPosts: (allPosts: Postdata[]) => void;
+    setAllPosts: Dispatch<SetStateAction<Postdata[]>>;
 
     mostReadArticle: MostReadArticle[] | null;
     setReadMostArticle: (mostReadArticle: MostReadArticle[]) => void;
@@ -101,7 +105,7 @@ const PostContext = createContext<PostContextData | undefined>(undefined);
 export const PostProvider = ({children}: {children: ReactNode}) => {
     const [hasLoading, setLoading,] = useState(true);
     const [mainCategory, setMainCategory] = useState<MainCategory | null>(null);
-    const [allPosts, setAllPosts] = useState<Postdata[] | null>(null);
+    const [allPosts, setAllPosts] = useState<Postdata[]>([]);
     const [mostReadArticle, setReadMostArticle] = useState<MostReadArticle[] | null>(null);
     const [latestArticle, setLatestArticle] = useState<MostReadArticle[] | null>(null);
     const [article, setArticle] = useState<MostArticle[] | null>(null);

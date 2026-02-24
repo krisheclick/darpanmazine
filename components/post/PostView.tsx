@@ -4,7 +4,7 @@ import Styles from "./style.module.css";
 import { usePostContext } from "@/context/post_context";
 import { usePathname } from "next/navigation";
 
-const PostView = () => {
+const PostView = ({ parentCategory }: { parentCategory: string }) => {
     const { hasLoading, mainCategory } = usePostContext();
     const pathName = usePathname();
 
@@ -20,10 +20,10 @@ const PostView = () => {
                     <ul className="inlineList">
                         {!hasLoading && mainCategory?.children ? (
                             mainCategory?.children?.map((value, index) => {
-                                const isActive = pathName === `/${mainCategory?.permalink}/${value?.permalink}` || (pathName.startsWith(`${value.permalink}`) && pathName !== "/");
+                                const isActive = pathName === `/${parentCategory}/${value?.permalink}` || (pathName.startsWith(`${value.permalink}`) && pathName !== "/");
                                 return (
                                     <li key={index}>
-                                        <Link href={`${process.env.NEXT_PUBLIC_ENV_URL}/${mainCategory?.permalink}/${value?.permalink}`} className={isActive ? "active" : ""}>{value?.categoryName}</Link>
+                                        <Link href={`${process.env.NEXT_PUBLIC_ENV_URL}/${parentCategory}/${value?.permalink}`} className={isActive ? "active" : ""}>{value?.categoryName}</Link>
                                     </li>
                                 )
                             })
