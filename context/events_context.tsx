@@ -1,5 +1,5 @@
 "use client";
-import { createContext, ReactNode, useContext, useState } from "react";
+import { createContext, Dispatch, ReactNode, SetStateAction, useContext, useState } from "react";
 
 interface MainCategory {
     category_name?: string;
@@ -60,8 +60,7 @@ interface EventsContextData {
     mainCategory: MainCategory | null;
     setMainCategory: (mainCategory: MainCategory) => void;
     allEvents: EventData[] | null;
-    setAllEvents: (allEvents: EventData[]) => void;
-
+    setAllEvents: Dispatch<SetStateAction<EventData[]>>;
     mostReadArticle: MostReadArticle[] | null;
     setReadMostArticle: (mostReadArticle: MostReadArticle[]) => void;
     banner: BannerItem[] | null;
@@ -73,7 +72,7 @@ const EventsContext = createContext<EventsContextData | undefined>(undefined);
 export const EventsProvider = ({children}: {children: ReactNode}) => {
     const [hasLoading, setLoading] = useState(true);
     const [mainCategory, setMainCategory] = useState<MainCategory | null>(null);
-    const [allEvents, setAllEvents] = useState<EventData[] | null>(null);
+    const [allEvents, setAllEvents] = useState<EventData[]>([]);
     const [mostReadArticle, setReadMostArticle] = useState<MostReadArticle[] | null>(null);
     const [banner, setBanner] = useState<BannerItem[] | null>(null);
 
