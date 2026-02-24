@@ -26,6 +26,7 @@ type VideoItem = {
     thumbnail?: {
         file_name?: string;
         file_url?: string;
+        file_thumb_url?: string;
     }
 }
 
@@ -114,7 +115,7 @@ const VideoSlider = () => {
                                     <VideosliderBox
                                         title={value?.heading}
                                         url={value?.url}
-                                        poster={value?.thumbnail?.file_url}
+                                        poster={value?.thumbnail?.file_thumb_url}
                                         videoTimer={value.video_duration}
                                         publish_date={value?.publish_date}
                                         strip={true}

@@ -22,6 +22,7 @@ type DataItem = {
     thumbnail?: {
         file_name?: string;
         file_url?: string;
+        file_thumb_url?: string;
     }
 }
 
@@ -110,7 +111,7 @@ const TrendingPicture = () => {
                                         tag=""
                                         title={value.heading}
                                         slug={value.url}
-                                        thumbnail={value?.thumbnail?.file_url}
+                                        thumbnail={value?.thumbnail?.file_thumb_url}
                                     />
                                 </SwiperSlide>
                             )

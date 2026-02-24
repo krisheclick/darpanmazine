@@ -12,6 +12,7 @@ type DataItem = {
     short_description?: string;
     thumbnail?: {
         file_url?: string;
+        file_thumb_url?: string;
     }
     category: {
         name: string;
@@ -53,7 +54,7 @@ const MagazinePost = () => {
                                             slug={value.url}
                                             author_name={value.author}
                                             publish_date={value.publish_date}
-                                            thumbnail={`${process.env.NEXT_PUBLIC_MEDIA_URL}${value.thumbnail?.file_url}`}
+                                            thumbnail={`${process.env.NEXT_PUBLIC_MEDIA_URL}${value.thumbnail?.file_thumb_url}`}
                                             errorImg="assets/images/deleted/Jacqueline-Fernandez.png"
                                         />
                                     </div>
