@@ -1,13 +1,14 @@
 "use client";
 import Link from "next/link";
-import { Container, FormControl } from "react-bootstrap";
+import { Container, FormControl, Modal } from "react-bootstrap";
 import Social from "../social/Social";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import Navigation from "./Navigation";
 import ImageFunctionLink from "@/utlis/ImageFunctionLink";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import "./style.css";
+import SubscriptionModal from "@/components/newsletter/SubscriptionModal";
 
 type Site = {
     favicon?: string;
@@ -47,6 +48,7 @@ type Props = {
 const Header = ({ data, menu}: Props) => {
     const title = data?.site?.title ?? "Darpan Magazine";
     const logo = data?.site?.logo;
+    const [show, setShow] = useState(false);
 
     // const [hasLoading, setLoading] = useState(true);
     // const [ads, setAds] = useState<AdType[] | null>(null);
@@ -68,6 +70,11 @@ const Header = ({ data, menu}: Props) => {
     // }, [fetchData]);
 
     // console.log('ads', ads)
+
+    const [showNewsletter, setShowNewsletter] = useState(false);
+
+    const openNewsletter = () => setShowNewsletter(true);
+    const closeNewsletter = () => setShowNewsletter(false);
 
     useEffect(() => {
         const body = document.body as HTMLElement;
@@ -106,7 +113,7 @@ const Header = ({ data, menu}: Props) => {
                     <div className="topHeaderWrapper">
                         <div className="leftArea d-flex align-items-center">
                             <Social data={data?.socials} classProps="round sm white header_social" />
-                            <Link href="#" className="rj-btn-newsletter white-btn specialHover newsletterBtn">NEWSLETTER</Link>
+                            <button type="button" onClick={openNewsletter} className="rj-btn-newsletter white-btn specialHover newsletterBtn">NEWSLETTER</button>
                         </div>
                         <ImageFunctionLink
                             href={process.env.NEXT_PUBLIC_ENV_URL}
@@ -134,6 +141,11 @@ const Header = ({ data, menu}: Props) => {
                 </Container>
             </div>
             <Navigation data={menu?.navbar_menu} />
+
+            <SubscriptionModal
+                show={showNewsletter}
+                onHide={closeNewsletter}
+            />
         </header>
     )
 }

@@ -61,8 +61,13 @@ const NewsletterForm = () => {
             if (!res.ok) throw new Error("Failed to submit");
 
             const data = await res.json();
-            setStatusMessage(data?.response_message?.msg || "Subscription successful!");
-            setUser({ name: "", email: "" });
+            if(!data.response_code)
+            {
+                setStatusMessage(data?.response_message);
+            }else{
+                setStatusMessage(data?.response_message || "Subscription successful!");
+                setUser({ name: "", email: "" });
+            }
         } catch (error) {
             setStatusMessage("Something went wrong. Please try again later.");
         } finally {
