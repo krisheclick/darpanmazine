@@ -3,9 +3,9 @@
 import { useRef, useState } from "react";
 import { Modal, Form, Button } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Styles from "./style.module.css";
 import {
     faEnvelope,
-    faPaperPlane,
     faTimes,
     faUser
 } from "@fortawesome/free-solid-svg-icons";
@@ -17,9 +17,9 @@ interface Props {
 
 export default function SubscriptionModal({ show, onHide }: Props) {
     const [user, setUser] = useState({
-            name: "",
-            email: ''
-        });
+        name: "",
+        email: ''
+    });
     const [errors, setErrors] = useState<{ [key: string]: string }>({});
     const [statusMessage, setStatusMessage] = useState("");
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -57,7 +57,7 @@ export default function SubscriptionModal({ show, onHide }: Props) {
         e.preventDefault();
         setStatusMessage("");
         if (!formValidate()) return;
-        
+
         setIsSubmitting(true);
         try {
             const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/subscription`, {
@@ -67,11 +67,10 @@ export default function SubscriptionModal({ show, onHide }: Props) {
             });
             if (!res.ok) throw new Error("Failed to submit");
             const data = await res.json();
-            
-            if(!data.response_code)
-            {
+
+            if (!data.response_code) {
                 setStatusMessage(data?.response_message);
-            }else{
+            } else {
                 setStatusMessage(data?.response_message || "Subscription successful!");
                 setUser({ name: "", email: "" });
                 setTimeout(() => onHide(), 1500);
@@ -90,36 +89,35 @@ export default function SubscriptionModal({ show, onHide }: Props) {
             centered
             size="lg"
             backdropClassName="yellow-backdrop"
-            contentClassName="newsletter-modal"
+            contentClassName={`newsletter-modal ${Styles.newslettermodal}`}
         >
-            <Modal.Body className="position-relative p-3">
-                {/* Close */}
-                <a className="close-btn" onClick={onHide}>
+            <Modal.Body className={`position-relative ${Styles.modalBody}`}>
+                <span className={Styles.closeBtn} onClick={onHide}>
                     <FontAwesomeIcon icon={faTimes} />
-                </a>
+                </span>
 
-                {/* Envelope Left */}
-                <div className="envelope">
+                <div className={Styles.envelope}>
                     <FontAwesomeIcon icon={faEnvelope} />
                 </div>
 
                 {/* Right Content */}
-                <div className="content">
-                    <h2 className="title">
+                <div className={Styles.content}>
+                    <h2 className={`title ${Styles.newsletterTitle}`}>
                         Subscribe to our <br /> Newsletter!
                     </h2>
 
-                    <p className="subtitle">
+                    <p className={Styles.newslettersubTitle}>
                         Subscribe to our newsletter and stay updated.
                     </p>
 
                     <Form onSubmit={handleSubmit} ref={formRef}>
-                        <div className="email-box">
+                        <label htmlFor="userNewsletterName" className={Styles.emailBox}>
                             <FontAwesomeIcon icon={faUser} className="input-icon" />
                             <input
                                 ref={nameRef}
                                 type="text"
                                 name="name"
+                                id="userNewsletterName"
                                 placeholder="Your name"
                                 value={user.name}
                                 onChange={handleChange}
@@ -127,13 +125,14 @@ export default function SubscriptionModal({ show, onHide }: Props) {
                                 required
                             />
                             {errors.name && <div className="text-danger mt-1">{errors.name}</div>}
-                        </div>
-                        <div className="email-box">
+                        </label>
+                        <label htmlFor="userNewsletterEmail" className={Styles.emailBox}>
                             <FontAwesomeIcon icon={faEnvelope} className="input-icon" />
                             <input
                                 ref={emailRef}
                                 type="email"
                                 name="email"
+                                id="userNewsletterEmail"
                                 placeholder="Your email"
                                 value={user.email}
                                 onChange={handleChange}
@@ -141,9 +140,9 @@ export default function SubscriptionModal({ show, onHide }: Props) {
                                 required
                             />
                             {errors.email && <div className="text-danger mt-1">{errors.email}</div>}
-                        </div>
+                        </label>
 
-                        <Button type="submit" className="subscribe-btn" disabled={isSubmitting}>
+                        <Button type="submit" className={`rj-btn-subscribe btn btn-primary ${Styles.subscribeBtn}`} disabled={isSubmitting}>
                             {isSubmitting ? "Submitting..." : "Subscribe"}
                         </Button>
 
@@ -157,16 +156,14 @@ export default function SubscriptionModal({ show, onHide }: Props) {
 
             </Modal.Body>
 
-            <style jsx global>{`
+            {/* <style jsx global>{`
 
-        /* Modal Box */
         .newsletter-modal {
           background: #ededed;
           border-radius: 20px;
           overflow: hidden;
         }
 
-        /* Close */
         .close-btn {
           position: absolute;
           top: 25px;
@@ -175,7 +172,6 @@ export default function SubscriptionModal({ show, onHide }: Props) {
           cursor: pointer;
         }
 
-        /* Decorative Curve */
         .curve-svg {
           position: absolute;
           width: 100%;
@@ -183,7 +179,6 @@ export default function SubscriptionModal({ show, onHide }: Props) {
           pointer-events: none;
         }
 
-        /* Envelope */
         .envelope {
           position: absolute;
           left: 120px;
@@ -192,7 +187,6 @@ export default function SubscriptionModal({ show, onHide }: Props) {
           color: #f4a62a;
         }
 
-        /* Content */
         .content {
           width: 60%;
           margin-left: auto;
@@ -240,7 +234,6 @@ export default function SubscriptionModal({ show, onHide }: Props) {
           background: #2f7f9e;
         }
 
-        /* Mobile */
         @media (max-width: 992px) {
           .envelope,
           .plane,
@@ -253,7 +246,7 @@ export default function SubscriptionModal({ show, onHide }: Props) {
             margin-top: 60px;
           }
         }
-      `}</style>
+      `}</style> */}
         </Modal>
     );
 }
