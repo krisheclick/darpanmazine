@@ -33,6 +33,92 @@
     margin-top: 4px;
 }
 
+/* Subcription Form */
+.newslettermodal {
+    background:#ededed;
+    border-radius:20px;
+    overflow:hidden
+}
+.modalBody {
+  display: flex;
+  padding: 0;
+  min-height: 420px;
+  background: linear-gradient(135deg, var(--primary-color), #000);
+}
+.closeBtn {
+    cursor:pointer;
+    font-size:20px;
+    position:absolute;
+    z-index: 9;
+    top:25px;
+    right:30px
+}
+.curvesvg {
+    pointer-events:none;
+    width:100%;
+    height:100%;
+    position:absolute
+}
+.envelope {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 90px;
+  color: var(--white-color);
+  position: relative;
+  left: 0;
+}
+.envelope::before {
+  content: "";
+  position: absolute;
+  width: 220px;
+  height: 220px;
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 50%;
+  z-index: 0;
+}
+.envelope svg {
+  position: relative;
+  z-index: 1;
+}
+.content {
+	flex: 1;
+	background: var(--white-color);
+	padding: 50px 40px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	border-top-left-radius: 40px;
+	border-bottom-left-radius: 40px;
+}
+.newsletterTitle {
+    margin-bottom:15px;
+    font-size:32px;
+    font-weight:700;
+    line-height:1.2
+}
+.newslettersubTitle {
+    color:#555;
+    margin-bottom:25px
+}
+.emailBox {
+    background:#fff;
+    border:1px solid #bbb;
+    border-radius:6px;
+    align-items:center;
+    margin-bottom:20px;
+    padding:12px 15px;
+    display:flex;
+    font-size: 16px;
+}
+.emailBox input {
+    border:none;
+    outline:none;
+    flex:1;
+    margin-left:10px
+}
+
 @media only screen and (max-width: 1600px){
     .fullWidth{
         width: 100%;
