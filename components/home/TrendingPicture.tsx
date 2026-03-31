@@ -111,7 +111,7 @@ const TrendingPicture = () => {
                                         tag=""
                                         title={value.heading}
                                         slug={value.url}
-                                        thumbnail={value?.thumbnail?.file_thumb_url}
+                                        thumbnail={value?.thumbnail?.file_url}
                                     />
                                 </SwiperSlide>
                             )
