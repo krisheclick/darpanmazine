@@ -54,7 +54,7 @@ const MagazinePost = () => {
                                             slug={value.url}
                                             author_name={value.author}
                                             publish_date={value.publish_date}
-                                            thumbnail={`${process.env.NEXT_PUBLIC_MEDIA_URL}${value.thumbnail?.file_thumb_url}`}
+                                            thumbnail={`${process.env.NEXT_PUBLIC_MEDIA_URL}${value.thumbnail?.file_url}`}
                                             errorImg="assets/images/deleted/Jacqueline-Fernandez.png"
                                         />
                                     </div>
