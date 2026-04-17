@@ -1,12 +1,14 @@
 "use client"
 import { useRef, useState } from "react";
 import { Alert } from "react-bootstrap";
+import { useRouter } from "next/navigation";
 import Styles from "./form.module.css"
 import { useAwardContext } from "@/context/award_context";
 type NominateFormProps = {
   slug?: string[];
 };
 const NominateForm = ({ slug }: NominateFormProps) => {
+    const router = useRouter();
     const inputFields = {
         award_category: '',
         previous_year: '',
@@ -72,7 +74,7 @@ const NominateForm = ({ slug }: NominateFormProps) => {
         } else if(!/^\S+@\S+\.\S+$/.test(nomineeData.nominated_email)){
            newErrors.nominated_email = "Please enter valid Nominated Email";
         }
-        if(!nomineeData.nominee_achievements.trim()) newErrors.nominated_occupation = "Nominated Achievements is Required";
+        if(!nomineeData.nominee_achievements.trim()) newErrors.nominee_achievements = "Nominated Achievements is Required";
         if(!nomineeData.community_involvement.trim()) newErrors.community_involvement = "Community involvement is Required";
         if(!nomineeData.leadership_experience.trim()) newErrors.leadership_experience = "Leadership abilities is Required";
         if(!nomineeData.nominee_association.trim()) newErrors.nominee_association = "Association is Required";
@@ -80,7 +82,7 @@ const NominateForm = ({ slug }: NominateFormProps) => {
         if(!nomineeData.userEmail.trim()){
             newErrors.userEmail = "Email is Required";
         } else if(!/^\S+@\S+\.\S+$/.test(nomineeData.userEmail)){
-           newErrors.nominated_email = "Please enter valid Email";
+           newErrors.userEmail = "Please enter valid Email";
         }
         if(!nomineeData.userPhone.trim()) newErrors.userPhone = "Phone Number is Required";
 
@@ -102,18 +104,48 @@ const NominateForm = ({ slug }: NominateFormProps) => {
         setSubmit(true);
         setStatusMessage('');
         try{
-            const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/award/${slug}/nominee`, {
+            const payload = {
+                category: nomineeData.award_category,
+                previousYear: nomineeData.previous_year,
+                name: nomineeData.nominated_person,
+                address: nomineeData.nominated_address,
+                phone: nomineeData.nominated_phone,
+                email: nomineeData.nominated_email,
+                website: nomineeData.nominated_website,
+                occupation: nomineeData.nominated_occupation,
+                aboutNominee: nomineeData.award_reason,
+                achievements: nomineeData.nominee_achievements,
+                community: nomineeData.community_involvement,
+                experience: nomineeData.leadership_experience,
+                otherCategory: nomineeData.other_category,
+                otherCategoryReason: nomineeData.why_nominated,
+                awardReason: nomineeData.bio,
+                personName: nomineeData.userName,
+                personAssociation: nomineeData.nominee_association,
+                nomineeAware: nomineeData.nominated_year,
+                personAddress: nomineeData.userAddress,
+                personPhone: nomineeData.userPhone,
+                personEmail: nomineeData.userEmail,
+                personWebsite: nomineeData.userWebsite,
+                profile_pic: null,
+                is_winner: null,
+                presenter: null,
+                bio: nomineeData.bio
+            };
+            const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/award/${slug?.[0]}/nominee/`, {
                 method: "POST",
                 headers: {"Content-Type": "application/json"},
-                body: JSON.stringify({...nomineeData})
+                body: JSON.stringify(payload)
             });
 
-            if(!res.ok) throw new Error("Request failed");
             const data = await res.json();
-            setStatusMessage(data?.response_message?.msg || "Message sent successfully.");
-            resetForm();
+            if(!res.ok || !data.response_code) {
+                throw new Error(data.response_message || "Request failed");
+            }
+            // Redirect to thank you page on success
+            router.push('/awards/thank-you');
         }catch(err: any){
-            setStatusMessage("Something went wrong. Please try again later.");
+            setStatusMessage(err.message || "Something went wrong. Please try again later.");
         }finally{
             setSubmit(false);
         }
@@ -128,7 +160,7 @@ const NominateForm = ({ slug }: NominateFormProps) => {
     const {category} = useAwardContext();
   return (                  
     <div id="nomineeForm" className={Styles.nominateForm} >
-        <div className={Styles.heading}>Nominate Now</div>
+        <div className={Styles.heading}>Nominate sNow</div>
         <form onSubmit={nomineeSubmit}>
             <div className={Styles.formGroup}>
                 <label htmlFor="award_category">Award Category : <span>*</span></label>
