@@ -1,3 +1,4 @@
+"use client";
 import { Container } from "react-bootstrap";
 import Styles from "./page.module.css";
 import HomeBannerSlider from "@/components/common/banner/Homebanner";
@@ -19,9 +20,13 @@ import TrendingPostAd from "@/components/common/advertiesment/poster-ad/Trending
 import VideoSlider from "@/components/home/VideoSlider";
 import VideoAd from "@/components/common/advertiesment/poster-ad/VideoAd";
 import ImageFunction from "@/utlis/ImageFunction";
+import DoorStepForm from "@/components/DoorstepModal";
+import DoorstepFormModal from "@/components/DoorstepModal";
+import DoorstepModal from "@/components/DoorstepModal";
+import { useState } from "react";
 
 export default function Home() {
-
+    const [show, setShow] = useState(false);
     const assetPrefix = process.env.NEXT_PUBLIC_ASSET_PREFIX ?? "";
     return (
         <div className={Styles.page}>
@@ -45,7 +50,7 @@ export default function Home() {
                             <HomeBannerSlider />
                         </article>
                         <aside className={Styles.advertiesmentColumn}>
-                            <Homebannerad />
+                            <Homebannerad setShow={setShow}/>
                         </aside>
                     </div>
                 </Container>
@@ -149,10 +154,12 @@ export default function Home() {
                             <VideoAd />
                             <QuizAd />
                             <OfferAd />
+                            
                         </aside>
                     </div>
                 </Container>
             </div>
+            <DoorstepModal show={show} onHide={() => setShow(false)}/>
         </div>
     );
 }

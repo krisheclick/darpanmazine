@@ -18,10 +18,10 @@ const Navigation = ({data}: Props) => {
                     <nav className="navMenu noList">
                         <ul className="d-flex align-items-center justify-content-center">
                             {data.map((value, index) => {
-                                const {url, label} = value;
+                                const {link, label} = value;
                                 return(
                                     <li key={index} className="menu-item">
-                                        <Link href={`${process.env.NEXT_PUBLIC_ENV_URL}/${url}`}>{label}</Link>
+                                        <Link href={`${process.env.NEXT_PUBLIC_ENV_URL}/${link}`}>{label}</Link>
                                     </li>
                                 )
                             })}
