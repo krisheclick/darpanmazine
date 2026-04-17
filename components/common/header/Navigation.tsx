@@ -2,7 +2,7 @@ import Link from "next/link";
 import { Container } from "react-bootstrap";
 
 type MenuItem = {
-    url?: string;
+    link?: string;
     label?: string;
 };
 

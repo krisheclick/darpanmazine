@@ -130,7 +130,7 @@ export default function DoorstepModal({ show, onHide }: Props) {
                 type="button"
                 className="btn-close position-absolute end-0 top-0 m-3"
                 onClick={onHide}
-                style={{"position": "absolute !important","display": "block","zIndex": 9}}
+                style={{"position": "absolute","display": "block","zIndex": 9}}
             ></a>
             <Modal.Body>
                 
